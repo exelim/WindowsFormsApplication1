@@ -8,6 +8,6 @@ namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
 {
     abstract class AggregationFormulaBase
     {
-        public abstract double Calculate(double _val_1, double _val_2);
+        public abstract double CalculateAggregation(double _val_1, double _val_2);
     }
 }

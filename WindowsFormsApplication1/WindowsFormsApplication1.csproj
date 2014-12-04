@@ -44,7 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Formulas\ActivisationFormulas\ActivisationFormulaBase.cs" />
+    <Compile Include="Classes\Formulas\ActivisationFormulas\AvarageActivisation.cs" />
+    <Compile Include="Classes\Formulas\ActivisationFormulas\ProdActivisation.cs" />
+    <Compile Include="Classes\Formulas\ActivisationFormulas\MinActivisation.cs" />
     <Compile Include="Classes\Formulas\AggregationFormulas\AggregationFormulaBase.cs" />
+    <Compile Include="Classes\Formulas\AggregationFormulas\AlgebraicMethod.cs" />
+    <Compile Include="Classes\Formulas\AggregationFormulas\LimitedMethod.cs" />
     <Compile Include="Classes\Formulas\AggregationFormulas\MaxMinMethod.cs" />
     <Compile Include="Classes\Formulas\Formula.cs" />
     <Compile Include="Classes\LexicalVariable.cs" />
