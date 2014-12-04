@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
 {
-    class MaxMinMethod : AggregationFormulaBase
+    class MaxMinAggregation : AggregationFormulaBase
     {
         RelationType m_type;
 

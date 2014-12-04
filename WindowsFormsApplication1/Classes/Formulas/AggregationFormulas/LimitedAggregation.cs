@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
 {
-    class AlgebraicMethod : AggregationFormulaBase
+    class LimitedAggregation : AggregationFormulaBase
     {
         RelationType m_type;
 
@@ -16,11 +16,11 @@ namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
             switch (m_type)
             { 
                 case RelationType.OR:
-                    returnValue = ( _val_1 + _val_2 ) - ( _val_1 * _val_2 );
+                    returnValue = Math.Min(1, _val_1 + _val_2);
                     break;
 
                 case RelationType.AND:
-                    returnValue = _val_1 * _val_2;
+                    returnValue = Math.Max( 0, _val_1 + _val_2 - 1 );
                     break;
 
                 default:
