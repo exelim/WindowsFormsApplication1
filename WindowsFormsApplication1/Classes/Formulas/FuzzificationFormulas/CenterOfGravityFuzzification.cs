@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas
     {
         public override double CalculateFuzzification(double _val_1, double _val_2)
         {
-            
+            return 0.0;
         }
     }
 }

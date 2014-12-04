@@ -57,6 +57,11 @@
     <Compile Include="Classes\Formulas\AggregationFormulas\LimitedAggregation.cs" />
     <Compile Include="Classes\Formulas\AggregationFormulas\MaxMinAggregation.cs" />
     <Compile Include="Classes\Formulas\Formula.cs" />
+    <Compile Include="Classes\Formulas\FuzzificationFormulas\CenterOfGravityFuzzification.cs" />
+    <Compile Include="Classes\Formulas\FuzzificationFormulas\CenterOfGravityPointSetsFuzzification.cs" />
+    <Compile Include="Classes\Formulas\FuzzificationFormulas\CenterSquareFuzzification.cs" />
+    <Compile Include="Classes\Formulas\FuzzificationFormulas\FuzzificationFormulaBase.cs" />
+    <Compile Include="Classes\Formulas\FuzzificationFormulas\LeftModelValuesFuzzification.cs" />
     <Compile Include="Classes\LexicalVariable.cs" />
     <Compile Include="Classes\ProductionRule.cs" />
     <Compile Include="OperationTree\OperationTree.cs" />
@@ -93,6 +98,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -16,6 +16,8 @@ namespace WindowsFormsApplication1
     enum VariableType { IN, OUT };
     enum RelationType { AND, OR };
 
+    int lexicalVariablesCount;
+
     public partial class Form1 : Form
     {
         public Form1()
