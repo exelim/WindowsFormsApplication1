@@ -64,7 +64,7 @@
     <Compile Include="Classes\Formulas\FuzzificationFormulas\LeftModelValuesFuzzification.cs" />
     <Compile Include="Classes\LexicalVariable.cs" />
     <Compile Include="Classes\ProductionRule.cs" />
-    <Compile Include="OperationTree\OperationTree.cs" />
+    <Compile Include="RuleParsing\RuleParser.cs" />
     <Compile Include="Structures\ControlVariable.cs" />
     <Compile Include="Structures\Node.cs" />
     <Compile Include="Structures\ProductionRulesTerm.cs" />
