@@ -49,6 +49,11 @@
             this.LVCountUpDown.Name = "LVCountUpDown";
             this.LVCountUpDown.Size = new System.Drawing.Size(36, 20);
             this.LVCountUpDown.TabIndex = 2;
+            this.LVCountUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // LVCountConfirmButton
             // 
@@ -64,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 315);
+            this.ClientSize = new System.Drawing.Size(871, 448);
             this.Controls.Add(this.LVCountConfirmButton);
             this.Controls.Add(this.LVCountUpDown);
             this.Controls.Add(this.LVCountLabel);
