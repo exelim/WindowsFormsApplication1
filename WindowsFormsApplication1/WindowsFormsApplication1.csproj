@@ -76,6 +76,12 @@
     <Compile Include="Classes\MembershipFunctions\TrapezoidalFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\TriangleFunction.cs" />
     <Compile Include="Classes\ProductionRule.cs" />
+    <Compile Include="MembershipFunctionChoise.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MembershipFunctionChoise.Designer.cs">
+      <DependentUpon>MembershipFunctionChoise.cs</DependentUpon>
+    </Compile>
     <Compile Include="RuleParsing\RuleParser.cs" />
     <Compile Include="Structures\ControlVariable.cs" />
     <Compile Include="Structures\Node.cs" />
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MembershipFunctionChoise.resx">
+      <DependentUpon>MembershipFunctionChoise.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -47,7 +47,6 @@ namespace WindowsFormsApplication1
                     this.Controls.RemoveByKey("upDown_TermsCount_" + (i + 1));
                     this.Controls.RemoveByKey("button_AddTerms_" + (i + 1));
                     this.Controls.RemoveByKey("LVOKButton");
-                    this.Controls.RemoveByKey("LVCancelButton");
                 }
             }
 
@@ -151,16 +150,9 @@ namespace WindowsFormsApplication1
             // creating OK button
             Button LVOKButton = new Button();
             LVOKButton.Name = "LVOKButton";
-            LVOKButton.Text = "Accept";
+            LVOKButton.Text = "Next >";
             LVOKButton.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + lexicalVariablesCount * 25 + 25);
             this.Controls.Add(LVOKButton);
-
-            // creating Cancel button
-            Button LVCancelButton = new Button();
-            LVCancelButton.Name = "LVCancelButton";
-            LVCancelButton.Text = "Cancel";
-            LVCancelButton.Location = new Point(LVCountLabel.Location.X + 100, LVCountLabel.Location.Y + lexicalVariablesCount * 25 + 25);
-            this.Controls.Add(LVCancelButton);
         }
 
         void AddTermsButton_Clicked(object sender, EventArgs e)
