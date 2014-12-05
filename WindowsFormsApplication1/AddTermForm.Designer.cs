@@ -30,7 +30,7 @@
         {
             this.TermsCountConfirmButton = new System.Windows.Forms.Button();
             this.TermsCountUpDown = new System.Windows.Forms.NumericUpDown();
-            this.termsCountLabel = new System.Windows.Forms.Label();
+            this.TermCountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TermsCountUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,14 +56,14 @@
             0,
             0});
             // 
-            // termsCountLabel
+            // TermCountLabel
             // 
-            this.termsCountLabel.AutoSize = true;
-            this.termsCountLabel.Location = new System.Drawing.Point(21, 20);
-            this.termsCountLabel.Name = "termsCountLabel";
-            this.termsCountLabel.Size = new System.Drawing.Size(66, 13);
-            this.termsCountLabel.TabIndex = 4;
-            this.termsCountLabel.Text = "Terms count";
+            this.TermCountLabel.AutoSize = true;
+            this.TermCountLabel.Location = new System.Drawing.Point(21, 20);
+            this.TermCountLabel.Name = "TermCountLabel";
+            this.TermCountLabel.Size = new System.Drawing.Size(66, 13);
+            this.TermCountLabel.TabIndex = 4;
+            this.TermCountLabel.Text = "Terms count";
             // 
             // AddTermForm
             // 
@@ -72,7 +72,7 @@
             this.ClientSize = new System.Drawing.Size(682, 356);
             this.Controls.Add(this.TermsCountConfirmButton);
             this.Controls.Add(this.TermsCountUpDown);
-            this.Controls.Add(this.termsCountLabel);
+            this.Controls.Add(this.TermCountLabel);
             this.Name = "AddTermForm";
             this.Text = "AddTermForm";
             ((System.ComponentModel.ISupportInitialize)(this.TermsCountUpDown)).EndInit();
@@ -85,6 +85,6 @@
 
         private System.Windows.Forms.Button TermsCountConfirmButton;
         private System.Windows.Forms.NumericUpDown TermsCountUpDown;
-        private System.Windows.Forms.Label termsCountLabel;
+        private System.Windows.Forms.Label TermCountLabel;
     }
 }

@@ -33,82 +33,89 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < TermsCountUpDown.Value; i++)
             {
-                // creating Label LV number
+                // creating Label Terms count
                 Label Numberlabel = new Label();
-                Numberlabel.Name = "label_LVNumber_" + (i + 1);
-                Numberlabel.Text = "Linguistic var №" + (i + 1) + ":";
-                Numberlabel.Width = 95;
-                Numberlabel.Location = new Point(termsCountLabel.Location.X, termsCountLabel.Location.Y + (25 + 25 * i));
+                Numberlabel.Name = "label_TermsCount_" + (i + 1);
+                Numberlabel.Text = "Term №" + (i + 1) + ":";
+                Numberlabel.Width = 60;
+                Numberlabel.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(Numberlabel);
 
-                // creating Label LV ID
+                // creating Label Term ID
                 Label IDlabel = new Label();
-                IDlabel.Name = "label_LVID_" + (i + 1);
+                IDlabel.Name = "label_TermID_" + (i + 1);
                 IDlabel.Text = "Id:";
                 IDlabel.Width = 20;
-                IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, termsCountLabel.Location.Y + (25 + 25 * i));
+                IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(IDlabel);
 
-                //creating TextBox for LV id
+                //creating TextBox for Terms ID
                 TextBox IDtextBox = new TextBox();
-                IDtextBox.Name = "textbox_LVID_" + (i + 1);
+                IDtextBox.Name = "textbox_TermID_" + (i + 1);
                 IDtextBox.Width = 50;
-                IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, termsCountLabel.Location.Y + (25 + 25 * i));
+                IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(IDtextBox);
 
-                // creating Label LV name
+                // creating Label Term name
                 Label Namelabel = new Label();
-                Namelabel.Name = "label_LVName_" + (i + 1);
-                Namelabel.Text = "Linguistic var name:";
-                Namelabel.Width = 110;
-                Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, termsCountLabel.Location.Y + (25 + 25 * i));
+                Namelabel.Name = "label_TermsName_" + (i + 1);
+                Namelabel.Text = "Terms name:";
+                Namelabel.Width = 70;
+                Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(Namelabel);
 
-                // creating TextBox for LV name
+                // creating TextBox for Term name
                 TextBox NametextBox = new TextBox();
-                NametextBox.Name = "textbox_LVName_" + (i + 1);
+                NametextBox.Name = "textbox_TermName_" + (i + 1);
                 NametextBox.Width = 100;
-                NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, termsCountLabel.Location.Y + (25 + 25 * i));
+                NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(NametextBox);
 
-                // creating Label LV min range
+                // creating Label Term min range
                 Label MinRangelabel = new Label();
-                MinRangelabel.Name = "label_LVMinrange_" + (i + 1);
+                MinRangelabel.Name = "label_TermsMinrange_" + (i + 1);
                 MinRangelabel.Text = "Range from:";
                 MinRangelabel.Width = 65;
-                MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, termsCountLabel.Location.Y + (25 + 25 * i));
+                MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(MinRangelabel);
 
-                // creating UpDown LV min range
+                // creating UpDown Term min range
                 NumericUpDown MinRangeUpDown = new NumericUpDown();
-                MinRangeUpDown.Name = "upDown_LVMinrange_" + (i + 1);
+                MinRangeUpDown.Name = "upDown_TermsMinrange_" + (i + 1);
                 MinRangeUpDown.Width = 36;
-                MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, termsCountLabel.Location.Y + (25 + 25 * i));
+                MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(MinRangeUpDown);
 
-                // creating Label LV max range
+                // creating Label Term max range
                 Label MaxRangelabel = new Label();
-                MaxRangelabel.Name = "label_LVMaxrange_" + (i + 1);
+                MaxRangelabel.Name = "label_TermMaxrange_" + (i + 1);
                 MaxRangelabel.Text = "Range to:";
                 MaxRangelabel.Width = 60;
-                MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, termsCountLabel.Location.Y + (25 + 25 * i));
+                MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(MaxRangelabel);
 
-                // creating UpDown LV max range
+                // creating UpDown Term max range
                 NumericUpDown MaxRangeUpDown = new NumericUpDown();
-                MaxRangeUpDown.Name = "upDown_LVMaxrange_" + (i + 1);
+                MaxRangeUpDown.Name = "upDown_TermMaxrange_" + (i + 1);
                 MaxRangeUpDown.Width = 36;
-                MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, termsCountLabel.Location.Y + (25 + 25 * i));
+                MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(MaxRangeUpDown);
-
-                // creating Label Terms count
-                Label TermsCountlabel = new Label();
-                TermsCountlabel.Name = "label_LVMaxrange_" + (i + 1);
-                TermsCountlabel.Text = "Terms count:";
-                TermsCountlabel.Width = 70;
-                TermsCountlabel.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, termsCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(TermsCountlabel);
             }
+
+            // creating OK button
+            Button TermsOKButton = new Button();
+            TermsOKButton.Name = "TermOKButton";
+            TermsOKButton.Text = "Accept";
+            TermsOKButton.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + termsCount*25 + 25);
+            this.Controls.Add(TermsOKButton);
+
+            // creating Cancel button
+            Button termsCancelButton = new Button();
+            termsCancelButton.Name = "TermCancelButton";
+            termsCancelButton.Text = "Cancel";
+            termsCancelButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + termsCount*25 + 25);
+            this.Controls.Add(termsCancelButton);
+
         }
 
 

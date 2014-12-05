@@ -20,6 +20,10 @@ namespace WindowsFormsApplication1
     {
         public int lexicalVariablesCount;
 
+        // FORMS
+        Form addTermsForm;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -130,13 +134,27 @@ namespace WindowsFormsApplication1
                 AddTerms.Location = new Point(TermsCountUpDown.Location.X + TermsCountUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                 AddTerms.Click += AddTermsButton_Clicked;
                 this.Controls.Add(AddTerms);
-            }          
+            }
+
+            // creating OK button
+            Button LVOKButton = new Button();
+            LVOKButton.Name = "LVOKButton";
+            LVOKButton.Text = "Accept";
+            LVOKButton.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + lexicalVariablesCount * 25 + 25);
+            this.Controls.Add(LVOKButton);
+
+            // creating Cancel button
+            Button LVCancelButton = new Button();
+            LVCancelButton.Name = "LVCancelButton";
+            LVCancelButton.Text = "Cancel";
+            LVCancelButton.Location = new Point(LVCountLabel.Location.X + 100, LVCountLabel.Location.Y + lexicalVariablesCount * 25 + 25);
+            this.Controls.Add(LVCancelButton);
         }
 
         void AddTermsButton_Clicked(object sender, EventArgs e)
         {
-            Form addTermsForm = new AddTermForm();
-            addTermsForm.Show();
+            addTermsForm = new AddTermForm();
+            addTermsForm.ShowDialog();
         }
     }
 }
