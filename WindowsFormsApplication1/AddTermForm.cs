@@ -21,11 +21,21 @@ namespace WindowsFormsApplication1
 
         private void TermsCountConfirmButton_Click(object sender, EventArgs e)
         {
-            if (termsCount > Convert.ToInt32(TermsCountUpDown.Value))
+            if (termsCount != Convert.ToInt32(TermsCountUpDown.Value))
             {
                 for (int i = 0; i <= termsCount; i++)
                 {
-                    this.Controls.RemoveByKey("LiguisticVariable_" + (i + 1));
+                    this.Controls.RemoveByKey("label_TermsCount_" + (i + 1));
+                    this.Controls.RemoveByKey("label_TermID_" + (i + 1));
+                    this.Controls.RemoveByKey("textbox_TermID_" + (i + 1));
+                    this.Controls.RemoveByKey("label_TermsName_" + (i + 1));
+                    this.Controls.RemoveByKey("textbox_TermName_" + (i + 1));
+                    this.Controls.RemoveByKey("label_TermMinrange_" + (i + 1));
+                    this.Controls.RemoveByKey("upDown_TermMinrange_" + (i + 1));
+                    this.Controls.RemoveByKey("label_TermMaxrange_" + (i + 1));
+                    this.Controls.RemoveByKey("upDown_TermMaxrange_" + (i + 1));
+                    this.Controls.RemoveByKey("TermOKButton");
+                    this.Controls.RemoveByKey("TermCancelButton");
                 }
             }
 
@@ -73,7 +83,7 @@ namespace WindowsFormsApplication1
 
                 // creating Label Term min range
                 Label MinRangelabel = new Label();
-                MinRangelabel.Name = "label_TermsMinrange_" + (i + 1);
+                MinRangelabel.Name = "label_TermMinrange_" + (i + 1);
                 MinRangelabel.Text = "Range from:";
                 MinRangelabel.Width = 65;
                 MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
@@ -81,7 +91,7 @@ namespace WindowsFormsApplication1
 
                 // creating UpDown Term min range
                 NumericUpDown MinRangeUpDown = new NumericUpDown();
-                MinRangeUpDown.Name = "upDown_TermsMinrange_" + (i + 1);
+                MinRangeUpDown.Name = "upDown_TermMinrange_" + (i + 1);
                 MinRangeUpDown.Width = 36;
                 MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(MinRangeUpDown);
@@ -118,6 +128,14 @@ namespace WindowsFormsApplication1
 
         }
 
+        void OKButton_Clicked(object sender, EventArgs e)
+        { 
+            
+        }
 
+        void CancelButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

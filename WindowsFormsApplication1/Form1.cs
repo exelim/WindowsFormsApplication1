@@ -31,11 +31,23 @@ namespace WindowsFormsApplication1
 
         private void LVCountConfirmButton_Click(object sender, EventArgs e)
         {
-            if (lexicalVariablesCount > Convert.ToInt32(LVCountUpDown.Value))
+            if (lexicalVariablesCount != Convert.ToInt32(LVCountUpDown.Value))
             {
                 for (int i = 0; i <= lexicalVariablesCount; i++)
                 {
-                    this.Controls.RemoveByKey( "LiguisticVariable_" + (i + 1) );
+                    this.Controls.RemoveByKey("label_LVNumber_" + (i + 1));
+                    this.Controls.RemoveByKey("label_LVID_" + (i + 1));
+                    this.Controls.RemoveByKey("textbox_LVID_" + (i + 1));
+                    this.Controls.RemoveByKey("label_LVName_" + (i + 1));
+                    this.Controls.RemoveByKey("textbox_LVName_" + (i + 1));
+                    this.Controls.RemoveByKey("label_LVMinrange_" + (i + 1));
+                    this.Controls.RemoveByKey("upDown_LVMinrange_" + (i + 1));
+                    this.Controls.RemoveByKey("label_LVMaxrange_" + (i + 1));
+                    this.Controls.RemoveByKey("upDown_LVMaxrange_" + (i + 1));
+                    this.Controls.RemoveByKey("upDown_TermsCount_" + (i + 1));
+                    this.Controls.RemoveByKey("button_AddTerms_" + (i + 1));
+                    this.Controls.RemoveByKey("LVOKButton");
+                    this.Controls.RemoveByKey("LVCancelButton");
                 }
             }
 
