@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTermForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTermForm.Designer.cs">
+      <DependentUpon>AddTermForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Formulas\AccumulationFormulas\AccumulatiomFormulaBase.cs" />
     <Compile Include="Classes\Formulas\AccumulationFormulas\AlgebraicAccumulation.cs" />
     <Compile Include="Classes\Formulas\AccumulationFormulas\LimitedAccumulation.cs" />
@@ -82,6 +88,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddTermForm.resx">
+      <DependentUpon>AddTermForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
