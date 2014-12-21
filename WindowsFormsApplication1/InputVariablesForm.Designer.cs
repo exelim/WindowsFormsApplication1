@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class AddTermForm
+    partial class InputVariablesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TermCountLabel = new System.Windows.Forms.Label();
+            this.InputVariables = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // TermCountLabel
+            // InputVariables
             // 
-            this.TermCountLabel.AutoSize = true;
-            this.TermCountLabel.Location = new System.Drawing.Point(21, 20);
-            this.TermCountLabel.Name = "TermCountLabel";
-            this.TermCountLabel.Size = new System.Drawing.Size(42, 13);
-            this.TermCountLabel.TabIndex = 4;
-            this.TermCountLabel.Text = "Terms :";
+            this.InputVariables.AutoSize = true;
+            this.InputVariables.Location = new System.Drawing.Point(12, 9);
+            this.InputVariables.Name = "InputVariables";
+            this.InputVariables.Size = new System.Drawing.Size(79, 13);
+            this.InputVariables.TabIndex = 0;
+            this.InputVariables.Text = "Input variables:";
             // 
-            // AddTermForm
+            // InputVariablesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 356);
-            this.Controls.Add(this.TermCountLabel);
-            this.Name = "AddTermForm";
-            this.Text = "AddTermForm";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.InputVariables);
+            this.Name = "InputVariablesForm";
+            this.Text = "InputVariablesForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -55,6 +55,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label TermCountLabel;
+        private System.Windows.Forms.Label InputVariables;
     }
 }

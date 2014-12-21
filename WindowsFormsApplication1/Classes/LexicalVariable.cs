@@ -8,7 +8,7 @@ namespace WindowsFormsApplication1.Classes
 {
     using WindowsFormsApplication1.Structures;
 
-    class LexicalVariable
+    public class LexicalVariable
     {
         private string                  m_id            { get; set; }
         private string                  m_name          { get; set; }
@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.Classes
         private ProductionRulesTerm[]   m_terms         { get; set; }
         private VariableType            m_type          { get; set; }
 
-        public LexicalVariable(string _id, string _name, int _minValue, int _maxValue, int _temrsCount, VariableType _variableType)
+        public LexicalVariable(string _id, string _name, int _minValue, int _maxValue, int _temrsCount, ProductionRulesTerm[] _terms, VariableType _variableType)
         {
             m_id            = _id;
             m_name          = _name;
@@ -26,6 +26,9 @@ namespace WindowsFormsApplication1.Classes
             m_maxValue      = _maxValue;
             m_termsCount    = _temrsCount;
             m_type          = _variableType;
+            m_terms         = new ProductionRulesTerm[m_termsCount];
+            m_terms         = _terms;
+
         }
     }
 }

@@ -76,6 +76,12 @@
     <Compile Include="Classes\MembershipFunctions\TrapezoidalFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\TriangleFunction.cs" />
     <Compile Include="Classes\ProductionRule.cs" />
+    <Compile Include="InputVariablesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputVariablesForm.Designer.cs">
+      <DependentUpon>InputVariablesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MembershipFunctionChoise.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputVariablesForm.resx">
+      <DependentUpon>InputVariablesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MembershipFunctionChoise.resx">
       <DependentUpon>MembershipFunctionChoise.cs</DependentUpon>
