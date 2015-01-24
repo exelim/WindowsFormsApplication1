@@ -9,9 +9,9 @@ namespace WindowsFormsApplication1.Classes
     public class ProductionRule
     {
         public static int           m_number = 0;
-        int                         m_termsCount;
-        RelationType                m_type;
-        Dictionary<string, string>  m_variables;
+        public int                         m_termsCount;
+        public RelationType                m_type;
+        public Dictionary<string, string>  m_variables;
 
         public ProductionRule(int _termsCount, RelationType _type, Dictionary<string, string> _variables)
         {

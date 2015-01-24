@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
 {
-    abstract class AggregationFormulaBase
+    abstract public class AggregationFormulaBase
     {
-        public abstract double CalculateAggregation(double _val_1, double _val_2);
+        public abstract double CalculateAggregation( Stack< double > st );
     }
 }

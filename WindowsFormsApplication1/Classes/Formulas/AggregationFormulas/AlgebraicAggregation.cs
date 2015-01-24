@@ -10,17 +10,27 @@ namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
     {
         RelationType m_type;
 
-        public override double CalculateAggregation(double _val_1, double _val_2)
+        public override double CalculateAggregation(Stack<double> st)
         {
             double returnValue = 0.0;
             switch (m_type)
             { 
                 case RelationType.OR:
-                    returnValue = ( _val_1 + _val_2 ) - ( _val_1 * _val_2 );
+                    double res = 1.0;
+                    foreach (var item in st)
+	                {
+		                res *= item;
+	                }
+                    returnValue = ( st.Sum() ) - ( res );
                     break;
 
                 case RelationType.AND:
-                    returnValue = _val_1 * _val_2;
+                    double res2 = 1.0;
+                    foreach (var item in st)
+	                {
+		                res2 *= item;
+	                }
+                    returnValue = res2;
                     break;
 
                 default:

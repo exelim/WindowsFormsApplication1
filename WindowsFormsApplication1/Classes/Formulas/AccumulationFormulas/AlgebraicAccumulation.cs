@@ -8,9 +8,14 @@ namespace WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas
 {
     class AlgebraicAccumulation : AccumulatiomFormulaBase
     {
-        public override double CalculateAccumulation(double _val_1, double _val_2)
+        public override double CalculateAccumulation(Stack<double> _st)
         {
-            return (_val_1 + _val_2) - (_val_1 * _val_2);
+            double res = 1.0;
+            foreach (var item in _st)
+            {
+                res *= item;
+            }
+            return (_st.Sum()) - (res);
         }
     }
 }

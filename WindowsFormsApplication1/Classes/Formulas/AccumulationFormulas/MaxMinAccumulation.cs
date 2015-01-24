@@ -8,9 +8,9 @@ namespace WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas
 {
     class MaxMinAccumulation :AccumulatiomFormulaBase
     {
-        public override double CalculateAccumulation(double _val_1, double _val_2)
+        public override double CalculateAccumulation(Stack<double> _st)
         {
-            return Math.Max(_val_1, _val_2);
+            return _st.Max();
         }
     }
 }

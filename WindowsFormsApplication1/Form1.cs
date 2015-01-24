@@ -20,6 +20,7 @@ namespace WindowsFormsApplication1
     {
         public int lexicalVariablesCount;
         public static int termsCount;
+        public static int fullTermsCount;
         public static ProductionRulesTerm[,] _terms;
         public static LexicalVariable[] lexicalVariables;
 
@@ -194,6 +195,7 @@ namespace WindowsFormsApplication1
         {
             var button = (Button)sender;
             termsCount = Convert.ToInt32(this.Controls["upDown_TermsCount_" + button.Name.Substring(button.Name.Length-1, 1)].Text);
+            fullTermsCount += termsCount;
             if (termsCount <= 0)
             {
                 MessageBox.Show("Terms count should be greater than 0.");
