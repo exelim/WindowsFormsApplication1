@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1
                 // creating Label Terms count
                 Label Numberlabel = new Label();
                 Numberlabel.Name = "label_TermsCount_" + i;
-                Numberlabel.Text = "Term №" + i + 1 + ":";
+                Numberlabel.Text = "Term №" + (i + 1) + ":";
                 Numberlabel.Width = 60;
                 Numberlabel.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(Numberlabel);
@@ -115,15 +115,40 @@ namespace WindowsFormsApplication1
 
         void OKButton_Clicked(object sender, EventArgs e)
         {
+            bool shouldClose = false;
             for (int i = 0; i < Form1.termsCount; i++)
             {
-                string ID = this.Controls["label_TermID_" + i].Text;
+                string ID = this.Controls["textbox_TermID_" + i].Text;
+                if (ID == "")
+                {
+                    MessageBox.Show("Error! Term's №" + (i + 1) + " ID is empty!");
+                    shouldClose = false;
+                    break;
+                }
+
                 string termName = this.Controls["textbox_TermName_" + i].Text;
+                if (termName == "")
+                {
+                    MessageBox.Show("Error! Term's №" + (i + 1) + " name is empty!");
+                    shouldClose = false;
+                    break;
+                }
+
                 int termMinRange = Convert.ToInt32( this.Controls["upDown_TermMinrange_" + i].Text );
                 int termMaxRange = Convert.ToInt32(this.Controls["upDown_TermMaxrange_" + i].Text);
+                if (termMinRange >= termMaxRange)
+                {
+                    MessageBox.Show("Error! Term's №" + (i + 1) + " minimum ragne is equal or greater than maximum range!");
+                    shouldClose = false;
+                    break;
+                }
+
+                shouldClose = true;
                 _term[i] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
                 Form1._terms[number,i] = _term[i];
             }
+            if( shouldClose )
+                Close();
         }
 
         void CancelButton_Clicked(object sender, EventArgs e)

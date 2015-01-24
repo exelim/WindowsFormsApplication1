@@ -14,7 +14,7 @@ using WindowsFormsApplication1.Structures;
 namespace WindowsFormsApplication1
 {
     public enum VariableType { IN, OUT };
-    enum RelationType { AND, OR };
+    public enum RelationType { AND, OR };
 
     public partial class Form1 : Form
     {
@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1
 
             if (Convert.ToInt32(LVCountUpDown.Value) <= 0)
             {
-                MessageBox.Show("Lexical variables count should be greater than 0.");
+                MessageBox.Show("Linguistic variables count should be greater than 0.");
             }
 
             else
@@ -72,7 +72,7 @@ namespace WindowsFormsApplication1
                     // creating Label LV number
                     Label Numberlabel = new Label();
                     Numberlabel.Name = "label_LVNumber_" + i;
-                    Numberlabel.Text = "Linguistic var №" + i + 1 + ":";
+                    Numberlabel.Text = "Linguistic var №" + (i + 1) + ":";
                     Numberlabel.Width = 95;
                     Numberlabel.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(Numberlabel);
@@ -212,20 +212,20 @@ namespace WindowsFormsApplication1
                 string ID = this.Controls["textbox_LVID_" + i].Text;
                 if (ID == "")
                 {
-                    MessageBox.Show("Error! Lexical variable ID is empty!");
+                    MessageBox.Show("Error! Linguistic's variable №" + (i + 1) + " ID is empty!");
                     return;
                 }
                 string LVName = this.Controls["textbox_LVName_" + i].Text;
                 if (LVName == "")
                 {
-                    MessageBox.Show("Error! Lexical variable name is empty!");
+                    MessageBox.Show("Error! Linguistic's variable №" + ( i + 1 ) + " name is empty!");
                     return;
                 }
                 int LVMinValue = Convert.ToInt32(this.Controls["upDown_LVMinrange_" + i].Text);
                 int LVMaxValue = Convert.ToInt32(this.Controls["upDown_LVMaxrange_" + i].Text);
                 if (LVMinValue >= LVMaxValue)
                 {
-                    MessageBox.Show("Error! Minimal value greater than maximal!");
+                    MessageBox.Show("Error! Linguistic's variable №" + ( i + 1 ) + " minimal value is equal greater than maximal!");
                     return;
                 }
                 int termsCount = Convert.ToInt32(this.Controls["upDown_TermsCount_" + i].Text);
@@ -244,7 +244,7 @@ namespace WindowsFormsApplication1
                 ProductionRulesTerm[] rules = new ProductionRulesTerm[termsCount];
                 if (termsCount <= 0)
                 {
-                    MessageBox.Show("Error! Terms count should be greater than 0!");
+                    MessageBox.Show("Error! Linguistic's variable №" + ( i + 1 ) + " terms count should be greater than 0!");
                     return;
                 }
                 else
@@ -253,7 +253,7 @@ namespace WindowsFormsApplication1
                     {
                         if (_terms[i, j].m_ID == null)
                         {
-                            MessageBox.Show("Error! You should first add terms for all lexical variables!");
+                            MessageBox.Show("Error! You should first add terms for all linguistic variables!");
                             return;
                         }
 
@@ -268,5 +268,6 @@ namespace WindowsFormsApplication1
             inputVariablesForm.ShowDialog();
 
         }
+
     }
 }

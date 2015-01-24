@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes
 {
-    class ProductionRule
+    public class ProductionRule
     {
         public static int           m_number = 0;
         int                         m_termsCount;

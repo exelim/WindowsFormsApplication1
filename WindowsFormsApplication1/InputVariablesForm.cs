@@ -50,42 +50,11 @@ namespace WindowsFormsApplication1
                 this.Controls.Add(InputVariableUpDown);
             }
 
-            // creating Label output variable
-            Label OutputNumberlabel = new Label();
-            OutputNumberlabel.Name = "label_OutputVariableNumber_";
-            OutputNumberlabel.Text = "Output variables:";
-            OutputNumberlabel.Width = 95;
-            OutputNumberlabel.Location = new Point(InputVariables.Location.X, InputVariables.Location.Y + (25 * LVCount + 25));
-            this.Controls.Add(OutputNumberlabel);
-
-            // creating Label output variable
-            Label OutputNumberlabel2 = new Label();
-            OutputNumberlabel2.Name = "label_OutputVariableNumber_";
-            OutputNumberlabel2.Text = "Output variable:";
-            OutputNumberlabel2.Width = 95;
-            OutputNumberlabel2.Location = new Point(OutputNumberlabel.Location.X, InputVariables.Location.Y + (25 * LVCount + 50));
-            this.Controls.Add(OutputNumberlabel2);
-
-            // creating Label output value
-            Label Outputlabel = new Label();
-            Outputlabel.Name = "label_OutputVariableValue_";
-            Outputlabel.Text = "Value:";
-            Outputlabel.Width = 65;
-            Outputlabel.Location = new Point(OutputNumberlabel2.Location.X + OutputNumberlabel2.Width + 5, InputVariables.Location.Y + (25 * LVCount + 50));
-            this.Controls.Add(Outputlabel);
-
-            // creating UpDown Output value
-            NumericUpDown OutputUpDown = new NumericUpDown();
-            OutputUpDown.Name = "upDown_OutputVariableValue_";
-            OutputUpDown.Width = 36;
-            OutputUpDown.Location = new Point(Outputlabel.Location.X + Outputlabel.Width + 5, InputVariables.Location.Y + (25 * LVCount + 50));
-            this.Controls.Add(OutputUpDown);
-
             // creating OK button
             Button LVNextButton = new Button();
             LVNextButton.Name = "InpurVariablesOKButton";
             LVNextButton.Text = "Ok";
-            LVNextButton.Location = new Point(OutputNumberlabel2.Location.X, OutputUpDown.Location.Y + (25 * LVCount) + 25);
+            LVNextButton.Location = new Point(this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.X, this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.Y + (25 * LVCount) + 25);
             LVNextButton.Click += OkButton_Clicked;
             this.Controls.Add(LVNextButton);
 
@@ -98,7 +67,9 @@ namespace WindowsFormsApplication1
                 inputVariables[i] = Convert.ToInt32(this.Controls["upDown_InputVariableValue_" + i].Text);
             }
 
-            outputVariable = Convert.ToInt32(this.Controls["upDown_OutputVariableValue_"].Text);
+            Close();
+            ProductionRulesInputForm PRForm = new ProductionRulesInputForm();
+            PRForm.ShowDialog();
         }
 
     }
