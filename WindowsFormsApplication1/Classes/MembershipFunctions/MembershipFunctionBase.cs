@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes.MembershipFunctions
 {
-    abstract class MembershipFunctionBase
+    abstract public class MembershipFunctionBase
     {
-        public abstract double CalculateFunctionValue(double _val_1, double _a, double _b = 0, double _c = 0, double _d = 0);
+        public int a;
+        public int b;
+        public int c;
+        public int d;
+
+        public abstract double CalculateFunctionValue(double _val_1/*, double _a, double _b = 0, double _c = 0, double _d = 0*/);
     }
 }

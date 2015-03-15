@@ -9,9 +9,9 @@ namespace WindowsFormsApplication1.Structures
     public struct ProductionRulesTerm
     {
         public string m_ID;
-        string m_name;
-        int m_minValue;
-        int m_maxValue;
+        public string m_name;
+        public int m_minValue;
+        public int m_maxValue;
 
         public ProductionRulesTerm(string _ID, string _name, int _minValue, int _maxValue)
         {

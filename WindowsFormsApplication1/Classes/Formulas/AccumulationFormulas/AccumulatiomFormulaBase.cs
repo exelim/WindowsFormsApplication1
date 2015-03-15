@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas
 {
-    abstract class AccumulatiomFormulaBase
+    abstract public class AccumulatiomFormulaBase
     {
         public abstract double CalculateAccumulation( Stack<double > _st );
     }

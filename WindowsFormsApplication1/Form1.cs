@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1
 
     public partial class Form1 : Form
     {
-        public int lexicalVariablesCount;
+        public static int lexicalVariablesCount;
         public static int termsCount;
         public static int fullTermsCount;
         public static ProductionRulesTerm[,] _terms;
@@ -259,7 +259,7 @@ namespace WindowsFormsApplication1
                             return;
                         }
 
-                        rules[i] = _terms[i, j];
+                        rules[j] = _terms[i, j];
                     }
                     lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, rules, type);
                 }

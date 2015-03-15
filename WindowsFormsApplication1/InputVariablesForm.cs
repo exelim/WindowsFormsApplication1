@@ -14,8 +14,6 @@ namespace WindowsFormsApplication1
     {
         public static int LVCount;
         public static int[] inputVariables;
-        public static int outputVariable;
-
 
         public InputVariablesForm(int _variablesCount)
         {

@@ -13,13 +13,14 @@ using WindowsFormsApplication1.Classes.Formulas.AggregationFormulas;
 using WindowsFormsApplication1.Classes.Formulas.ActivisationFormulas;
 using WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas;
 using WindowsFormsApplication1.Classes.MembershipFunctions;
+using WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas;
 
 namespace WindowsFormsApplication1
 {
     public partial class ProductionRulesInputForm : Form
     {
         public static ProductionRule[] prodcutionsRules;
-        public static Tuple<string, string, double>[] fuzzification_1_Values;
+        public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < linguistick variable id, term id, fuzzification value>
         public static double[] aggregationValues;
         public static Stack<double> activisationValues;
 
@@ -47,6 +48,7 @@ namespace WindowsFormsApplication1
             {
                 prodcutionsRules[i] = rp.ParseRuleString(lines[i]);
             }
+            Fuzzification_1();
             this.Close();
         }
 
@@ -62,6 +64,21 @@ namespace WindowsFormsApplication1
              TODO: Fill it!!!  
             */
             Aggregation();
+        }
+
+        public void FuzzificationValues(MembershipFunctionBase _mf)
+        {
+            for (int i = 0; i < Form1.lexicalVariablesCount; i++)
+            { 
+                for( int j = 0; j < Form1.lexicalVariables.Length; j++)
+                {
+                    for( int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++ )
+                    {
+                        MembershipFunctionBase a = new GaussFunction();
+                        //_mf.CalculateFunctionValue( InputVariablesForm.inputVariables[j] )
+                    }
+                }
+            }
         }
 
         public void Aggregation()
@@ -104,6 +121,8 @@ namespace WindowsFormsApplication1
                     activisationValues.Push(ActivisationValues(actBase, 1.0, item)); // 1.0 ?????????????????????
             }
         }
+
+        
 
         public void AccumulationPhase()
         {

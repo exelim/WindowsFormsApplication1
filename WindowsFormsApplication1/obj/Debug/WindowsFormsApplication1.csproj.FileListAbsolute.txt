@@ -13,7 +13,6 @@ H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\D
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
-H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.AddTermForm.resources
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.MembershipFunctionChoise.resources
@@ -34,3 +33,4 @@ C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\ob
 C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
 C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ProductionRulesInputForm.resources
 H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ProductionRulesInputForm.resources
+H:\Users\Nikolay\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache

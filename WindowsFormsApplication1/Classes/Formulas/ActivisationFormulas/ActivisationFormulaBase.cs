@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Classes.Formulas.ActivisationFormulas
 {
-    abstract class ActivisationFormulaBase
+    abstract public class ActivisationFormulaBase
     {
         public abstract double CalculateActivisation( double _c, double _val_1 );
     }
