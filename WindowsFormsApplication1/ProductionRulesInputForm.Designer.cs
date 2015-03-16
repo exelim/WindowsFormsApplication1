@@ -40,7 +40,7 @@
             this.prodRulesTB.Name = "prodRulesTB";
             this.prodRulesTB.Size = new System.Drawing.Size(492, 195);
             this.prodRulesTB.TabIndex = 0;
-            this.prodRulesTB.Text = "";
+            this.prodRulesTB.Text = "if lvid_0 is tmid_0 then y is 23";
             // 
             // label1
             // 

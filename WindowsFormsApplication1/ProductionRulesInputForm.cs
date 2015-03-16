@@ -60,7 +60,7 @@ namespace WindowsFormsApplication1
         public void Fuzzification_1()
         { 
             fuzzification_1_Values = new Tuple<string,string,double>[Form1.fullTermsCount]; // < linguistick variable id, term id, fuzzification value>
-            MembershipFunctionBase mf = new TriangleFunction(1, 2, 3);
+            MembershipFunctionBase mf = new TriangleFunction(0.5, 2, 3);
 
             FuzzificationValues( mf, fuzzification_1_Values);
 
@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
                 {
                     for( int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++ )
                     {
-                        _tp[i] = Tuple.Create( Form1.lexicalVariables[i].m_name, Form1.lexicalVariables[i].m_terms[i].m_name, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
+                        _tp[i] = Tuple.Create( Form1.lexicalVariables[i].m_id, Form1.lexicalVariables[i].m_terms[i].m_ID, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
                     }
                 }
             }
@@ -103,8 +103,8 @@ namespace WindowsFormsApplication1
                             values.Push( fuz.Item3 );
                     }
                 }
-                i++;
                 aggregationValues[i] = AggregationValues(aggrBase, values);
+                i++;
             }
 
             ActivisationPhase();
@@ -120,8 +120,6 @@ namespace WindowsFormsApplication1
                     activisationValues.Push(ActivisationValues(actBase, 1.0, item)); // 1.0 ?????????????????????
             }
         }
-
-        
 
         public void AccumulationPhase()
         {

@@ -46,7 +46,7 @@ namespace WindowsFormsApplication1
                 IDtextBox.Name = "textbox_TermID_" + i;
                 IDtextBox.Width = 50;
                 IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                IDtextBox.Text = "zxc_" + i;  // DEBUG
+                IDtextBox.Text = "tmid_" + i;  // DEBUG
                 this.Controls.Add(IDtextBox);
 
                 // creating Label Term name
@@ -62,7 +62,7 @@ namespace WindowsFormsApplication1
                 NametextBox.Name = "textbox_TermName_" + i;
                 NametextBox.Width = 100;
                 NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                NametextBox.Text = "z_" + i;  // DEBUG
+                NametextBox.Text = "tmname_" + i;  // DEBUG
                 this.Controls.Add(NametextBox);
 
                 // creating Label Term min range

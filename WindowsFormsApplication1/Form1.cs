@@ -91,7 +91,7 @@ namespace WindowsFormsApplication1
                     IDtextBox.Name = "textbox_LVID_" + i;
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    IDtextBox.Text = "qwe_" + i; // DEBUG
+                    IDtextBox.Text = "lvid_" + i; // DEBUG
                     this.Controls.Add(IDtextBox);
 
                     // creating Label LV name
@@ -107,7 +107,7 @@ namespace WindowsFormsApplication1
                     NametextBox.Name = "textbox_LVName_" + i;
                     NametextBox.Width = 100;
                     NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    NametextBox.Text = "asd_" + i; // DEBUG
+                    NametextBox.Text = "lvname_" + i; // DEBUG
                     this.Controls.Add(NametextBox);
 
                     // creating Label LV min range
