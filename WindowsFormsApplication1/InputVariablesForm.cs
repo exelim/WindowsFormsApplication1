@@ -45,6 +45,7 @@ namespace WindowsFormsApplication1
                 InputVariableUpDown.Name = "upDown_InputVariableValue_" + i;
                 InputVariableUpDown.Width = 36;
                 InputVariableUpDown.Location = new Point(InputVariablelabel.Location.X + InputVariablelabel.Width + 5, InputVariables.Location.Y + (25 + 25 * i));
+                InputVariableUpDown.Value = 1 + 10*i;
                 this.Controls.Add(InputVariableUpDown);
             }
 

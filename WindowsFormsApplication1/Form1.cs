@@ -91,6 +91,7 @@ namespace WindowsFormsApplication1
                     IDtextBox.Name = "textbox_LVID_" + i;
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                    IDtextBox.Text = "qwe_" + i; // DEBUG
                     this.Controls.Add(IDtextBox);
 
                     // creating Label LV name
@@ -106,6 +107,7 @@ namespace WindowsFormsApplication1
                     NametextBox.Name = "textbox_LVName_" + i;
                     NametextBox.Width = 100;
                     NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                    NametextBox.Text = "asd_" + i; // DEBUG
                     this.Controls.Add(NametextBox);
 
                     // creating Label LV min range
@@ -136,6 +138,7 @@ namespace WindowsFormsApplication1
                     MaxRangeUpDown.Name = "upDown_LVMaxrange_" + i;
                     MaxRangeUpDown.Width = 36;
                     MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
                     this.Controls.Add(MaxRangeUpDown);
 
                     // creating Label LV type
@@ -169,6 +172,7 @@ namespace WindowsFormsApplication1
                     TermsCountUpDown.Name = "upDown_TermsCount_" + i;
                     TermsCountUpDown.Width = 36;
                     TermsCountUpDown.Location = new Point(TermsCountlabel.Location.X + TermsCountlabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    TermsCountUpDown.Value = 1;
                     this.Controls.Add(TermsCountUpDown);
 
                     // creating button add terms

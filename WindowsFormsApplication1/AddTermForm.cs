@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
     public partial class AddTermForm : Form
     {
 
-        static public ProductionRulesTerm[] _term = new ProductionRulesTerm[Form1.termsCount];
+        static public ProductionRulesTerm[] _term;
         int number;
 
         public AddTermForm( int _number )
@@ -46,6 +46,7 @@ namespace WindowsFormsApplication1
                 IDtextBox.Name = "textbox_TermID_" + i;
                 IDtextBox.Width = 50;
                 IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
+                IDtextBox.Text = "zxc_" + i;  // DEBUG
                 this.Controls.Add(IDtextBox);
 
                 // creating Label Term name
@@ -61,6 +62,7 @@ namespace WindowsFormsApplication1
                 NametextBox.Name = "textbox_TermName_" + i;
                 NametextBox.Width = 100;
                 NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
+                NametextBox.Text = "z_" + i;  // DEBUG
                 this.Controls.Add(NametextBox);
 
                 // creating Label Term min range
@@ -74,7 +76,7 @@ namespace WindowsFormsApplication1
                 // creating UpDown Term min range
                 NumericUpDown MinRangeUpDown = new NumericUpDown();
                 MinRangeUpDown.Name = "upDown_TermMinrange_" + i;
-                MinRangeUpDown.Width = 36;
+                MinRangeUpDown.Width = 36; 
                 MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                 this.Controls.Add(MinRangeUpDown);
 
@@ -91,6 +93,7 @@ namespace WindowsFormsApplication1
                 MaxRangeUpDown.Name = "upDown_TermMaxrange_" + i;
                 MaxRangeUpDown.Width = 36;
                 MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                MaxRangeUpDown.Value = 1 + 10 * i; // DEBUG
                 this.Controls.Add(MaxRangeUpDown);
             }
 
@@ -115,6 +118,7 @@ namespace WindowsFormsApplication1
 
         void OKButton_Clicked(object sender, EventArgs e)
         {
+            _term = new ProductionRulesTerm[Form1.termsCount];
             bool shouldClose = false;
             for (int i = 0; i < Form1.termsCount; i++)
             {

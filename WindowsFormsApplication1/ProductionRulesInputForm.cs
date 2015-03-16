@@ -99,7 +99,7 @@ namespace WindowsFormsApplication1
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item2.Equals(pair.Key)/* && fuz.Item2.Equals(pair.Value)*/)
+                        if (fuz.Item1.Equals(pair.Key)/* && fuz.Item2.Equals(pair.Value)*/)
                             values.Push( fuz.Item3 );
                     }
                 }
