@@ -8,9 +8,16 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
 {
     class SigmoidFunction : MembershipFunctionBase
     {
-        public override double CalculateFunctionValue(double _val_1, double _a, double _b, double _c, double _d = 0)
+        public SigmoidFunction(double _a, double _b, double _c, double _d)
         {
-            return 1 / (1 + ( Math.Pow( Math.Exp(1), ( -_a * ( _val_1 - _c ) ) ) ) );
+            a = _a;
+            b = _b;
+            c = _c;
+            d = _d;
+        }
+        public override double CalculateFunctionValue(double _val_1/*, double _a, double _b, double _c, double _d = 0*/)
+        {
+            return 1 / (1 + ( Math.Pow( Math.Exp(1), ( -a * ( _val_1 - b ) ) ) ) ); // b is c !!!!
         }
     }
 }

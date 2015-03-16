@@ -8,21 +8,29 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
 {
     class TriangleFunction : MembershipFunctionBase
     {
-        public override double CalculateFunctionValue(double _val_1, double _a, double _b, double _c, double _d)
+        public TriangleFunction(double _a, double _b, double _c = 0, double _d = 0)
         {
-            if (_val_1 <= _a)
+            a = _a;
+            b = _b;
+            c = _c;
+            d = _d;
+        }
+
+        public override double CalculateFunctionValue(double _val_1/*, double _a, double _b, double _c, double _d*/)
+        {
+            if (_val_1 <= a)
             {
                 return 0.0;
             }
-            else if (_a <= _val_1 && _val_1 <= _b)
+            else if (a <= _val_1 && _val_1 <= b)
             {
-                return (_val_1 - _a) / (_b - _a);
+                return (_val_1 - a) / (b - a);
             }
-            else if (_b <= _val_1 && _val_1 <= _c)
+            else if (b <= _val_1 && _val_1 <= c)
             {
-                return (_c - _val_1) / (_c - _b);
+                return (c - _val_1) / (c - b);
             }
-            else if (_c <= _val_1)
+            else if (c <= _val_1)
             {
                 return 0.0;
             }

@@ -59,14 +59,16 @@ namespace WindowsFormsApplication1
 
         public void Fuzzification_1()
         { 
-            fuzzification_1_Values = new Tuple<string,string,double>[Form1.fullTermsCount];
-            /*
-             TODO: Fill it!!!  
-            */
+            fuzzification_1_Values = new Tuple<string,string,double>[Form1.fullTermsCount]; // < linguistick variable id, term id, fuzzification value>
+            MembershipFunctionBase mf = new TriangleFunction(1, 2, 3);
+
+            FuzzificationValues( mf, fuzzification_1_Values);
+
+
             Aggregation();
         }
 
-        public void FuzzificationValues(MembershipFunctionBase _mf)
+        public void FuzzificationValues(MembershipFunctionBase _mf, Tuple< string, string, double >[] _tp)
         {
             for (int i = 0; i < Form1.lexicalVariablesCount; i++)
             { 
@@ -74,8 +76,7 @@ namespace WindowsFormsApplication1
                 {
                     for( int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++ )
                     {
-                        MembershipFunctionBase a = new GaussFunction();
-                        //_mf.CalculateFunctionValue( InputVariablesForm.inputVariables[j] )
+                        _tp[i] = Tuple.Create( Form1.lexicalVariables[i].m_name, Form1.lexicalVariables[i].m_terms[i].m_name, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
                     }
                 }
             }
@@ -84,8 +85,6 @@ namespace WindowsFormsApplication1
         public void Aggregation()
         {
             AggregationFormulaBase aggrBase = new MaxMinAggregation(); 
-            
-            MembershipFunctionBase memBase = new TriangleFunction();
 
             aggregationValues = new double[Form1.fullTermsCount];
             activisationValues = new Stack<double>();
@@ -100,7 +99,7 @@ namespace WindowsFormsApplication1
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item1.Equals(pair.Key) && fuz.Item2.Equals(pair.Value))
+                        if (fuz.Item2.Equals(pair.Key)/* && fuz.Item2.Equals(pair.Value)*/)
                             values.Push( fuz.Item3 );
                     }
                 }
