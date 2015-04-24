@@ -92,6 +92,10 @@ namespace WindowsFormsApplication1
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
                     IDtextBox.Text = "lvid_" + i; // DEBUG
+                    if (i == 2) // DEBUG
+                    {
+                        IDtextBox.Text = "lvout"; // DEBUG
+                    }    
                     this.Controls.Add(IDtextBox);
 
                     // creating Label LV name
@@ -158,6 +162,10 @@ namespace WindowsFormsApplication1
                     TypeList.SelectedIndex = 0;
                     TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(TypeList);
+                    if (i == 2) // DEBUG
+                    {
+                        TypeList.SelectedIndex = 1; // DEBUG
+                    }
 
                     // creating Label Terms count
                     Label TermsCountlabel = new Label();

@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1
     {
         public static ProductionRule[] prodcutionsRules;
         public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < linguistick variable id, term id, fuzzification value>
-        public static double[] aggregationValues;
+        public static Dictionary<String, Stack<double>> aggregationValues;
         public static Stack<double> activisationValues;
 
         public ProductionRulesInputForm()
@@ -59,8 +59,8 @@ namespace WindowsFormsApplication1
 
         public void Fuzzification_1()
         { 
-            fuzzification_1_Values = new Tuple<string,string,double>[Form1.fullTermsCount]; // < linguistick variable id, term id, fuzzification value>
-            MembershipFunctionBase mf = new TriangleFunction(0.5, 2, 3);
+            fuzzification_1_Values = new Tuple<string,string,double>[Form1.fullTermsCount - 1 /* 1 of temrs is OUT*/]; // < linguistick variable id, term id, fuzzification value>
+            MembershipFunctionBase mf = new TriangleFunction(0.5, 2, 3); // TODO: use real membership function
 
             FuzzificationValues( mf, fuzzification_1_Values);
 
@@ -70,13 +70,13 @@ namespace WindowsFormsApplication1
 
         public void FuzzificationValues(MembershipFunctionBase _mf, Tuple< string, string, double >[] _tp)
         {
-            for (int i = 0; i < Form1.lexicalVariablesCount; i++)
-            { 
-                for( int j = 0; j < Form1.lexicalVariables.Length; j++)
+            for( int j = 0; j < Form1.lexicalVariables.Length; j++)
+            {
+                for( int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++ )
                 {
-                    for( int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++ )
+                    if (Form1.lexicalVariables[j].m_type != VariableType.OUT)
                     {
-                        _tp[i] = Tuple.Create( Form1.lexicalVariables[i].m_id, Form1.lexicalVariables[i].m_terms[i].m_ID, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
+                        _tp[j] = Tuple.Create(Form1.lexicalVariables[j].m_id, Form1.lexicalVariables[j].m_terms[k].m_ID, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
                     }
                 }
             }
@@ -84,10 +84,11 @@ namespace WindowsFormsApplication1
 
         public void Aggregation()
         {
-            AggregationFormulaBase aggrBase = new MaxMinAggregation(); 
+            AggregationFormulaBase aggrBase = new MaxMinAggregation(); // TODO: use real agregation function
 
-            aggregationValues = new double[Form1.fullTermsCount];
             activisationValues = new Stack<double>();
+
+            aggregationValues = new Dictionary<string, Stack<double>>();
                  
             Stack< double > values = new Stack<double>();
 
@@ -95,16 +96,27 @@ namespace WindowsFormsApplication1
 
             foreach (var item in prodcutionsRules)
             {
+                String agrValueKey;
                 foreach (var pair in item.m_variables)
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item1.Equals(pair.Key)/* && fuz.Item2.Equals(pair.Value)*/)
-                            values.Push( fuz.Item3 );
+                        if (fuz.Item1.Equals(pair.Key) && fuz.Item3 > 0.0)
+                        {
+                            values.Push(fuz.Item3);
+                            agrValueKey = item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Key;
+                            if (!aggregationValues.ContainsKey(agrValueKey))
+                            {
+                                aggregationValues.Add(agrValueKey, new Stack<double>());
+                                aggregationValues[agrValueKey].Push( AggregationValues(aggrBase, values));
+                            }
+                            else 
+                            {
+                                aggregationValues[agrValueKey].Push(AggregationValues(aggrBase, values));
+                            }
+                        }
                     }
                 }
-                aggregationValues[i] = AggregationValues(aggrBase, values);
-                i++;
             }
 
             ActivisationPhase();
@@ -112,12 +124,28 @@ namespace WindowsFormsApplication1
 
         public void ActivisationPhase()
         {
-            ActivisationFormulaBase actBase = new MinActivisation();
+            ActivisationFormulaBase actBase = new MinActivisation(); // TODO: use real activisation function
 
             foreach (var item in aggregationValues)
             {
-                if (item > 0)
-                    activisationValues.Push(ActivisationValues(actBase, 1.0, item)); // 1.0 ?????????????????????
+                foreach (var val in item.Value)
+                {
+                    if (val > 0)
+                    {
+                        double minValue = 0, maxValue = 0;
+                        foreach (var lv in Form1.lexicalVariables)
+                        {
+                            if (lv.m_type == VariableType.OUT && lv.m_id == item.Key)
+                            {
+                                minValue = lv.m_minValue;
+                                maxValue = lv.m_maxValue;
+                            }
+                        }
+                        MembershipFunctionBase _mf = new TriangleFunction(minValue, (minValue + maxValue) / 2, maxValue); // TODO: use real membership function
+                        double _funcVal = _mf.CalculateFunctionValue(val);
+                        activisationValues.Push(ActivisationValues(actBase, _funcVal, val));
+                    }
+                }
             }
         }
 

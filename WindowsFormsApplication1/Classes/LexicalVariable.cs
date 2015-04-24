@@ -28,7 +28,6 @@ namespace WindowsFormsApplication1.Classes
             m_type          = _variableType;
             m_terms         = new ProductionRulesTerm[m_termsCount];
             m_terms         = _terms;
-
         }
     }
 }
