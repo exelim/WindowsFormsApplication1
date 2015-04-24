@@ -33,6 +33,7 @@
             this.LVCountConfirmButton = new System.Windows.Forms.Button();
             this.AddTermsPanel = new System.Windows.Forms.Panel();
             this.ChooseFunctionsPanel = new System.Windows.Forms.Panel();
+            this.ChooseFunctionsBackButton = new System.Windows.Forms.Button();
             this.FuzzificationComboBox = new System.Windows.Forms.ComboBox();
             this.AccumulationComboBox = new System.Windows.Forms.ComboBox();
             this.ActivisationComboBox = new System.Windows.Forms.ComboBox();
@@ -46,11 +47,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ChooseFunctionsNextButton = new System.Windows.Forms.Button();
             this.TermCountLabel = new System.Windows.Forms.Label();
-            this.ChooseFunctionsBackButton = new System.Windows.Forms.Button();
+            this.InputVariablesPanel = new System.Windows.Forms.Panel();
+            this.InputVariables = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).BeginInit();
             this.AddTermsPanel.SuspendLayout();
             this.ChooseFunctionsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.InputVariablesPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // LVCountLabel
@@ -97,6 +100,7 @@
             // 
             // ChooseFunctionsPanel
             // 
+            this.ChooseFunctionsPanel.Controls.Add(this.InputVariablesPanel);
             this.ChooseFunctionsPanel.Controls.Add(this.ChooseFunctionsBackButton);
             this.ChooseFunctionsPanel.Controls.Add(this.FuzzificationComboBox);
             this.ChooseFunctionsPanel.Controls.Add(this.AccumulationComboBox);
@@ -115,6 +119,16 @@
             this.ChooseFunctionsPanel.Name = "ChooseFunctionsPanel";
             this.ChooseFunctionsPanel.Size = new System.Drawing.Size(1024, 448);
             this.ChooseFunctionsPanel.TabIndex = 6;
+            // 
+            // ChooseFunctionsBackButton
+            // 
+            this.ChooseFunctionsBackButton.Location = new System.Drawing.Point(187, 348);
+            this.ChooseFunctionsBackButton.Name = "ChooseFunctionsBackButton";
+            this.ChooseFunctionsBackButton.Size = new System.Drawing.Size(75, 23);
+            this.ChooseFunctionsBackButton.TabIndex = 29;
+            this.ChooseFunctionsBackButton.Text = "< Back";
+            this.ChooseFunctionsBackButton.UseVisualStyleBackColor = true;
+            this.ChooseFunctionsBackButton.Click += new System.EventHandler(this.ChooseFunctionsBackButton_Click);
             // 
             // FuzzificationComboBox
             // 
@@ -229,15 +243,24 @@
             this.TermCountLabel.TabIndex = 5;
             this.TermCountLabel.Text = "Terms :";
             // 
-            // ChooseFunctionsBackButton
+            // InputVariablesPanel
             // 
-            this.ChooseFunctionsBackButton.Location = new System.Drawing.Point(187, 348);
-            this.ChooseFunctionsBackButton.Name = "ChooseFunctionsBackButton";
-            this.ChooseFunctionsBackButton.Size = new System.Drawing.Size(75, 23);
-            this.ChooseFunctionsBackButton.TabIndex = 29;
-            this.ChooseFunctionsBackButton.Text = "< Back";
-            this.ChooseFunctionsBackButton.UseVisualStyleBackColor = true;
-            this.ChooseFunctionsBackButton.Click += new System.EventHandler(this.ChooseFunctionsBackButton_Click);
+            this.InputVariablesPanel.Controls.Add(this.InputVariables);
+            this.InputVariablesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InputVariablesPanel.Location = new System.Drawing.Point(0, 0);
+            this.InputVariablesPanel.Name = "InputVariablesPanel";
+            this.InputVariablesPanel.Size = new System.Drawing.Size(1024, 448);
+            this.InputVariablesPanel.TabIndex = 30;
+            this.InputVariablesPanel.Visible = false;
+            // 
+            // InputVariables
+            // 
+            this.InputVariables.AutoSize = true;
+            this.InputVariables.Location = new System.Drawing.Point(37, 41);
+            this.InputVariables.Name = "InputVariables";
+            this.InputVariables.Size = new System.Drawing.Size(79, 13);
+            this.InputVariables.TabIndex = 1;
+            this.InputVariables.Text = "Input variables:";
             // 
             // Form1
             // 
@@ -256,6 +279,8 @@
             this.ChooseFunctionsPanel.ResumeLayout(false);
             this.ChooseFunctionsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.InputVariablesPanel.ResumeLayout(false);
+            this.InputVariablesPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,8 +291,6 @@
         private System.Windows.Forms.Label LVCountLabel;
         private System.Windows.Forms.NumericUpDown LVCountUpDown;
         private System.Windows.Forms.Button LVCountConfirmButton;
-        private System.Windows.Forms.Panel AddTermsPanel;
-        private System.Windows.Forms.Label TermCountLabel;
         private System.Windows.Forms.Panel ChooseFunctionsPanel;
         private System.Windows.Forms.ComboBox FuzzificationComboBox;
         private System.Windows.Forms.ComboBox AccumulationComboBox;
@@ -282,6 +305,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button ChooseFunctionsNextButton;
         private System.Windows.Forms.Button ChooseFunctionsBackButton;
+        private System.Windows.Forms.Panel AddTermsPanel;
+        private System.Windows.Forms.Label TermCountLabel;
+        private System.Windows.Forms.Panel InputVariablesPanel;
+        private System.Windows.Forms.Label InputVariables;
     }
 }
 

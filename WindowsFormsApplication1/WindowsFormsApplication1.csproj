@@ -50,6 +50,7 @@
     <Compile Include="AddTermForm.Designer.cs">
       <DependentUpon>AddTermForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="Classes\Formulas\AccumulationFormulas\AccumulatiomFormulaBase.cs" />
     <Compile Include="Classes\Formulas\AccumulationFormulas\AlgebraicAccumulation.cs" />
     <Compile Include="Classes\Formulas\AccumulationFormulas\LimitedAccumulation.cs" />

@@ -36,6 +36,8 @@ namespace WindowsFormsApplication1
         public static LexicalVariable[] lexicalVariables;
         static public ProductionRulesTerm[] _term;
 
+        public static int[] inputVariables;
+
         int number;
         bool choseFunctionFormInitialized = false;
 
@@ -602,6 +604,9 @@ namespace WindowsFormsApplication1
                     fuzzification_function = new LeftModelValuesFuzzification();
                     break;
             }
+
+            InputVariablesPanel.Visible = true;
+            FillInputVariablesForm();
         }
 
         private void ChooseFunctionsBackButton_Click(object sender, EventArgs e)
@@ -610,5 +615,79 @@ namespace WindowsFormsApplication1
             ChooseFunctionsPanel.Visible = false;
         }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////   INPUT VARTIABLE FORM     /////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void FillInputVariablesForm()
+        {
+            inputVariables = new int[lexicalVariablesCount];
+
+            for (int i = 0; i < lexicalVariablesCount /*-1 /*Since last is the outout value*/; i++)
+            {
+                // creating Label input var
+                Label InputNumberlabel = new Label();
+                InputNumberlabel.Name = "label_InputVariableNumber_" + i;
+                InputNumberlabel.Text = "Input var №" + (i + 1) + ":";
+                InputNumberlabel.Width = 95;
+                InputNumberlabel.Location = new Point(InputVariables.Location.X, InputVariables.Location.Y + (25 + 25 * i));
+                InputVariablesPanel.Controls.Add(InputNumberlabel);
+
+                // creating Label input var
+                Label InputVariablelabel = new Label();
+                InputVariablelabel.Name = "label_InputVariableValue_" + i;
+                InputVariablelabel.Text = "Value:";
+                InputVariablelabel.Width = 65;
+                InputVariablelabel.Location = new Point(InputNumberlabel.Location.X + InputNumberlabel.Width + 5, InputVariables.Location.Y + (25 + 25 * i));
+                InputVariablesPanel.Controls.Add(InputVariablelabel);
+
+                // creating UpDown input var
+                NumericUpDown InputVariableUpDown = new NumericUpDown();
+                InputVariableUpDown.Name = "upDown_InputVariableValue_" + i;
+                InputVariableUpDown.Width = 36;
+                InputVariableUpDown.Location = new Point(InputVariablelabel.Location.X + InputVariablelabel.Width + 5, InputVariables.Location.Y + (25 + 25 * i));
+                InputVariableUpDown.Value = 1 + 10 * i;
+                InputVariablesPanel.Controls.Add(InputVariableUpDown);
+            }
+
+            // creating OK button
+            Button LVNextButton = new Button();
+            LVNextButton.Name = "InpurVariablesOKButton";
+            LVNextButton.Text = "Next >";
+            LVNextButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.X + 100, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.Y + (25 * lexicalVariablesCount) + 25);
+            LVNextButton.Click += OkButton_Clicked;
+            InputVariablesPanel.Controls.Add(LVNextButton);
+
+            // creating Back button
+            Button LVBackButton = new Button();
+            LVBackButton.Name = "InpurVariablesBackButton";
+            LVBackButton.Text = "< Back";
+            LVBackButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.X, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.Y + (25 * lexicalVariablesCount) + 25);
+            LVBackButton.Click += BackButton_Clicked;
+            InputVariablesPanel.Controls.Add(LVBackButton);
+
+        }
+
+        void BackButton_Clicked(object sender, EventArgs e)
+        {
+            ChooseFunctionsPanel.Visible = true;
+            InputVariablesPanel.Visible = false;
+        }
+
+        void OkButton_Clicked(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lexicalVariablesCount; i++)
+            {
+                inputVariables[i] = Convert.ToInt32(InputVariablesPanel.Controls["upDown_InputVariableValue_" + i].Text);
+            }
+
+            Close();
+            ProductionRulesInputForm PRForm = new ProductionRulesInputForm();
+            PRForm.ShowDialog();
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////   PRODUCTION RULES INTPUT FORM     /////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

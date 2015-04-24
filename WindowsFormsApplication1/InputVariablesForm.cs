@@ -52,11 +52,31 @@ namespace WindowsFormsApplication1
             // creating OK button
             Button LVNextButton = new Button();
             LVNextButton.Name = "InpurVariablesOKButton";
-            LVNextButton.Text = "Ok";
-            LVNextButton.Location = new Point(this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.X, this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.Y + (25 * LVCount) + 25);
+            LVNextButton.Text = "Next >";
+            LVNextButton.Location = new Point(this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.X + 100, this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.Y + (25 * LVCount) + 25);
             LVNextButton.Click += OkButton_Clicked;
             this.Controls.Add(LVNextButton);
 
+            // creating Back button
+            Button LVBackButton = new Button();
+            LVNextButton.Name = "InpurVariablesBackButton";
+            LVNextButton.Text = "< Back";
+            LVNextButton.Location = new Point(this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.X + 100, this.Controls["label_InputVariableNumber_" + (LVCount - 1)].Location.Y + (25 * LVCount) + 25);
+            LVNextButton.Click += BackButton_Clicked;
+            this.Controls.Add(LVNextButton);
+
+        }
+
+        void BackButton_Clicked(object sender, EventArgs e)
+        {
+            for (int i = 0; i < LVCount; i++)
+            {
+                inputVariables[i] = Convert.ToInt32(this.Controls["upDown_InputVariableValue_" + i].Text);
+            }
+
+            Close();
+            ProductionRulesInputForm PRForm = new ProductionRulesInputForm();
+            PRForm.ShowDialog();
         }
 
         void OkButton_Clicked(object sender, EventArgs e)
