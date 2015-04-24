@@ -279,7 +279,9 @@ namespace WindowsFormsApplication1
 
             inputVariablesForm = new InputVariablesForm(lexicalVariablesCount);
             //Close();
-            inputVariablesForm.ShowDialog();
+            //inputVariablesForm.ShowDialog();
+            MembershipFunctionChoise  choiseFunctionForm = new MembershipFunctionChoise();
+            choiseFunctionForm.ShowDialog();
 
         }
 
