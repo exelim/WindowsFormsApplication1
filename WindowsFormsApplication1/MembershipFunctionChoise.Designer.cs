@@ -51,6 +51,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Next >";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -112,6 +113,7 @@
             this.MembershipComboBox.Name = "MembershipComboBox";
             this.MembershipComboBox.Size = new System.Drawing.Size(121, 21);
             this.MembershipComboBox.TabIndex = 12;
+            this.MembershipComboBox.SelectedIndexChanged += new System.EventHandler(this.MembershipComboBox_SelectedIndexChanged);
             // 
             // AggregationComboBox
             // 

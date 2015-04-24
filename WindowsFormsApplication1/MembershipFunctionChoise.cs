@@ -7,11 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication1.Classes.Formulas.AggregationFormulas;
+using WindowsFormsApplication1.Classes.Formulas.ActivisationFormulas;
+using WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas;
+using WindowsFormsApplication1.Classes.MembershipFunctions;
+using WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas;
 
 namespace WindowsFormsApplication1
 {
     public partial class MembershipFunctionChoise : Form
     {
+        public static MembershipFunctionBase membeship_function;
+        public static AggregationFormulaBase aggregation_function;
+        public static ActivisationFormulaBase activization_function;
+        public static AccumulatiomFormulaBase accumulation_function;
+        public static FuzzificationFormulaBase fuzzification_function;
+
         public MembershipFunctionChoise()
         {
             InitializeComponent();
@@ -44,6 +55,33 @@ namespace WindowsFormsApplication1
             FuzzificationComboBox.Items.Add("Two Function");
             FuzzificationComboBox.Items.Add("Three Function");
             FuzzificationComboBox.SelectedIndex = 0;
+        }
+
+        private void MembershipComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (MembershipComboBox.SelectedIndex)
+            { 
+                case 0:
+                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Desert.jpg");
+                    break;
+                case 1:
+                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Penguins.jpg");
+                    break;
+                case 2:
+                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Koala.jpg");
+                    break;
+                case 3:
+                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Lighthouse.jpg");
+                    break;
+                case 4:
+                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Jellyfish.jpg");
+                    break;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
