@@ -33,6 +33,13 @@
             this.LVCountConfirmButton = new System.Windows.Forms.Button();
             this.AddTermsPanel = new System.Windows.Forms.Panel();
             this.ChooseFunctionsPanel = new System.Windows.Forms.Panel();
+            this.InputVariablesPanel = new System.Windows.Forms.Panel();
+            this.ProductionRulesInputPanel = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.prodRulesTB = new System.Windows.Forms.RichTextBox();
+            this.InputVariables = new System.Windows.Forms.Label();
             this.ChooseFunctionsBackButton = new System.Windows.Forms.Button();
             this.FuzzificationComboBox = new System.Windows.Forms.ComboBox();
             this.AccumulationComboBox = new System.Windows.Forms.ComboBox();
@@ -46,14 +53,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ChooseFunctionsNextButton = new System.Windows.Forms.Button();
+            this.DLabelInput = new System.Windows.Forms.TextBox();
+            this.CLabelInput = new System.Windows.Forms.TextBox();
+            this.BLabelInput = new System.Windows.Forms.TextBox();
+            this.ALabelInput = new System.Windows.Forms.TextBox();
+            this.DLabel = new System.Windows.Forms.Label();
+            this.CLabel = new System.Windows.Forms.Label();
+            this.BLabel = new System.Windows.Forms.Label();
+            this.ALabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.TermCountLabel = new System.Windows.Forms.Label();
-            this.InputVariablesPanel = new System.Windows.Forms.Panel();
-            this.InputVariables = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).BeginInit();
             this.AddTermsPanel.SuspendLayout();
             this.ChooseFunctionsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.InputVariablesPanel.SuspendLayout();
+            this.ProductionRulesInputPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LVCountLabel
@@ -114,15 +129,94 @@
             this.ChooseFunctionsPanel.Controls.Add(this.label1);
             this.ChooseFunctionsPanel.Controls.Add(this.pictureBox1);
             this.ChooseFunctionsPanel.Controls.Add(this.ChooseFunctionsNextButton);
+            this.ChooseFunctionsPanel.Controls.Add(this.DLabelInput);
+            this.ChooseFunctionsPanel.Controls.Add(this.CLabelInput);
+            this.ChooseFunctionsPanel.Controls.Add(this.BLabelInput);
+            this.ChooseFunctionsPanel.Controls.Add(this.ALabelInput);
+            this.ChooseFunctionsPanel.Controls.Add(this.DLabel);
+            this.ChooseFunctionsPanel.Controls.Add(this.CLabel);
+            this.ChooseFunctionsPanel.Controls.Add(this.BLabel);
+            this.ChooseFunctionsPanel.Controls.Add(this.ALabel);
+            this.ChooseFunctionsPanel.Controls.Add(this.label6);
             this.ChooseFunctionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChooseFunctionsPanel.Location = new System.Drawing.Point(0, 0);
             this.ChooseFunctionsPanel.Name = "ChooseFunctionsPanel";
             this.ChooseFunctionsPanel.Size = new System.Drawing.Size(1024, 448);
             this.ChooseFunctionsPanel.TabIndex = 6;
             // 
+            // InputVariablesPanel
+            // 
+            this.InputVariablesPanel.Controls.Add(this.ProductionRulesInputPanel);
+            this.InputVariablesPanel.Controls.Add(this.InputVariables);
+            this.InputVariablesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InputVariablesPanel.Location = new System.Drawing.Point(0, 0);
+            this.InputVariablesPanel.Name = "InputVariablesPanel";
+            this.InputVariablesPanel.Size = new System.Drawing.Size(1024, 448);
+            this.InputVariablesPanel.TabIndex = 31;
+            this.InputVariablesPanel.Visible = false;
+            // 
+            // ProductionRulesInputPanel
+            // 
+            this.ProductionRulesInputPanel.Controls.Add(this.button2);
+            this.ProductionRulesInputPanel.Controls.Add(this.button1);
+            this.ProductionRulesInputPanel.Controls.Add(this.label7);
+            this.ProductionRulesInputPanel.Controls.Add(this.prodRulesTB);
+            this.ProductionRulesInputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProductionRulesInputPanel.Location = new System.Drawing.Point(0, 0);
+            this.ProductionRulesInputPanel.Name = "ProductionRulesInputPanel";
+            this.ProductionRulesInputPanel.Size = new System.Drawing.Size(1024, 448);
+            this.ProductionRulesInputPanel.TabIndex = 2;
+            this.ProductionRulesInputPanel.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(187, 325);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "< Back";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(604, 325);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Calculate";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(188, 66);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(175, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Enter productions rules in for below:";
+            // 
+            // prodRulesTB
+            // 
+            this.prodRulesTB.Location = new System.Drawing.Point(187, 89);
+            this.prodRulesTB.Name = "prodRulesTB";
+            this.prodRulesTB.Size = new System.Drawing.Size(492, 195);
+            this.prodRulesTB.TabIndex = 4;
+            this.prodRulesTB.Text = "if lvid_0 is tmid_0 then lvout is tmout_0";
+            // 
+            // InputVariables
+            // 
+            this.InputVariables.AutoSize = true;
+            this.InputVariables.Location = new System.Drawing.Point(37, 41);
+            this.InputVariables.Name = "InputVariables";
+            this.InputVariables.Size = new System.Drawing.Size(79, 13);
+            this.InputVariables.TabIndex = 1;
+            this.InputVariables.Text = "Input variables:";
+            // 
             // ChooseFunctionsBackButton
             // 
-            this.ChooseFunctionsBackButton.Location = new System.Drawing.Point(187, 348);
+            this.ChooseFunctionsBackButton.Location = new System.Drawing.Point(209, 386);
             this.ChooseFunctionsBackButton.Name = "ChooseFunctionsBackButton";
             this.ChooseFunctionsBackButton.Size = new System.Drawing.Size(75, 23);
             this.ChooseFunctionsBackButton.TabIndex = 29;
@@ -133,7 +227,7 @@
             // FuzzificationComboBox
             // 
             this.FuzzificationComboBox.FormattingEnabled = true;
-            this.FuzzificationComboBox.Location = new System.Drawing.Point(308, 284);
+            this.FuzzificationComboBox.Location = new System.Drawing.Point(330, 322);
             this.FuzzificationComboBox.Name = "FuzzificationComboBox";
             this.FuzzificationComboBox.Size = new System.Drawing.Size(121, 21);
             this.FuzzificationComboBox.TabIndex = 28;
@@ -141,7 +235,7 @@
             // AccumulationComboBox
             // 
             this.AccumulationComboBox.FormattingEnabled = true;
-            this.AccumulationComboBox.Location = new System.Drawing.Point(308, 233);
+            this.AccumulationComboBox.Location = new System.Drawing.Point(330, 271);
             this.AccumulationComboBox.Name = "AccumulationComboBox";
             this.AccumulationComboBox.Size = new System.Drawing.Size(121, 21);
             this.AccumulationComboBox.TabIndex = 27;
@@ -149,7 +243,7 @@
             // ActivisationComboBox
             // 
             this.ActivisationComboBox.FormattingEnabled = true;
-            this.ActivisationComboBox.Location = new System.Drawing.Point(308, 176);
+            this.ActivisationComboBox.Location = new System.Drawing.Point(330, 214);
             this.ActivisationComboBox.Name = "ActivisationComboBox";
             this.ActivisationComboBox.Size = new System.Drawing.Size(121, 21);
             this.ActivisationComboBox.TabIndex = 26;
@@ -157,7 +251,7 @@
             // AggregationComboBox
             // 
             this.AggregationComboBox.FormattingEnabled = true;
-            this.AggregationComboBox.Location = new System.Drawing.Point(308, 127);
+            this.AggregationComboBox.Location = new System.Drawing.Point(330, 165);
             this.AggregationComboBox.Name = "AggregationComboBox";
             this.AggregationComboBox.Size = new System.Drawing.Size(121, 21);
             this.AggregationComboBox.TabIndex = 25;
@@ -165,7 +259,7 @@
             // MembershipComboBox
             // 
             this.MembershipComboBox.FormattingEnabled = true;
-            this.MembershipComboBox.Location = new System.Drawing.Point(308, 83);
+            this.MembershipComboBox.Location = new System.Drawing.Point(330, 48);
             this.MembershipComboBox.Name = "MembershipComboBox";
             this.MembershipComboBox.Size = new System.Drawing.Size(121, 21);
             this.MembershipComboBox.TabIndex = 24;
@@ -174,7 +268,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 287);
+            this.label5.Location = new System.Drawing.Point(216, 325);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 13);
             this.label5.TabIndex = 23;
@@ -183,7 +277,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(194, 233);
+            this.label4.Location = new System.Drawing.Point(216, 271);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 22;
@@ -192,7 +286,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 179);
+            this.label3.Location = new System.Drawing.Point(216, 217);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 13);
             this.label3.TabIndex = 21;
@@ -201,7 +295,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(194, 130);
+            this.label2.Location = new System.Drawing.Point(216, 168);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 20;
@@ -210,7 +304,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(194, 86);
+            this.label1.Location = new System.Drawing.Point(216, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 13);
             this.label1.TabIndex = 19;
@@ -218,7 +312,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(464, 78);
+            this.pictureBox1.Location = new System.Drawing.Point(486, 43);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(367, 223);
             this.pictureBox1.TabIndex = 18;
@@ -226,13 +320,86 @@
             // 
             // ChooseFunctionsNextButton
             // 
-            this.ChooseFunctionsNextButton.Location = new System.Drawing.Point(354, 349);
+            this.ChooseFunctionsNextButton.Location = new System.Drawing.Point(376, 387);
             this.ChooseFunctionsNextButton.Name = "ChooseFunctionsNextButton";
             this.ChooseFunctionsNextButton.Size = new System.Drawing.Size(75, 23);
             this.ChooseFunctionsNextButton.TabIndex = 17;
             this.ChooseFunctionsNextButton.Text = "Next >";
             this.ChooseFunctionsNextButton.UseVisualStyleBackColor = true;
             this.ChooseFunctionsNextButton.Click += new System.EventHandler(this.ChooseFunctionsNextButton_Click);
+            // 
+            // DLabelInput
+            // 
+            this.DLabelInput.Location = new System.Drawing.Point(368, 127);
+            this.DLabelInput.Name = "DLabelInput";
+            this.DLabelInput.Size = new System.Drawing.Size(79, 20);
+            this.DLabelInput.TabIndex = 39;
+            // 
+            // CLabelInput
+            // 
+            this.CLabelInput.Location = new System.Drawing.Point(241, 130);
+            this.CLabelInput.Name = "CLabelInput";
+            this.CLabelInput.Size = new System.Drawing.Size(79, 20);
+            this.CLabelInput.TabIndex = 38;
+            // 
+            // BLabelInput
+            // 
+            this.BLabelInput.Location = new System.Drawing.Point(368, 93);
+            this.BLabelInput.Name = "BLabelInput";
+            this.BLabelInput.Size = new System.Drawing.Size(79, 20);
+            this.BLabelInput.TabIndex = 37;
+            // 
+            // ALabelInput
+            // 
+            this.ALabelInput.Location = new System.Drawing.Point(241, 93);
+            this.ALabelInput.Name = "ALabelInput";
+            this.ALabelInput.Size = new System.Drawing.Size(79, 20);
+            this.ALabelInput.TabIndex = 36;
+            // 
+            // DLabel
+            // 
+            this.DLabel.AutoSize = true;
+            this.DLabel.Location = new System.Drawing.Point(343, 130);
+            this.DLabel.Name = "DLabel";
+            this.DLabel.Size = new System.Drawing.Size(19, 13);
+            this.DLabel.TabIndex = 35;
+            this.DLabel.Text = "d :";
+            // 
+            // CLabel
+            // 
+            this.CLabel.AutoSize = true;
+            this.CLabel.Location = new System.Drawing.Point(216, 130);
+            this.CLabel.Name = "CLabel";
+            this.CLabel.Size = new System.Drawing.Size(19, 13);
+            this.CLabel.TabIndex = 34;
+            this.CLabel.Text = "c :";
+            // 
+            // BLabel
+            // 
+            this.BLabel.AutoSize = true;
+            this.BLabel.Location = new System.Drawing.Point(343, 93);
+            this.BLabel.Name = "BLabel";
+            this.BLabel.Size = new System.Drawing.Size(19, 13);
+            this.BLabel.TabIndex = 33;
+            this.BLabel.Text = "b :";
+            // 
+            // ALabel
+            // 
+            this.ALabel.AutoSize = true;
+            this.ALabel.Location = new System.Drawing.Point(216, 93);
+            this.ALabel.Name = "ALabel";
+            this.ALabel.Size = new System.Drawing.Size(19, 13);
+            this.ALabel.TabIndex = 32;
+            this.ALabel.Text = "a :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(122, 93);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Function values :";
             // 
             // TermCountLabel
             // 
@@ -242,25 +409,6 @@
             this.TermCountLabel.Size = new System.Drawing.Size(42, 13);
             this.TermCountLabel.TabIndex = 5;
             this.TermCountLabel.Text = "Terms :";
-            // 
-            // InputVariablesPanel
-            // 
-            this.InputVariablesPanel.Controls.Add(this.InputVariables);
-            this.InputVariablesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InputVariablesPanel.Location = new System.Drawing.Point(0, 0);
-            this.InputVariablesPanel.Name = "InputVariablesPanel";
-            this.InputVariablesPanel.Size = new System.Drawing.Size(1024, 448);
-            this.InputVariablesPanel.TabIndex = 30;
-            this.InputVariablesPanel.Visible = false;
-            // 
-            // InputVariables
-            // 
-            this.InputVariables.AutoSize = true;
-            this.InputVariables.Location = new System.Drawing.Point(37, 41);
-            this.InputVariables.Name = "InputVariables";
-            this.InputVariables.Size = new System.Drawing.Size(79, 13);
-            this.InputVariables.TabIndex = 1;
-            this.InputVariables.Text = "Input variables:";
             // 
             // Form1
             // 
@@ -278,9 +426,11 @@
             this.AddTermsPanel.PerformLayout();
             this.ChooseFunctionsPanel.ResumeLayout(false);
             this.ChooseFunctionsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.InputVariablesPanel.ResumeLayout(false);
             this.InputVariablesPanel.PerformLayout();
+            this.ProductionRulesInputPanel.ResumeLayout(false);
+            this.ProductionRulesInputPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +459,20 @@
         private System.Windows.Forms.Label TermCountLabel;
         private System.Windows.Forms.Panel InputVariablesPanel;
         private System.Windows.Forms.Label InputVariables;
+        private System.Windows.Forms.TextBox DLabelInput;
+        private System.Windows.Forms.TextBox CLabelInput;
+        private System.Windows.Forms.TextBox BLabelInput;
+        private System.Windows.Forms.TextBox ALabelInput;
+        private System.Windows.Forms.Label DLabel;
+        private System.Windows.Forms.Label CLabel;
+        private System.Windows.Forms.Label BLabel;
+        private System.Windows.Forms.Label ALabel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel ProductionRulesInputPanel;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RichTextBox prodRulesTB;
     }
 }
 
