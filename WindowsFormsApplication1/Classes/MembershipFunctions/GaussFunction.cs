@@ -17,7 +17,7 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
         }
         public override double CalculateFunctionValue(double _val_1/*, double _a, double _b, double _c, double _d*/)
         {
-            return Math.Exp(Math.Pow((_val_1 - a), 2) / ( 2 * Math.Pow(b, 2) ) ); // _b is gamma && _a is C!!
+            return Math.Exp(Math.Pow((_val_1 - c), 2) / ( 2 * Math.Pow(a, 2) ) ); // a is gamma && c is C!!
         }
     }
 }

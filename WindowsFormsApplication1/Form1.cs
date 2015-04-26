@@ -128,7 +128,7 @@ namespace WindowsFormsApplication1
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
                     IDtextBox.Text = "lvid_" + i; // DEBUG
-                    if (i == 2) // DEBUG
+                    if (i == 1) // DEBUG
                     {
                         IDtextBox.Text = "lvout"; // DEBUG
                     }    
@@ -198,7 +198,7 @@ namespace WindowsFormsApplication1
                     TypeList.SelectedIndex = 0;
                     TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(TypeList);
-                    if (i == 2) // DEBUG
+                    if (i == 1) // DEBUG
                     {
                         TypeList.SelectedIndex = 1; // DEBUG
                     }
@@ -522,10 +522,10 @@ namespace WindowsFormsApplication1
                     pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Desert.jpg");
                     ALabel.Text = "g :";
                     BLabel.Visible = false;
-                    CLabel.Visible = false;
+                    CLabel.Visible = true;
                     DLabel.Visible = false;
                     BLabelInput.Visible = false;
-                    CLabelInput.Visible = false;
+                    CLabelInput.Visible = true;
                     DLabelInput.Visible = false;
                     break;
                 case 1: // Sigmoid
@@ -575,20 +575,20 @@ namespace WindowsFormsApplication1
         {
             switch (MembershipComboBox.SelectedIndex)
             {
-                case 0:
-                    //membeship_function = new GaussFunction();
+                case 0: // Gaus
+                    membeship_function = new GaussFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
                     break;
-                case 1:
-                    //membeship_function = new SigmoidFunction();
+                case 1: // sigmoid
+                    membeship_function = new SigmoidFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
                     break;
-                case 2:
-                    //membeship_function = new SingletonFunction();
+                case 2: // Singleton 
+                    membeship_function = new SingletonFunction(Convert.ToInt32(ALabelInput.Text), 0, 0, 0);
                     break;
-                case 3:
-                    //membeship_function = new TrapezoidalFunction();
+                case 3: // Tpapezoidal
+                    membeship_function = new TrapezoidalFunction(Convert.ToInt32(ALabelInput.Text), Convert.ToInt32(BLabelInput.Text), Convert.ToInt32(CLabelInput.Text), Convert.ToInt32(DLabelInput.Text));
                     break;
-                case 4:
-                    //membeship_function = new triangleFunction();
+                case 4: // Triangle
+                    membeship_function = new TriangleFunction(Convert.ToInt32(ALabelInput.Text), Convert.ToInt32(BLabelInput.Text), Convert.ToInt32(CLabelInput.Text), 0);
                     break;
             }
 
@@ -664,7 +664,7 @@ namespace WindowsFormsApplication1
         {
             inputVariables = new int[lexicalVariablesCount];
 
-            for (int i = 0; i < lexicalVariablesCount /*-1 /*Since last is the outout value*/; i++)
+            for (int i = 0; i < lexicalVariablesCount -1 /*Since last is the outout value*/; i++)
             {
                 // creating Label input var
                 Label InputNumberlabel = new Label();
@@ -687,7 +687,7 @@ namespace WindowsFormsApplication1
                 InputVariableUpDown.Name = "upDown_InputVariableValue_" + i;
                 InputVariableUpDown.Width = 36;
                 InputVariableUpDown.Location = new Point(InputVariablelabel.Location.X + InputVariablelabel.Width + 5, InputVariables.Location.Y + (25 + 25 * i));
-                InputVariableUpDown.Value = 1 + 10 * i;
+                InputVariableUpDown.Value = 2 + 10 * i;
                 InputVariablesPanel.Controls.Add(InputVariableUpDown);
             }
 
@@ -695,7 +695,7 @@ namespace WindowsFormsApplication1
             Button LVNextButton = new Button();
             LVNextButton.Name = "InpurVariablesOKButton";
             LVNextButton.Text = "Next >";
-            LVNextButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.X + 100, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.Y + (25 * lexicalVariablesCount) + 25);
+            LVNextButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.X + 100, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.Y + (25 * lexicalVariablesCount) + 25);
             LVNextButton.Click += OkButton_Clicked;
             InputVariablesPanel.Controls.Add(LVNextButton);
 
@@ -703,7 +703,7 @@ namespace WindowsFormsApplication1
             Button LVBackButton = new Button();
             LVBackButton.Name = "InpurVariablesBackButton";
             LVBackButton.Text = "< Back";
-            LVBackButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.X, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 1)].Location.Y + (25 * lexicalVariablesCount) + 25);
+            LVBackButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.X, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.Y + (25 * lexicalVariablesCount) + 25);
             LVBackButton.Click += BackButton_Clicked;
             InputVariablesPanel.Controls.Add(LVBackButton);
 
@@ -717,7 +717,7 @@ namespace WindowsFormsApplication1
 
         void OkButton_Clicked(object sender, EventArgs e)
         {
-            for (int i = 0; i < lexicalVariablesCount; i++)
+            for (int i = 0; i < lexicalVariablesCount - 1 /*Since 1 is the output*/; i++)
             {
                 inputVariables[i] = Convert.ToInt32(InputVariablesPanel.Controls["upDown_InputVariableValue_" + i].Text);
             }
@@ -770,10 +770,9 @@ namespace WindowsFormsApplication1
 
             // TODO: DO NOT FORGET TO UNCOMMENT THIS -1 !!!!!!!!!!!!!!!!!!!! 
 
-            fuzzification_1_Values = new Tuple<string, string, double>[Form1.fullTermsCount /*- 1 /* 1 of temrs is OUT*/]; // < linguistick variable id, term id, fuzzification value>
-            MembershipFunctionBase mf = new TriangleFunction(0.5, 2, 3); // TODO: use real membership function
+            fuzzification_1_Values = new Tuple<string, string, double>[Form1.fullTermsCount - 1 /* 1 of temrs is OUT*/]; // < linguistick variable id, term id, fuzzification value>
 
-            FuzzificationValues(mf, fuzzification_1_Values);
+            FuzzificationValues(membeship_function, fuzzification_1_Values);
 
 
             Aggregation();
@@ -795,8 +794,6 @@ namespace WindowsFormsApplication1
 
         public void Aggregation()
         {
-            AggregationFormulaBase aggrBase = new MaxMinAggregation(); // TODO: use real agregation function
-
             activisationValues = new Stack<double>();
 
             aggregationValues = new Dictionary<string, Stack<double>>();
@@ -819,11 +816,11 @@ namespace WindowsFormsApplication1
                             if (!aggregationValues.ContainsKey(agrValueKey))
                             {
                                 aggregationValues.Add(agrValueKey, new Stack<double>());
-                                aggregationValues[agrValueKey].Push(AggregationValues(aggrBase, values));
+                                aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
                             }
                             else
                             {
-                                aggregationValues[agrValueKey].Push(AggregationValues(aggrBase, values));
+                                aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
                             }
                         }
                     }
@@ -835,7 +832,6 @@ namespace WindowsFormsApplication1
 
         public void ActivisationPhase()
         {
-            ActivisationFormulaBase actBase = new MinActivisation(); // TODO: use real activisation function
 
             foreach (var item in aggregationValues)
             {
@@ -851,10 +847,9 @@ namespace WindowsFormsApplication1
                                 minValue = lv.m_minValue;
                                 maxValue = lv.m_maxValue;
                             }
-                        }
-                        MembershipFunctionBase _mf = new TriangleFunction(minValue, (minValue + maxValue) / 2, maxValue); // TODO: use real membership function
-                        double _funcVal = _mf.CalculateFunctionValue(val);
-                        activisationValues.Push(ActivisationValues(actBase, _funcVal, val));
+                        }  
+                        double _funcVal = membeship_function.CalculateFunctionValue(val);
+                        activisationValues.Push(ActivisationValues(activization_function, _funcVal, val));
                     }
                 }
             }
