@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms;
 
 using WindowsFormsApplication1.Classes;
 using WindowsFormsApplication1.Structures;
@@ -38,22 +39,22 @@ namespace WindowsFormsApplication1
         public static LexicalVariable[] lexicalVariables;
         static public ProductionRulesTerm[] _term;
 
-        public static int[] inputVariables;
+        public static double[] inputVariables;
 
         int number;
         bool choseFunctionFormInitialized = false;
 
         public static ProductionRule[] prodcutionsRules;
-        public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < linguistick variable id, term id, fuzzification value>
+        public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < output lexical variable id, input variable id, term id, fuzzification value>
         public static Dictionary<String, Stack<double>> aggregationValues;
-        public static Stack<double> activisationValues;
+        public static Dictionary<String, Stack<double>[]> activisationValues;
+        public static Dictionary<String, Stack<double>> accumulationValues;
 
 
 /// <summary>
 /// Functoins declaration
 /// </summary>
 /// 
-        public static MembershipFunctionBase membeship_function;
         public static AggregationFormulaBase aggregation_function;
         public static ActivisationFormulaBase activization_function;
         public static AccumulatiomFormulaBase accumulation_function;
@@ -486,8 +487,6 @@ namespace WindowsFormsApplication1
                 MembershipComboBox.Items.Add("Trapezoidal Function");
                 MembershipComboBox.Items.Add("Triangle Function");
                 MembershipComboBox.SelectedIndex = 0;
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Desert.jpg");
 
                 AggregationComboBox.Items.Add("Limited Function");
                 AggregationComboBox.Items.Add("Algebraic Function");
@@ -519,7 +518,6 @@ namespace WindowsFormsApplication1
             switch (MembershipComboBox.SelectedIndex)
             {
                 case 0: // Gaus
-                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Desert.jpg");
                     ALabel.Text = "g :";
                     BLabel.Visible = false;
                     CLabel.Visible = true;
@@ -529,7 +527,6 @@ namespace WindowsFormsApplication1
                     DLabelInput.Visible = false;
                     break;
                 case 1: // Sigmoid
-                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Penguins.jpg");
                     ALabel.Text = "a :";
                     BLabel.Visible = false;
                     CLabel.Visible = true;
@@ -539,7 +536,6 @@ namespace WindowsFormsApplication1
                     DLabelInput.Visible = false;
                     break;
                 case 2: // Singleton
-                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Koala.jpg");
                     ALabel.Text = "a :";
                     BLabel.Visible = false;
                     CLabel.Visible = false;
@@ -549,7 +545,6 @@ namespace WindowsFormsApplication1
                     DLabelInput.Visible = false;
                     break;
                 case 3: // Tpapezoidal
-                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Lighthouse.jpg");
                     ALabel.Text = "a :";
                     BLabel.Visible = true;
                     CLabel.Visible = true;
@@ -558,8 +553,7 @@ namespace WindowsFormsApplication1
                     CLabelInput.Visible = true;
                     DLabelInput.Visible = true;
                     break;
-                case 4: // Triangle
-                    pictureBox1.Image = new Bitmap(Application.StartupPath + @"\Jellyfish.jpg");
+                case 4: // Triangle  
                     ALabel.Text = "a :";
                     BLabel.Visible = true;
                     CLabel.Visible = true;
@@ -576,19 +570,38 @@ namespace WindowsFormsApplication1
             switch (MembershipComboBox.SelectedIndex)
             {
                 case 0: // Gaus
-                    membeship_function = new GaussFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                    }
                     break;
                 case 1: // sigmoid
-                    membeship_function = new SigmoidFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                    }
                     break;
                 case 2: // Singleton 
-                    membeship_function = new SingletonFunction(Convert.ToInt32(ALabelInput.Text), 0, 0, 0);
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToInt32(ALabelInput.Text), 0, 0, 0);
+                    }
                     break;
                 case 3: // Tpapezoidal
-                    membeship_function = new TrapezoidalFunction(Convert.ToInt32(ALabelInput.Text), Convert.ToInt32(BLabelInput.Text), Convert.ToInt32(CLabelInput.Text), Convert.ToInt32(DLabelInput.Text));
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
+                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
+                    }
                     break;
                 case 4: // Triangle
-                    membeship_function = new TriangleFunction(Convert.ToInt32(ALabelInput.Text), Convert.ToInt32(BLabelInput.Text), Convert.ToInt32(CLabelInput.Text), 0);
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
+                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
+                    }
                     break;
             }
 
@@ -647,6 +660,7 @@ namespace WindowsFormsApplication1
                     break;
             }
 
+           
             InputVariablesPanel.Visible = true;
             FillInputVariablesForm();
         }
@@ -657,12 +671,95 @@ namespace WindowsFormsApplication1
             ChooseFunctionsPanel.Visible = false;
         }
 
+        private void DrawGraph_Click(object sender, EventArgs e)
+        {
+            switch (MembershipComboBox.SelectedIndex)
+            {
+                case 0: // Gaus
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                    }
+                    break;
+                case 1: // sigmoid
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                    }
+                    break;
+                case 2: // Singleton 
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToInt32(ALabelInput.Text), 0, 0, 0);
+                    }
+                    break;
+                case 3: // Tpapezoidal
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
+                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
+                    }
+                    break;
+                case 4: // Triangle
+                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    {
+                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
+                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
+                    }
+                    break;
+            }
+
+            // Получим панель для рисования
+            ZedGraph.GraphPane pane = zedGraph.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+            
+
+            for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.Length; i++)
+            {
+                ZedGraph.PointPairList list = new ZedGraph.PointPairList();
+
+                double xmin = lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.ElementAt(i).m_minValue;
+                double xmax = lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.ElementAt(i).m_maxValue;
+
+                // Заполняем список точек
+                for (double x = xmin; x <= xmax; x += 0.01)
+                {
+                    // добавим в список точку
+                    list.Add(x, lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms[i].CalculateValue(x));
+                }
+
+                // Создадим кривую с названием "Sinc", 
+                // которая будет рисоваться голубым цветом (Color.Blue),
+                // Опорные точки выделяться не будут (SymbolType.None)
+                ZedGraph.LineItem myCurve;
+                if( i == 0)
+                     myCurve = pane.AddCurve("Sinc_" + i, list, Color.Red, ZedGraph.SymbolType.None);
+                else
+                     myCurve = pane.AddCurve("Sinc_" + i, list, Color.Green, ZedGraph.SymbolType.None);
+                // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
+                // В противном случае на рисунке будет показана только часть графика, 
+                // которая умещается в интервалы по осям, установленные по умолчанию
+                zedGraph.AxisChange();
+
+                
+            }
+
+            // Обновляем график
+            zedGraph.Invalidate();
+        }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////   INPUT VARTIABLE FORM     /////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         void FillInputVariablesForm()
         {
-            inputVariables = new int[lexicalVariablesCount];
+            inputVariables = new double[lexicalVariablesCount];
 
             for (int i = 0; i < lexicalVariablesCount -1 /*Since last is the outout value*/; i++)
             {
@@ -719,7 +816,7 @@ namespace WindowsFormsApplication1
         {
             for (int i = 0; i < lexicalVariablesCount - 1 /*Since 1 is the output*/; i++)
             {
-                inputVariables[i] = Convert.ToInt32(InputVariablesPanel.Controls["upDown_InputVariableValue_" + i].Text);
+                inputVariables[i] = Convert.ToDouble(InputVariablesPanel.Controls["upDown_InputVariableValue_" + i].Text);
             }
 
             ProductionRulesInputPanel.Visible = true;
@@ -770,31 +867,38 @@ namespace WindowsFormsApplication1
 
             // TODO: DO NOT FORGET TO UNCOMMENT THIS -1 !!!!!!!!!!!!!!!!!!!! 
 
-            fuzzification_1_Values = new Tuple<string, string, double>[Form1.fullTermsCount - 1 /* 1 of temrs is OUT*/]; // < linguistick variable id, term id, fuzzification value>
+            fuzzification_1_Values = new Tuple<string, string, double>[Form1.fullTermsCount - 1 /* 1 of temrs is OUT*/]; // < output lexical variable id, input variable id, fuzzification value>
 
-            FuzzificationValues(membeship_function, fuzzification_1_Values);
+            FuzzificationValues(fuzzification_1_Values);
 
 
             Aggregation();
         }
 
-        public void FuzzificationValues(MembershipFunctionBase _mf, Tuple<string, string, double>[] _tp)
+        public void FuzzificationValues(Tuple<string, string, double>[] _tp)
         {
-            for (int j = 0; j < Form1.lexicalVariables.Length; j++)
+            for (int i = 0; i < inputVariables.Length; i++ )
+            {
+                for (int j = 0; j < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; j++)
+                {
+                    _tp[j] = Tuple.Create(lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_id, lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[j].CalculateValue(inputVariables.ElementAt(i)));
+                }
+            }
+            /*for (int j = 0; j < Form1.lexicalVariables.Length; j++)
             {
                 for (int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++)
                 {
                     if (Form1.lexicalVariables[j].m_type != VariableType.OUT)
                     {
-                        _tp[j] = Tuple.Create(Form1.lexicalVariables[j].m_id, Form1.lexicalVariables[j].m_terms[k].m_ID, _mf.CalculateFunctionValue(inputVariables[j]));
+                        _tp[j] = Tuple.Create(Form1.lexicalVariables[j].m_id, Form1.lexicalVariables[j].m_terms[k].m_ID, lexicalVariables.ElementAt( lexicalVariables.Length - 1) _mf.CalculateFunctionValue(inputVariables[j]));
                     }
                 }
-            }
+            }*/
         }
 
         public void Aggregation()
         {
-            activisationValues = new Stack<double>();
+            activisationValues = new Dictionary<String, Stack<double>[]>();
 
             aggregationValues = new Dictionary<string, Stack<double>>();
 
@@ -809,21 +913,21 @@ namespace WindowsFormsApplication1
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item1.Equals(pair.Key) && fuz.Item3 > 0.0)
+                        if (fuz.Item2.Equals(pair.Key) && fuz.Item3 > 0.0)
                         {
                             values.Push(fuz.Item3);
-                            agrValueKey = item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Key;
-                            if (!aggregationValues.ContainsKey(agrValueKey))
-                            {
-                                aggregationValues.Add(agrValueKey, new Stack<double>());
-                                aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
-                            }
-                            else
-                            {
-                                aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
-                            }
                         }
                     }
+                }
+                agrValueKey = item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Key + "#" + item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value;
+                if (!aggregationValues.ContainsKey(agrValueKey))
+                {
+                    aggregationValues.Add(agrValueKey, new Stack<double>());
+                    aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
+                }
+                else
+                {
+                    aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
                 }
             }
 
@@ -839,27 +943,76 @@ namespace WindowsFormsApplication1
                 {
                     if (val > 0)
                     {
-                        double minValue = 0, maxValue = 0;
                         foreach (var lv in Form1.lexicalVariables)
                         {
-                            if (lv.m_type == VariableType.OUT && lv.m_id == item.Key)
+                            string[] temp = item.Key.Split('#');
+                            if (lv.m_type == VariableType.OUT && lv.m_id == temp[0])
                             {
-                                minValue = lv.m_minValue;
-                                maxValue = lv.m_maxValue;
+                                for (int i = 0; i < lv.m_termsCount; i++)
+                                {
+                                    if (lv.m_terms.ElementAt(i).m_ID == temp[1])
+                                    {
+                                        int k = 0;
+                                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += 0.1 )
+                                        {
+                                            double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
+                                            if (!activisationValues.ContainsKey(temp[1]))
+                                            {
+                                                activisationValues.Add(temp[1], new Stack< double >[Convert.ToInt32( ( lv.m_terms.ElementAt(i).m_maxValue - lv.m_terms.ElementAt(i).m_minValue )/0.1 ) + 1]);
+                                                if (activisationValues[temp[1]][k] == null)
+                                                {
+                                                    activisationValues[temp[1]][k] = new Stack<double>();
+                                                    activisationValues[temp[1]][k].Push(ActivisationValues(activization_function, _funcVal, val));
+                                                }
+                                                else
+                                                {
+                                                    activisationValues[temp[1]][k].Push(ActivisationValues(activization_function, _funcVal, val));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (activisationValues[temp[1]][k] == null)
+                                                {
+                                                    activisationValues[temp[1]][k] = new Stack<double>();
+                                                    activisationValues[temp[1]][k].Push(ActivisationValues(activization_function, _funcVal, val));
+                                                }
+                                                else 
+                                                {
+                                                    activisationValues[temp[1]][k].Push(ActivisationValues(activization_function, _funcVal, val));
+                                                }
+                                            }
+                                            k++;
+                                        }
+                                    }
+                                }
                             }
                         }  
-                        double _funcVal = membeship_function.CalculateFunctionValue(val);
-                        activisationValues.Push(ActivisationValues(activization_function, _funcVal, val));
                     }
                 }
             }
+
+            AccumulationPhase();
+
         }
 
         public void AccumulationPhase()
         {
-            AccumulatiomFormulaBase accBase = new MaxMinAccumulation();
+            Stack< double >[] pointsToDraw = new Stack< double >[lexicalVariables.ElementAt(lexicalVariables.Length - 1 ).m_termsCount];
+            for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+            {
+                pointsToDraw[i] = new Stack<double>();
+            }
 
-            double res = AccumulationValues(accBase, activisationValues);
+            int j = 0;
+            foreach (var actVal in activisationValues)
+            {
+                foreach (var val in actVal.Value)
+                {
+                    pointsToDraw[j].Push(AccumulationValues(val));
+                }
+                j++;
+            }
+            //double res = AccumulationValues(activisationValues);
 
         }
 
@@ -873,10 +1026,12 @@ namespace WindowsFormsApplication1
             return _af.CalculateActivisation(_c, _val1);
         }
 
-        public double AccumulationValues(AccumulatiomFormulaBase _af, Stack<double> _st)
+        public double AccumulationValues( Stack<double> _st)
         {
-            return _af.CalculateAccumulation(_st);
+            return accumulation_function.CalculateAccumulation(_st);
         }
+
+        
 
     }
 }

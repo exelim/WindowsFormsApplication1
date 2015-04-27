@@ -17,17 +17,20 @@ namespace WindowsFormsApplication1.Classes
         public int                      m_termsCount;  // { get { return m_termsCount; } set { m_termsCount = value; } }
         public ProductionRulesTerm[]    m_terms;       //  { get { return m_terms; } set { m_terms = value; } }
         public VariableType             m_type;        //  { get { return m_type; } set { m_type = value; } }
+        
 
         public LexicalVariable(string _id, string _name, int _minValue, int _maxValue, int _temrsCount, ProductionRulesTerm[] _terms, VariableType _variableType)
         {
-            m_id            = _id;
-            m_name          = _name;
-            m_minValue      = _minValue;
-            m_maxValue      = _maxValue;
-            m_termsCount    = _temrsCount;
-            m_type          = _variableType;
-            m_terms         = new ProductionRulesTerm[m_termsCount];
-            m_terms         = _terms;
+            m_id                    = _id;
+            m_name                  = _name;
+            m_minValue              = _minValue;
+            m_maxValue              = _maxValue;
+            m_termsCount            = _temrsCount;
+            m_type                  = _variableType;
+            m_terms                 = new ProductionRulesTerm[m_termsCount];
+            m_terms                 = _terms;
         }
+
+        
     }
 }

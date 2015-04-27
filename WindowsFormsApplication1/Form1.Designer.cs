@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.LVCountLabel = new System.Windows.Forms.Label();
             this.LVCountUpDown = new System.Windows.Forms.NumericUpDown();
             this.LVCountConfirmButton = new System.Windows.Forms.Button();
@@ -51,7 +52,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ChooseFunctionsNextButton = new System.Windows.Forms.Button();
             this.DLabelInput = new System.Windows.Forms.TextBox();
             this.CLabelInput = new System.Windows.Forms.TextBox();
@@ -62,13 +62,17 @@
             this.BLabel = new System.Windows.Forms.Label();
             this.ALabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.zedGraph = new ZedGraph.ZedGraphControl();
+            this.DrawGraph = new System.Windows.Forms.Button();
             this.TermCountLabel = new System.Windows.Forms.Label();
+            this.ResultPanel = new System.Windows.Forms.Panel();
+            this.FinalGraph = new ZedGraph.ZedGraphControl();
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).BeginInit();
             this.AddTermsPanel.SuspendLayout();
             this.ChooseFunctionsPanel.SuspendLayout();
             this.InputVariablesPanel.SuspendLayout();
             this.ProductionRulesInputPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.ResultPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // LVCountLabel
@@ -127,7 +131,6 @@
             this.ChooseFunctionsPanel.Controls.Add(this.label3);
             this.ChooseFunctionsPanel.Controls.Add(this.label2);
             this.ChooseFunctionsPanel.Controls.Add(this.label1);
-            this.ChooseFunctionsPanel.Controls.Add(this.pictureBox1);
             this.ChooseFunctionsPanel.Controls.Add(this.ChooseFunctionsNextButton);
             this.ChooseFunctionsPanel.Controls.Add(this.DLabelInput);
             this.ChooseFunctionsPanel.Controls.Add(this.CLabelInput);
@@ -138,6 +141,8 @@
             this.ChooseFunctionsPanel.Controls.Add(this.BLabel);
             this.ChooseFunctionsPanel.Controls.Add(this.ALabel);
             this.ChooseFunctionsPanel.Controls.Add(this.label6);
+            this.ChooseFunctionsPanel.Controls.Add(this.zedGraph);
+            this.ChooseFunctionsPanel.Controls.Add(this.DrawGraph);
             this.ChooseFunctionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChooseFunctionsPanel.Location = new System.Drawing.Point(0, 0);
             this.ChooseFunctionsPanel.Name = "ChooseFunctionsPanel";
@@ -157,6 +162,7 @@
             // 
             // ProductionRulesInputPanel
             // 
+            this.ProductionRulesInputPanel.Controls.Add(this.ResultPanel);
             this.ProductionRulesInputPanel.Controls.Add(this.button2);
             this.ProductionRulesInputPanel.Controls.Add(this.button1);
             this.ProductionRulesInputPanel.Controls.Add(this.label7);
@@ -310,14 +316,6 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Membership Function";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(486, 43);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(367, 223);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
             // ChooseFunctionsNextButton
             // 
             this.ChooseFunctionsNextButton.Location = new System.Drawing.Point(376, 387);
@@ -401,6 +399,30 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "Function values :";
             // 
+            // zedGraph
+            // 
+            this.zedGraph.Location = new System.Drawing.Point(502, 48);
+            this.zedGraph.Name = "zedGraph";
+            this.zedGraph.ScrollGrace = 0D;
+            this.zedGraph.ScrollMaxX = 0D;
+            this.zedGraph.ScrollMaxY = 0D;
+            this.zedGraph.ScrollMaxY2 = 0D;
+            this.zedGraph.ScrollMinX = 0D;
+            this.zedGraph.ScrollMinY = 0D;
+            this.zedGraph.ScrollMinY2 = 0D;
+            this.zedGraph.Size = new System.Drawing.Size(494, 299);
+            this.zedGraph.TabIndex = 40;
+            // 
+            // DrawGraph
+            // 
+            this.DrawGraph.Location = new System.Drawing.Point(453, 93);
+            this.DrawGraph.Name = "DrawGraph";
+            this.DrawGraph.Size = new System.Drawing.Size(43, 54);
+            this.DrawGraph.TabIndex = 41;
+            this.DrawGraph.Text = "Draw";
+            this.DrawGraph.UseVisualStyleBackColor = true;
+            this.DrawGraph.Click += new System.EventHandler(this.DrawGraph_Click);
+            // 
             // TermCountLabel
             // 
             this.TermCountLabel.AutoSize = true;
@@ -409,6 +431,30 @@
             this.TermCountLabel.Size = new System.Drawing.Size(42, 13);
             this.TermCountLabel.TabIndex = 5;
             this.TermCountLabel.Text = "Terms :";
+            // 
+            // ResultPanel
+            // 
+            this.ResultPanel.Controls.Add(this.FinalGraph);
+            this.ResultPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ResultPanel.Location = new System.Drawing.Point(0, 0);
+            this.ResultPanel.Name = "ResultPanel";
+            this.ResultPanel.Size = new System.Drawing.Size(1024, 448);
+            this.ResultPanel.TabIndex = 8;
+            this.ResultPanel.Visible = false;
+            // 
+            // FinalGraph
+            // 
+            this.FinalGraph.Location = new System.Drawing.Point(24, 21);
+            this.FinalGraph.Name = "FinalGraph";
+            this.FinalGraph.ScrollGrace = 0D;
+            this.FinalGraph.ScrollMaxX = 0D;
+            this.FinalGraph.ScrollMaxY = 0D;
+            this.FinalGraph.ScrollMaxY2 = 0D;
+            this.FinalGraph.ScrollMinX = 0D;
+            this.FinalGraph.ScrollMinY = 0D;
+            this.FinalGraph.ScrollMinY2 = 0D;
+            this.FinalGraph.Size = new System.Drawing.Size(574, 359);
+            this.FinalGraph.TabIndex = 41;
             // 
             // Form1
             // 
@@ -430,7 +476,7 @@
             this.InputVariablesPanel.PerformLayout();
             this.ProductionRulesInputPanel.ResumeLayout(false);
             this.ProductionRulesInputPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResultPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,7 +498,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button ChooseFunctionsNextButton;
         private System.Windows.Forms.Button ChooseFunctionsBackButton;
         private System.Windows.Forms.Panel AddTermsPanel;
@@ -473,6 +518,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox prodRulesTB;
+        private ZedGraph.ZedGraphControl zedGraph;
+        private System.Windows.Forms.Button DrawGraph;
+        private System.Windows.Forms.Panel ResultPanel;
+        private ZedGraph.ZedGraphControl FinalGraph;
     }
 }
 

@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
                 {
                     if (Form1.lexicalVariables[j].m_type != VariableType.OUT)
                     {
-                        _tp[j] = Tuple.Create(Form1.lexicalVariables[j].m_id, Form1.lexicalVariables[j].m_terms[k].m_ID, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
+                       // _tp[j] = Tuple.Create(Form1.lexicalVariables[j].m_id, Form1.lexicalVariables[j].m_terms[k].m_ID, _mf.CalculateFunctionValue(InputVariablesForm.inputVariables[j]));
                     }
                 }
             }
@@ -142,8 +142,8 @@ namespace WindowsFormsApplication1
                             }
                         }
                         MembershipFunctionBase _mf = new TriangleFunction(minValue, (minValue + maxValue) / 2, maxValue); // TODO: use real membership function
-                        double _funcVal = _mf.CalculateFunctionValue(val);
-                        activisationValues.Push(ActivisationValues(actBase, _funcVal, val));
+                      //  double _funcVal = _mf.CalculateFunctionValue(val);
+                      //  activisationValues.Push(ActivisationValues(actBase, _funcVal, val));
                     }
                 }
             }
