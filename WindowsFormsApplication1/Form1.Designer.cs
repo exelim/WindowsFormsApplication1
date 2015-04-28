@@ -36,6 +36,8 @@
             this.ChooseFunctionsPanel = new System.Windows.Forms.Panel();
             this.InputVariablesPanel = new System.Windows.Forms.Panel();
             this.ProductionRulesInputPanel = new System.Windows.Forms.Panel();
+            this.ResultPanel = new System.Windows.Forms.Panel();
+            this.FinalGraph = new ZedGraph.ZedGraphControl();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -65,8 +67,6 @@
             this.zedGraph = new ZedGraph.ZedGraphControl();
             this.DrawGraph = new System.Windows.Forms.Button();
             this.TermCountLabel = new System.Windows.Forms.Label();
-            this.ResultPanel = new System.Windows.Forms.Panel();
-            this.FinalGraph = new ZedGraph.ZedGraphControl();
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).BeginInit();
             this.AddTermsPanel.SuspendLayout();
             this.ChooseFunctionsPanel.SuspendLayout();
@@ -173,6 +173,30 @@
             this.ProductionRulesInputPanel.Size = new System.Drawing.Size(1024, 448);
             this.ProductionRulesInputPanel.TabIndex = 2;
             this.ProductionRulesInputPanel.Visible = false;
+            // 
+            // ResultPanel
+            // 
+            this.ResultPanel.Controls.Add(this.FinalGraph);
+            this.ResultPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ResultPanel.Location = new System.Drawing.Point(0, 0);
+            this.ResultPanel.Name = "ResultPanel";
+            this.ResultPanel.Size = new System.Drawing.Size(1024, 448);
+            this.ResultPanel.TabIndex = 8;
+            this.ResultPanel.Visible = false;
+            // 
+            // FinalGraph
+            // 
+            this.FinalGraph.Location = new System.Drawing.Point(24, 21);
+            this.FinalGraph.Name = "FinalGraph";
+            this.FinalGraph.ScrollGrace = 0D;
+            this.FinalGraph.ScrollMaxX = 0D;
+            this.FinalGraph.ScrollMaxY = 0D;
+            this.FinalGraph.ScrollMaxY2 = 0D;
+            this.FinalGraph.ScrollMinX = 0D;
+            this.FinalGraph.ScrollMinY = 0D;
+            this.FinalGraph.ScrollMinY2 = 0D;
+            this.FinalGraph.Size = new System.Drawing.Size(574, 359);
+            this.FinalGraph.TabIndex = 41;
             // 
             // button2
             // 
@@ -431,30 +455,6 @@
             this.TermCountLabel.Size = new System.Drawing.Size(42, 13);
             this.TermCountLabel.TabIndex = 5;
             this.TermCountLabel.Text = "Terms :";
-            // 
-            // ResultPanel
-            // 
-            this.ResultPanel.Controls.Add(this.FinalGraph);
-            this.ResultPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ResultPanel.Location = new System.Drawing.Point(0, 0);
-            this.ResultPanel.Name = "ResultPanel";
-            this.ResultPanel.Size = new System.Drawing.Size(1024, 448);
-            this.ResultPanel.TabIndex = 8;
-            this.ResultPanel.Visible = false;
-            // 
-            // FinalGraph
-            // 
-            this.FinalGraph.Location = new System.Drawing.Point(24, 21);
-            this.FinalGraph.Name = "FinalGraph";
-            this.FinalGraph.ScrollGrace = 0D;
-            this.FinalGraph.ScrollMaxX = 0D;
-            this.FinalGraph.ScrollMaxY = 0D;
-            this.FinalGraph.ScrollMaxY2 = 0D;
-            this.FinalGraph.ScrollMinX = 0D;
-            this.FinalGraph.ScrollMinY = 0D;
-            this.FinalGraph.ScrollMinY2 = 0D;
-            this.FinalGraph.Size = new System.Drawing.Size(574, 359);
-            this.FinalGraph.TabIndex = 41;
             // 
             // Form1
             // 

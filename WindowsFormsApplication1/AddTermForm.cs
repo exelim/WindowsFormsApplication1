@@ -149,7 +149,7 @@ namespace WindowsFormsApplication1
 
                 shouldClose = true;
                 _term[i] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
-                Form1._terms[number,i] = _term[i];
+                //Form1._terms[number,i] = _term[i];
             }
             if( shouldClose )
                 Close();

@@ -35,7 +35,8 @@ namespace WindowsFormsApplication1
         public static int lexicalVariablesCount;
         public static int termsCount;
         public static int fullTermsCount;
-        public static ProductionRulesTerm[,] _terms;
+        public static Stack< ProductionRulesTerm >[] _terms;
+        public static Array arr; 
         public static LexicalVariable[] lexicalVariables;
         static public ProductionRulesTerm[] _term;
 
@@ -43,6 +44,7 @@ namespace WindowsFormsApplication1
 
         int number;
         bool choseFunctionFormInitialized = false;
+        int lastLExicalVariableTermsCount = 0;
 
         public static ProductionRule[] prodcutionsRules;
         public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < output lexical variable id, input variable id, term id, fuzzification value>
@@ -50,6 +52,8 @@ namespace WindowsFormsApplication1
         public static Dictionary<String, Stack<double>[]> activisationValues;
         public static Dictionary<String, Stack<double>> accumulationValues;
 
+
+        const double drawStep = 0.1;
 
 /// <summary>
 /// Functoins declaration
@@ -73,7 +77,6 @@ namespace WindowsFormsApplication1
 
         private void LVCountConfirmButton_Click(object sender, EventArgs e)
         {
-
             if (Convert.ToInt32(LVCountUpDown.Value) <= 0)
             {
                 MessageBox.Show("Linguistic variables count should be greater than 0.");
@@ -103,132 +106,137 @@ namespace WindowsFormsApplication1
                 lexicalVariablesCount = Convert.ToInt32(LVCountUpDown.Value);
                 lexicalVariables = new LexicalVariable[lexicalVariablesCount];
 
-                _terms = new ProductionRulesTerm[lexicalVariablesCount + 1, lexicalVariablesCount + 1];
+                _terms = new Stack< ProductionRulesTerm >[lexicalVariablesCount];
 
-                for (int i = 0; i < LVCountUpDown.Value; i++)
+                for( int i = 0; i < lexicalVariablesCount; i ++)
                 {
-                    // creating Label LV number
-                    Label Numberlabel = new Label();
-                    Numberlabel.Name = "label_LVNumber_" + i;
-                    Numberlabel.Text = "Linguistic var №" + (i + 1) + ":";
-                    Numberlabel.Width = 95;
-                    Numberlabel.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(Numberlabel);
-
-                    // creating Label LV ID
-                    Label IDlabel = new Label();
-                    IDlabel.Name = "label_LVID_" + i;
-                    IDlabel.Text = "Id:";
-                    IDlabel.Width = 20;
-                    IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(IDlabel);
-
-                    //creating TextBox for LV id
-                    TextBox IDtextBox = new TextBox();
-                    IDtextBox.Name = "textbox_LVID_" + i;
-                    IDtextBox.Width = 50;
-                    IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    IDtextBox.Text = "lvid_" + i; // DEBUG
-                    if (i == 1) // DEBUG
-                    {
-                        IDtextBox.Text = "lvout"; // DEBUG
-                    }    
-                    this.Controls.Add(IDtextBox);
-
-                    // creating Label LV name
-                    Label Namelabel = new Label();
-                    Namelabel.Name = "label_LVName_" + i;
-                    Namelabel.Text = "Linguistic var name:";
-                    Namelabel.Width = 110;
-                    Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(Namelabel);
-
-                    // creating TextBox for LV name
-                    TextBox NametextBox = new TextBox();
-                    NametextBox.Name = "textbox_LVName_" + i;
-                    NametextBox.Width = 100;
-                    NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    NametextBox.Text = "lvname_" + i; // DEBUG
-                    this.Controls.Add(NametextBox);
-
-                    // creating Label LV min range
-                    Label MinRangelabel = new Label();
-                    MinRangelabel.Name = "label_LVMinrange_" + i;
-                    MinRangelabel.Text = "Range from:";
-                    MinRangelabel.Width = 65;
-                    MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(MinRangelabel);
-
-                    // creating UpDown LV min range
-                    NumericUpDown MinRangeUpDown = new NumericUpDown();
-                    MinRangeUpDown.Name = "upDown_LVMinrange_" + i;
-                    MinRangeUpDown.Width = 36;
-                    MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(MinRangeUpDown);
-
-                    // creating Label LV max range
-                    Label MaxRangelabel = new Label();
-                    MaxRangelabel.Name = "label_LVMaxrange_" + i;
-                    MaxRangelabel.Text = "Range to:";
-                    MaxRangelabel.Width = 60;
-                    MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(MaxRangelabel);
-
-                    // creating UpDown LV max range
-                    NumericUpDown MaxRangeUpDown = new NumericUpDown();
-                    MaxRangeUpDown.Name = "upDown_LVMaxrange_" + i;
-                    MaxRangeUpDown.Width = 36;
-                    MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
-                    this.Controls.Add(MaxRangeUpDown);
-
-                    // creating Label LV type
-                    Label Typelabel = new Label();
-                    Typelabel.Name = "label_LVType_" + i;
-                    Typelabel.Text = "Type:";
-                    Typelabel.Width = 40;
-                    Typelabel.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(Typelabel);
-
-                    // creating UpDown LV type
-                    ComboBox TypeList = new ComboBox();
-                    TypeList.Name = "List_LVType_" + i;
-                    TypeList.Width = 45;
-                    TypeList.Items.Add("IN");
-                    TypeList.Items.Add("OUT");
-                    TypeList.SelectedIndex = 0;
-                    TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(TypeList);
-                    if (i == 1) // DEBUG
-                    {
-                        TypeList.SelectedIndex = 1; // DEBUG
-                    }
-
-                    // creating Label Terms count
-                    Label TermsCountlabel = new Label();
-                    TermsCountlabel.Name = "label_LVTermsCount_" + i;
-                    TermsCountlabel.Text = "Terms count:";
-                    TermsCountlabel.Width = 70;
-                    TermsCountlabel.Location = new Point(TypeList.Location.X + TypeList.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(TermsCountlabel);
-
-                    // creating UpDown terms Count
-                    NumericUpDown TermsCountUpDown = new NumericUpDown();
-                    TermsCountUpDown.Name = "upDown_TermsCount_" + i;
-                    TermsCountUpDown.Width = 36;
-                    TermsCountUpDown.Location = new Point(TermsCountlabel.Location.X + TermsCountlabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    TermsCountUpDown.Value = 1;
-                    this.Controls.Add(TermsCountUpDown);
-
-                    // creating button add terms
-                    Button AddTerms = new Button();
-                    AddTerms.Name = "button_AddTerms_" + i;
-                    AddTerms.Width = 90;
-                    AddTerms.Text = "Add terms";
-                    AddTerms.Location = new Point(TermsCountUpDown.Location.X + TermsCountUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    AddTerms.Click += AddTermsButton_Clicked;
-                    this.Controls.Add(AddTerms);
+                    _terms[i] = new Stack<ProductionRulesTerm>();
                 }
+
+                    for (int i = 0; i < LVCountUpDown.Value; i++)
+                    {
+                        // creating Label LV number
+                        Label Numberlabel = new Label();
+                        Numberlabel.Name = "label_LVNumber_" + i;
+                        Numberlabel.Text = "Linguistic var №" + (i + 1) + ":";
+                        Numberlabel.Width = 95;
+                        Numberlabel.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(Numberlabel);
+
+                        // creating Label LV ID
+                        Label IDlabel = new Label();
+                        IDlabel.Name = "label_LVID_" + i;
+                        IDlabel.Text = "Id:";
+                        IDlabel.Width = 20;
+                        IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(IDlabel);
+
+                        //creating TextBox for LV id
+                        TextBox IDtextBox = new TextBox();
+                        IDtextBox.Name = "textbox_LVID_" + i;
+                        IDtextBox.Width = 50;
+                        IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                        IDtextBox.Text = "lvid_" + i; // DEBUG
+                        if (i == 1) // DEBUG
+                        {
+                            IDtextBox.Text = "lvout"; // DEBUG
+                        }
+                        this.Controls.Add(IDtextBox);
+
+                        // creating Label LV name
+                        Label Namelabel = new Label();
+                        Namelabel.Name = "label_LVName_" + i;
+                        Namelabel.Text = "Linguistic var name:";
+                        Namelabel.Width = 110;
+                        Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(Namelabel);
+
+                        // creating TextBox for LV name
+                        TextBox NametextBox = new TextBox();
+                        NametextBox.Name = "textbox_LVName_" + i;
+                        NametextBox.Width = 100;
+                        NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                        NametextBox.Text = "lvname_" + i; // DEBUG
+                        this.Controls.Add(NametextBox);
+
+                        // creating Label LV min range
+                        Label MinRangelabel = new Label();
+                        MinRangelabel.Name = "label_LVMinrange_" + i;
+                        MinRangelabel.Text = "Range from:";
+                        MinRangelabel.Width = 65;
+                        MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(MinRangelabel);
+
+                        // creating UpDown LV min range
+                        NumericUpDown MinRangeUpDown = new NumericUpDown();
+                        MinRangeUpDown.Name = "upDown_LVMinrange_" + i;
+                        MinRangeUpDown.Width = 36;
+                        MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(MinRangeUpDown);
+
+                        // creating Label LV max range
+                        Label MaxRangelabel = new Label();
+                        MaxRangelabel.Name = "label_LVMaxrange_" + i;
+                        MaxRangelabel.Text = "Range to:";
+                        MaxRangelabel.Width = 60;
+                        MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(MaxRangelabel);
+
+                        // creating UpDown LV max range
+                        NumericUpDown MaxRangeUpDown = new NumericUpDown();
+                        MaxRangeUpDown.Name = "upDown_LVMaxrange_" + i;
+                        MaxRangeUpDown.Width = 36;
+                        MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
+                        this.Controls.Add(MaxRangeUpDown);
+
+                        // creating Label LV type
+                        Label Typelabel = new Label();
+                        Typelabel.Name = "label_LVType_" + i;
+                        Typelabel.Text = "Type:";
+                        Typelabel.Width = 40;
+                        Typelabel.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(Typelabel);
+
+                        // creating UpDown LV type
+                        ComboBox TypeList = new ComboBox();
+                        TypeList.Name = "List_LVType_" + i;
+                        TypeList.Width = 45;
+                        TypeList.Items.Add("IN");
+                        TypeList.Items.Add("OUT");
+                        TypeList.SelectedIndex = 0;
+                        TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(TypeList);
+                        if (i == 1) // DEBUG
+                        {
+                            TypeList.SelectedIndex = 1; // DEBUG
+                        }
+
+                        // creating Label Terms count
+                        Label TermsCountlabel = new Label();
+                        TermsCountlabel.Name = "label_LVTermsCount_" + i;
+                        TermsCountlabel.Text = "Terms count:";
+                        TermsCountlabel.Width = 70;
+                        TermsCountlabel.Location = new Point(TypeList.Location.X + TypeList.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        this.Controls.Add(TermsCountlabel);
+
+                        // creating UpDown terms Count
+                        NumericUpDown TermsCountUpDown = new NumericUpDown();
+                        TermsCountUpDown.Name = "upDown_TermsCount_" + i;
+                        TermsCountUpDown.Width = 36;
+                        TermsCountUpDown.Location = new Point(TermsCountlabel.Location.X + TermsCountlabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        TermsCountUpDown.Value = 1;
+                        this.Controls.Add(TermsCountUpDown);
+
+                        // creating button add terms
+                        Button AddTerms = new Button();
+                        AddTerms.Name = "button_AddTerms_" + i;
+                        AddTerms.Width = 90;
+                        AddTerms.Text = "Add terms";
+                        AddTerms.Location = new Point(TermsCountUpDown.Location.X + TermsCountUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                        AddTerms.Click += AddTermsButton_Clicked;
+                        this.Controls.Add(AddTerms);
+                    }
 
                 // creating OK button
                 Button LVNextButton = new Button();
@@ -244,7 +252,7 @@ namespace WindowsFormsApplication1
         {
             var button = (Button)sender;
             termsCount = Convert.ToInt32(this.Controls["upDown_TermsCount_" + button.Name.Substring(button.Name.Length-1, 1)].Text);
-            fullTermsCount += termsCount;
+            
             if (termsCount <= 0)
             {
                 MessageBox.Show("Terms count should be greater than 0.");
@@ -296,7 +304,7 @@ namespace WindowsFormsApplication1
                 }
 
 
-                ProductionRulesTerm[] rules = new ProductionRulesTerm[termsCount];
+                ProductionRulesTerm[] terms = new ProductionRulesTerm[termsCount];
                 if (termsCount <= 0)
                 {
                     MessageBox.Show("Error! Linguistic's variable №" + ( i + 1 ) + " terms count should be greater than 0!");
@@ -304,17 +312,18 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
+                    fullTermsCount += termsCount;
                     for (int j = 0; j < termsCount; j++)
                     {
-                        if (_terms[i, j].m_ID == null)
+                        if (_terms.ElementAt( i ).ElementAt( j ).m_ID == null)
                         {
                             MessageBox.Show("Error! You should first add terms for all linguistic variables!");
                             return;
                         }
 
-                        rules[j] = _terms[i, j];
+                        terms[j] = _terms.ElementAt(i).ElementAt(j);
                     }
-                    lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, rules, type);
+                    lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, terms, type);
                 }
             }
 
@@ -336,6 +345,22 @@ namespace WindowsFormsApplication1
 
         void FillAddTermsForm()
         {
+            for (int i = 0; i <= lastLExicalVariableTermsCount; i++)
+            {
+                AddTermsPanel.Controls.RemoveByKey("label_TermsCount_" + i);
+                AddTermsPanel.Controls.RemoveByKey("label_TermID_" + i);
+                AddTermsPanel.Controls.RemoveByKey("textbox_TermID_" + i);
+                AddTermsPanel.Controls.RemoveByKey("label_TermsName_" + i);
+                AddTermsPanel.Controls.RemoveByKey("textbox_TermName_" + i);
+                AddTermsPanel.Controls.RemoveByKey("label_TermMinrange_" + i);
+                AddTermsPanel.Controls.RemoveByKey("upDown_TermMinrange_" + i);
+                AddTermsPanel.Controls.RemoveByKey("label_TermMaxrange_" + i);
+                AddTermsPanel.Controls.RemoveByKey("upDown_TermMaxrange_" + i);
+            }
+
+            AddTermsPanel.Controls.RemoveByKey("TermOKButton");
+            AddTermsPanel.Controls.RemoveByKey("TermCancelButton");
+
             for (int i = 0; i < termsCount; i++)
             {
                 // creating Label Terms count
@@ -425,6 +450,8 @@ namespace WindowsFormsApplication1
             termsCancelButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + termsCount * 25 + 25);
             AddTermsPanel.Controls.Add(termsCancelButton);
             termsCancelButton.Click += CancelButton_Clicked;
+
+            lastLExicalVariableTermsCount = termsCount;
         }
 
         void OKButton_Clicked(object sender, EventArgs e )
@@ -460,7 +487,7 @@ namespace WindowsFormsApplication1
 
                 shouldClose = true;
                 _term[i] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
-                _terms[number, i] = _term[i];
+                _terms.ElementAt(number).Push( _term[i] );
             }
             if (shouldClose)
             {
@@ -738,10 +765,10 @@ namespace WindowsFormsApplication1
                 // которая будет рисоваться голубым цветом (Color.Blue),
                 // Опорные точки выделяться не будут (SymbolType.None)
                 ZedGraph.LineItem myCurve;
-                if( i == 0)
-                     myCurve = pane.AddCurve("Sinc_" + i, list, Color.Red, ZedGraph.SymbolType.None);
-                else
-                     myCurve = pane.AddCurve("Sinc_" + i, list, Color.Green, ZedGraph.SymbolType.None);
+
+                myCurve = pane.AddCurve(lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_name, list, Color.Red, ZedGraph.SymbolType.None);
+                myCurve.MakeUnique();
+
                 // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
                 // В противном случае на рисунке будет показана только часть графика, 
                 // которая умещается в интервалы по осям, установленные по умолчанию
@@ -759,7 +786,7 @@ namespace WindowsFormsApplication1
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         void FillInputVariablesForm()
         {
-            inputVariables = new double[lexicalVariablesCount];
+            inputVariables = new double[lexicalVariablesCount - 1];
 
             for (int i = 0; i < lexicalVariablesCount -1 /*Since last is the outout value*/; i++)
             {
@@ -867,7 +894,7 @@ namespace WindowsFormsApplication1
 
             // TODO: DO NOT FORGET TO UNCOMMENT THIS -1 !!!!!!!!!!!!!!!!!!!! 
 
-            fuzzification_1_Values = new Tuple<string, string, double>[Form1.fullTermsCount - 1 /* 1 of temrs is OUT*/]; // < output lexical variable id, input variable id, fuzzification value>
+            fuzzification_1_Values = new Tuple<string, string, double>[lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount * inputVariables.Length /* 1 of temrs is OUT*/]; // < output lexical variable id, input variable id, fuzzification value>
 
             FuzzificationValues(fuzzification_1_Values);
 
@@ -881,19 +908,9 @@ namespace WindowsFormsApplication1
             {
                 for (int j = 0; j < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; j++)
                 {
-                    _tp[j] = Tuple.Create(lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_id, lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[j].CalculateValue(inputVariables.ElementAt(i)));
+                    _tp[(i * inputVariables.Length) + j] = Tuple.Create(lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_id, lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[j].CalculateValue(inputVariables.ElementAt(i)));
                 }
             }
-            /*for (int j = 0; j < Form1.lexicalVariables.Length; j++)
-            {
-                for (int k = 0; k < Form1.lexicalVariables[j].m_termsCount; k++)
-                {
-                    if (Form1.lexicalVariables[j].m_type != VariableType.OUT)
-                    {
-                        _tp[j] = Tuple.Create(Form1.lexicalVariables[j].m_id, Form1.lexicalVariables[j].m_terms[k].m_ID, lexicalVariables.ElementAt( lexicalVariables.Length - 1) _mf.CalculateFunctionValue(inputVariables[j]));
-                    }
-                }
-            }*/
         }
 
         public void Aggregation()
@@ -953,12 +970,12 @@ namespace WindowsFormsApplication1
                                     if (lv.m_terms.ElementAt(i).m_ID == temp[1])
                                     {
                                         int k = 0;
-                                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += 0.1 )
+                                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += drawStep)
                                         {
                                             double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
                                             if (!activisationValues.ContainsKey(temp[1]))
                                             {
-                                                activisationValues.Add(temp[1], new Stack< double >[Convert.ToInt32( ( lv.m_terms.ElementAt(i).m_maxValue - lv.m_terms.ElementAt(i).m_minValue )/0.1 ) + 1]);
+                                                activisationValues.Add(temp[1], new Stack<double>[Convert.ToInt32((lv.m_terms.ElementAt(i).m_maxValue - lv.m_terms.ElementAt(i).m_minValue) / drawStep) + 1]);
                                                 if (activisationValues[temp[1]][k] == null)
                                                 {
                                                     activisationValues[temp[1]][k] = new Stack<double>();
@@ -997,22 +1014,62 @@ namespace WindowsFormsApplication1
 
         public void AccumulationPhase()
         {
-            Stack< double >[] pointsToDraw = new Stack< double >[lexicalVariables.ElementAt(lexicalVariables.Length - 1 ).m_termsCount];
-            for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+            Stack< double > pointsToDraw = new Stack< double >();
+
+            //Stack<ZedGraph.PointD>[] pointsToDraw = new Stack<ZedGraph.PointD>[lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount];
+
+            /*for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
             {
                 pointsToDraw[i] = new Stack<double>();
-            }
+            }*/
 
             int j = 0;
+
             foreach (var actVal in activisationValues)
             {
                 foreach (var val in actVal.Value)
                 {
-                    pointsToDraw[j].Push(AccumulationValues(val));
+                    pointsToDraw.Push(AccumulationValues(val));
                 }
                 j++;
             }
-            //double res = AccumulationValues(activisationValues);
+
+            ResultPanel.Visible = true;
+
+            // Получим панель для рисования
+            ZedGraph.GraphPane pane = FinalGraph.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+            ZedGraph.PointPairList list = new ZedGraph.PointPairList();
+
+            // Заполняем список точек
+            double x = 0;
+            foreach (var item in pointsToDraw)
+            {
+                list.Add(x, item);
+                x += drawStep;
+            }
+
+            // Создадим кривую с названием "Sinc", 
+            // которая будет рисоваться голубым цветом (Color.Blue),
+            // Опорные точки выделяться не будут (SymbolType.None)
+            ZedGraph.LineItem myCurve;
+
+            myCurve = pane.AddCurve("Result", list, Color.Red, ZedGraph.SymbolType.None);
+            myCurve.Line.Fill = new ZedGraph.Fill(Color.White, Color.Blue, 45F); ;
+
+            // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
+            // В противном случае на рисунке будет показана только часть графика, 
+            // которая умещается в интервалы по осям, установленные по умолчанию
+            zedGraph.AxisChange();
+
+            // Обновляем график
+            zedGraph.Invalidate();
+
+
 
         }
 
