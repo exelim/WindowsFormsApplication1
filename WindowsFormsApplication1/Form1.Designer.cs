@@ -55,12 +55,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ChooseFunctionsNextButton = new System.Windows.Forms.Button();
-            this.DLabelInput = new System.Windows.Forms.TextBox();
-            this.CLabelInput = new System.Windows.Forms.TextBox();
             this.BLabelInput = new System.Windows.Forms.TextBox();
             this.ALabelInput = new System.Windows.Forms.TextBox();
-            this.DLabel = new System.Windows.Forms.Label();
-            this.CLabel = new System.Windows.Forms.Label();
             this.BLabel = new System.Windows.Forms.Label();
             this.ALabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -132,12 +128,8 @@
             this.ChooseFunctionsPanel.Controls.Add(this.label2);
             this.ChooseFunctionsPanel.Controls.Add(this.label1);
             this.ChooseFunctionsPanel.Controls.Add(this.ChooseFunctionsNextButton);
-            this.ChooseFunctionsPanel.Controls.Add(this.DLabelInput);
-            this.ChooseFunctionsPanel.Controls.Add(this.CLabelInput);
             this.ChooseFunctionsPanel.Controls.Add(this.BLabelInput);
             this.ChooseFunctionsPanel.Controls.Add(this.ALabelInput);
-            this.ChooseFunctionsPanel.Controls.Add(this.DLabel);
-            this.ChooseFunctionsPanel.Controls.Add(this.CLabel);
             this.ChooseFunctionsPanel.Controls.Add(this.BLabel);
             this.ChooseFunctionsPanel.Controls.Add(this.ALabel);
             this.ChooseFunctionsPanel.Controls.Add(this.label6);
@@ -350,20 +342,6 @@
             this.ChooseFunctionsNextButton.UseVisualStyleBackColor = true;
             this.ChooseFunctionsNextButton.Click += new System.EventHandler(this.ChooseFunctionsNextButton_Click);
             // 
-            // DLabelInput
-            // 
-            this.DLabelInput.Location = new System.Drawing.Point(368, 127);
-            this.DLabelInput.Name = "DLabelInput";
-            this.DLabelInput.Size = new System.Drawing.Size(79, 20);
-            this.DLabelInput.TabIndex = 39;
-            // 
-            // CLabelInput
-            // 
-            this.CLabelInput.Location = new System.Drawing.Point(241, 130);
-            this.CLabelInput.Name = "CLabelInput";
-            this.CLabelInput.Size = new System.Drawing.Size(79, 20);
-            this.CLabelInput.TabIndex = 38;
-            // 
             // BLabelInput
             // 
             this.BLabelInput.Location = new System.Drawing.Point(368, 93);
@@ -378,24 +356,6 @@
             this.ALabelInput.Size = new System.Drawing.Size(79, 20);
             this.ALabelInput.TabIndex = 36;
             // 
-            // DLabel
-            // 
-            this.DLabel.AutoSize = true;
-            this.DLabel.Location = new System.Drawing.Point(343, 130);
-            this.DLabel.Name = "DLabel";
-            this.DLabel.Size = new System.Drawing.Size(19, 13);
-            this.DLabel.TabIndex = 35;
-            this.DLabel.Text = "d :";
-            // 
-            // CLabel
-            // 
-            this.CLabel.AutoSize = true;
-            this.CLabel.Location = new System.Drawing.Point(216, 130);
-            this.CLabel.Name = "CLabel";
-            this.CLabel.Size = new System.Drawing.Size(19, 13);
-            this.CLabel.TabIndex = 34;
-            this.CLabel.Text = "c :";
-            // 
             // BLabel
             // 
             this.BLabel.AutoSize = true;
@@ -403,7 +363,7 @@
             this.BLabel.Name = "BLabel";
             this.BLabel.Size = new System.Drawing.Size(19, 13);
             this.BLabel.TabIndex = 33;
-            this.BLabel.Text = "b :";
+            this.BLabel.Text = "c :";
             // 
             // ALabel
             // 
@@ -504,12 +464,8 @@
         private System.Windows.Forms.Label TermCountLabel;
         private System.Windows.Forms.Panel InputVariablesPanel;
         private System.Windows.Forms.Label InputVariables;
-        private System.Windows.Forms.TextBox DLabelInput;
-        private System.Windows.Forms.TextBox CLabelInput;
         private System.Windows.Forms.TextBox BLabelInput;
         private System.Windows.Forms.TextBox ALabelInput;
-        private System.Windows.Forms.Label DLabel;
-        private System.Windows.Forms.Label CLabel;
         private System.Windows.Forms.Label BLabel;
         private System.Windows.Forms.Label ALabel;
         private System.Windows.Forms.Label label6;

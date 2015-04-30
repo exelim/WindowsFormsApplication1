@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
             }
             else if (a <= _val_1 && _val_1 <= b)
             {
-                return (_val_1 - a) / (_val_1 - a);
+                return (_val_1 - a) / (b - a);
             }
             else if (b <= _val_1 && _val_1 <= c)
             {

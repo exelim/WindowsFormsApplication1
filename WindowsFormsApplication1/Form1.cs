@@ -47,7 +47,7 @@ namespace WindowsFormsApplication1
         int lastLExicalVariableTermsCount = 0;
 
         public static ProductionRule[] prodcutionsRules;
-        public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < output lexical variable id, input variable id, term id, fuzzification value>
+        public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < input variable id, output lexical variable id, fuzzification value>
         public static Dictionary<String, Stack<double>> aggregationValues;
         public static Dictionary<String, Stack<double>[]> activisationValues;
         public static Dictionary<String, Stack<double>> accumulationValues;
@@ -270,6 +270,10 @@ namespace WindowsFormsApplication1
 
         void NextButton_Clicked(object sender, EventArgs e)
         {
+            
+
+            int outVariablesCount = 0;
+
             for (int i = 0; i < lexicalVariablesCount; i++)
             {
                 string ID = this.Controls["textbox_LVID_" + i].Text;
@@ -300,7 +304,14 @@ namespace WindowsFormsApplication1
                         break;
                     case "OUT":
                         type = VariableType.OUT;
+                        outVariablesCount++;
                         break;
+                }
+
+                if (outVariablesCount > 1)
+                {
+                    MessageBox.Show("Error! Single OUT variable should be present in the lexical variables list and it should be the last one. There are: " +outVariablesCount + " now.");
+                    return;
                 }
 
 
@@ -315,7 +326,7 @@ namespace WindowsFormsApplication1
                     fullTermsCount += termsCount;
                     for (int j = 0; j < termsCount; j++)
                     {
-                        if (_terms.ElementAt( i ).ElementAt( j ).m_ID == null)
+                        if ( _terms.ElementAt(i).Count == 0 || _terms.ElementAt( i ).ElementAt( j ).m_ID == null)
                         {
                             MessageBox.Show("Error! You should first add terms for all linguistic variables!");
                             return;
@@ -327,12 +338,17 @@ namespace WindowsFormsApplication1
                 }
             }
 
-            //inputVariablesForm = new InputVariablesForm(lexicalVariablesCount);
+            if (lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_type != VariableType.OUT)
+            {
+                MessageBox.Show("Error! The last variable in the list on lexical variables should be an OUT variable and it should be the only one.");
+                return;
+            }
+
             AddTermsPanel.Visible = true;
             ChooseFunctionsPanel.Visible = true;
             FillChooseFunctionForm();
             //Close();
-            //inputVariablesForm.ShowDialog();
+
            // MembershipFunctionChoise  choiseFunctionForm = new MembershipFunctionChoise();
             //choiseFunctionForm.ShowDialog();
             //AddTermsPanel.Visible = true;
@@ -546,48 +562,36 @@ namespace WindowsFormsApplication1
             {
                 case 0: // Gaus
                     ALabel.Text = "g :";
-                    BLabel.Visible = false;
-                    CLabel.Visible = true;
-                    DLabel.Visible = false;
-                    BLabelInput.Visible = false;
-                    CLabelInput.Visible = true;
-                    DLabelInput.Visible = false;
+                    ALabel.Visible = true;
+                    ALabelInput.Visible = true;
+                    BLabel.Visible = true;
+                    BLabelInput.Visible = true;
                     break;
                 case 1: // Sigmoid
                     ALabel.Text = "a :";
-                    BLabel.Visible = false;
-                    CLabel.Visible = true;
-                    DLabel.Visible = false;
-                    BLabelInput.Visible = false;
-                    CLabelInput.Visible = true;
-                    DLabelInput.Visible = false;
+                    ALabel.Visible = true;
+                    ALabelInput.Visible = true;
+                    BLabel.Visible = true;
+                    BLabelInput.Visible = true;
                     break;
                 case 2: // Singleton
                     ALabel.Text = "a :";
+                    ALabel.Visible = true;
+                    ALabelInput.Visible = true;
                     BLabel.Visible = false;
-                    CLabel.Visible = false;
-                    DLabel.Visible = false;
                     BLabelInput.Visible = false;
-                    CLabelInput.Visible = false;
-                    DLabelInput.Visible = false;
                     break;
                 case 3: // Tpapezoidal
-                    ALabel.Text = "a :";
-                    BLabel.Visible = true;
-                    CLabel.Visible = true;
-                    DLabel.Visible = true;
-                    BLabelInput.Visible = true;
-                    CLabelInput.Visible = true;
-                    DLabelInput.Visible = true;
+                    ALabel.Visible = false;
+                    ALabelInput.Visible = false;
+                    BLabel.Visible = false;
+                    BLabelInput.Visible = false;
                     break;
                 case 4: // Triangle  
-                    ALabel.Text = "a :";
-                    BLabel.Visible = true;
-                    CLabel.Visible = true;
-                    DLabel.Visible = false;
-                    BLabelInput.Visible = true;
-                    CLabelInput.Visible = true;
-                    DLabelInput.Visible = false;
+                    ALabel.Visible = false;
+                    ALabelInput.Visible = false;
+                    BLabel.Visible = false;
+                    BLabelInput.Visible = false;
                     break;
             }
         }
@@ -599,19 +603,34 @@ namespace WindowsFormsApplication1
                 case 0: // Gaus
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
                     {
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            return;
+                        }
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                     }
                     break;
                 case 1: // sigmoid
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
                     {
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            return;
+                        }
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                     }
                     break;
                 case 2: // Singleton 
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
                     {
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToInt32(ALabelInput.Text), 0, 0, 0);
+                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            return;
+                        }
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToDouble(ALabelInput.Text), 0, 0, 0);
                     }
                     break;
                 case 3: // Tpapezoidal
@@ -705,19 +724,34 @@ namespace WindowsFormsApplication1
                 case 0: // Gaus
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
                     {
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            return;
+                        }
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                     }
                     break;
                 case 1: // sigmoid
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
                     {
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToInt32(ALabelInput.Text), 0, Convert.ToInt32(CLabelInput.Text), 0);
+                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            return;
+                        }
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                     }
                     break;
                 case 2: // Singleton 
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
                     {
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToInt32(ALabelInput.Text), 0, 0, 0);
+                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            return;
+                        }
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToDouble(ALabelInput.Text), 0, 0, 0);
                     }
                     break;
                 case 3: // Tpapezoidal
@@ -725,7 +759,7 @@ namespace WindowsFormsApplication1
                     {
                         double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
                         double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
+                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TrapezoidalFunction(min, min + (max - min) / 4, max - (max - min ) / 4, max);
                     }
                     break;
                 case 4: // Triangle
@@ -884,7 +918,8 @@ namespace WindowsFormsApplication1
             RuleParser rp = new RuleParser();
             for (int i = 0; i < lines.Length; i++)
             {
-                prodcutionsRules[i] = rp.ParseRuleString(lines[i]);
+                if (lines[i] != "")
+                    prodcutionsRules[i] = rp.ParseRuleString(lines[i]);
             }
             Fuzzification_1();
         }
@@ -894,7 +929,7 @@ namespace WindowsFormsApplication1
 
             // TODO: DO NOT FORGET TO UNCOMMENT THIS -1 !!!!!!!!!!!!!!!!!!!! 
 
-            fuzzification_1_Values = new Tuple<string, string, double>[lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount * inputVariables.Length /* 1 of temrs is OUT*/]; // < output lexical variable id, input variable id, fuzzification value>
+            fuzzification_1_Values = new Tuple<string, string, double>[lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount * inputVariables.Length /* 1 of temrs is OUT*/]; // < input variable id, output lexical variable id, fuzzification value>
 
             FuzzificationValues(fuzzification_1_Values);
 
@@ -908,7 +943,7 @@ namespace WindowsFormsApplication1
             {
                 for (int j = 0; j < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; j++)
                 {
-                    _tp[(i * inputVariables.Length) + j] = Tuple.Create(lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_id, lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[j].CalculateValue(inputVariables.ElementAt(i)));
+                    _tp[(i * inputVariables.Length) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).m_ID, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).CalculateValue(inputVariables.ElementAt(i)));
                 }
             }
         }
@@ -917,7 +952,7 @@ namespace WindowsFormsApplication1
         {
             activisationValues = new Dictionary<String, Stack<double>[]>();
 
-            aggregationValues = new Dictionary<string, Stack<double>>();
+            aggregationValues = new Dictionary<String, Stack<double>>();
 
             Stack<double> values = new Stack<double>();
 
@@ -970,12 +1005,12 @@ namespace WindowsFormsApplication1
                                     if (lv.m_terms.ElementAt(i).m_ID == temp[1])
                                     {
                                         int k = 0;
-                                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += drawStep)
+                                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += drawStep, k++)
                                         {
                                             double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
                                             if (!activisationValues.ContainsKey(temp[1]))
                                             {
-                                                activisationValues.Add(temp[1], new Stack<double>[Convert.ToInt32((lv.m_terms.ElementAt(i).m_maxValue - lv.m_terms.ElementAt(i).m_minValue) / drawStep) + 1]);
+                                                activisationValues.Add(temp[1], new Stack<double>[Convert.ToInt32((lv.m_terms.ElementAt(i).m_maxValue - lv.m_terms.ElementAt(i).m_minValue) / drawStep) + 1 ]);
                                                 if (activisationValues[temp[1]][k] == null)
                                                 {
                                                     activisationValues[temp[1]][k] = new Stack<double>();
@@ -998,7 +1033,6 @@ namespace WindowsFormsApplication1
                                                     activisationValues[temp[1]][k].Push(ActivisationValues(activization_function, _funcVal, val));
                                                 }
                                             }
-                                            k++;
                                         }
                                     }
                                 }
@@ -1016,20 +1050,14 @@ namespace WindowsFormsApplication1
         {
             Stack< double > pointsToDraw = new Stack< double >();
 
-            //Stack<ZedGraph.PointD>[] pointsToDraw = new Stack<ZedGraph.PointD>[lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount];
-
-            /*for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
-            {
-                pointsToDraw[i] = new Stack<double>();
-            }*/
-
             int j = 0;
 
             foreach (var actVal in activisationValues)
             {
                 foreach (var val in actVal.Value)
                 {
-                    pointsToDraw.Push(AccumulationValues(val));
+                    if( val != null )
+                        pointsToDraw.Push(AccumulationValues(val));
                 }
                 j++;
             }
