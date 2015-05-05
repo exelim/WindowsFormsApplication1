@@ -137,10 +137,22 @@ namespace WindowsFormsApplication1
                         IDtextBox.Width = 50;
                         IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
                         IDtextBox.Text = "lvid_" + i; // DEBUG
-                        if (i == 1) // DEBUG
+
+                        // Debug start
+                        if (i == 0)
                         {
-                            IDtextBox.Text = "lvout"; // DEBUG
+                            IDtextBox.Text = "s"; // DEBUG
                         }
+                        else if (i == 1) // DEBUG
+                        {
+                            IDtextBox.Text = "f"; // DEBUG
+                        }
+                        else if (i == 2)
+                        {
+                            IDtextBox.Text = "t"; // DEBUG
+                        }
+                        // Debug end
+
                         this.Controls.Add(IDtextBox);
 
                         // creating Label LV name
@@ -188,6 +200,21 @@ namespace WindowsFormsApplication1
                         MaxRangeUpDown.Width = 36;
                         MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                         MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
+                        // Debug start
+                        if (i == 0)
+                        {
+                            MaxRangeUpDown.Value = 10;  // DEBUG
+                        }
+                        else if (i == 1) // DEBUG
+                        {
+                            MaxRangeUpDown.Value = 10;  // DEBUG
+                        }
+                        else if (i == 2)
+                        {
+                            MaxRangeUpDown.Value = 30;  // DEBUG
+                        }
+                        // Debug en
+
                         this.Controls.Add(MaxRangeUpDown);
 
                         // creating Label LV type
@@ -207,7 +234,7 @@ namespace WindowsFormsApplication1
                         TypeList.SelectedIndex = 0;
                         TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                         this.Controls.Add(TypeList);
-                        if (i == 1) // DEBUG
+                        if (i == 2) // DEBUG
                         {
                             TypeList.SelectedIndex = 1; // DEBUG
                         }
@@ -400,7 +427,34 @@ namespace WindowsFormsApplication1
                 IDtextBox.Name = "textbox_TermID_" + i;
                 IDtextBox.Width = 50;
                 IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                IDtextBox.Text = "tmid_" + i;  // DEBUG
+                // Debug start
+                if (termsCount == 3)
+                {
+                    if (i == 0)
+                    {
+                        IDtextBox.Text = "p";  // DEBUG
+                    }
+                    else if (i == 1) // DEBUG
+                    {
+                        IDtextBox.Text = "g";  // DEBUG
+                    }
+                    else if (i == 2)
+                    {
+                        IDtextBox.Text = "e";  // DEBUG
+                    }
+                }
+                else 
+                {
+                    if (i == 0)
+                    {
+                        IDtextBox.Text = "b";  // DEBUG
+                    }
+                    else if (i == 1) // DEBUG
+                    {
+                        IDtextBox.Text = "g";  // DEBUG
+                    }
+                }
+                // Debug en
                 AddTermsPanel.Controls.Add(IDtextBox);
 
                 // creating Label Term name
@@ -432,6 +486,34 @@ namespace WindowsFormsApplication1
                 MinRangeUpDown.Name = "upDown_TermMinrange_" + i;
                 MinRangeUpDown.Width = 36;
                 MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                // Debug start
+                if (termsCount == 3)
+                {
+                    if (i == 0)
+                    {
+                        MinRangeUpDown.Value = 0;  // DEBUG
+                    }
+                    else if (i == 1) // DEBUG
+                    {
+                        MinRangeUpDown.Value = 4;  // DEBUG
+                    }
+                    else if (i == 2)
+                    {
+                        MinRangeUpDown.Value = 7;  // DEBUG
+                    }
+                }
+                else
+                {
+                    if (i == 0)
+                    {
+                        MinRangeUpDown.Value = 0;  // DEBUG
+                    }
+                    else if (i == 1) // DEBUG
+                    {
+                        MinRangeUpDown.Value = 6;  // DEBUG
+                    }
+                }
+                // Debug en
                 AddTermsPanel.Controls.Add(MinRangeUpDown);
 
                 // creating Label Term max range
@@ -447,7 +529,34 @@ namespace WindowsFormsApplication1
                 MaxRangeUpDown.Name = "upDown_TermMaxrange_" + i;
                 MaxRangeUpDown.Width = 36;
                 MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                MaxRangeUpDown.Value = 1 + 10 * i; // DEBUG
+                // Debug start
+                if (termsCount == 3)
+                {
+                    if (i == 0)
+                    {
+                        MaxRangeUpDown.Value = 3;  // DEBUG
+                    }
+                    else if (i == 1) // DEBUG
+                    {
+                        MaxRangeUpDown.Value = 6;  // DEBUG
+                    }
+                    else if (i == 2)
+                    {
+                        MaxRangeUpDown.Value = 10;  // DEBUG
+                    }
+                }
+                else
+                {
+                    if (i == 0)
+                    {
+                        MaxRangeUpDown.Value = 5;  // DEBUG
+                    }
+                    else if (i == 1) // DEBUG
+                    {
+                        MaxRangeUpDown.Value = 10;  // DEBUG
+                    }
+                }
+                // Debug en
                 AddTermsPanel.Controls.Add(MaxRangeUpDown);
             }
 
@@ -601,52 +710,67 @@ namespace WindowsFormsApplication1
             switch (MembershipComboBox.SelectedIndex)
             {
                 case 0: // Gaus
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    if (ALabelInput.Text == "" || BLabelInput.Text == "")
                     {
-                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        MessageBox.Show("Error! Fields are empty.");
+                        return;
+                    }
+                    for (int i = 0; i < lexicalVariables.Length; i++)
+                    {
+                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
                         {
-                            MessageBox.Show("Error! Fields are empty.");
-                            return;
+                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new GaussFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                         }
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                     }
                     break;
                 case 1: // sigmoid
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    if (ALabelInput.Text == "" || BLabelInput.Text == "")
                     {
-                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        MessageBox.Show("Error! Fields are empty.");
+                        return;
+                    }
+                    for (int i = 0; i < lexicalVariables.Length; i++)
+                    {
+                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
                         {
-                            MessageBox.Show("Error! Fields are empty.");
-                            return;
+                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                         }
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
                     }
                     break;
-                case 2: // Singleton 
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                case 2: // Singleton
+                    if (ALabelInput.Text == "" || BLabelInput.Text == "")
                     {
-                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
+                        MessageBox.Show("Error! Fields are empty.");
+                        return;
+                    }
+                    for (int i = 0; i < lexicalVariables.Length; i++)
+                    {
+                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
                         {
-                            MessageBox.Show("Error! Fields are empty.");
-                            return;
+                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SingletonFunction(Convert.ToDouble(ALabelInput.Text), 0, 0, 0);
                         }
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToDouble(ALabelInput.Text), 0, 0, 0);
                     }
                     break;
                 case 3: // Tpapezoidal
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    for (int i = 0; i < lexicalVariables.Length; i++)
                     {
-                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
-                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
+                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
+                        {
+                            double min = lexicalVariables.ElementAt(i).m_terms[j].m_minValue;
+                            double max = lexicalVariables.ElementAt(i).m_terms[j].m_maxValue;
+                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
+                        }
                     }
                     break;
                 case 4: // Triangle
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
+                    for (int i = 0; i < lexicalVariables.Length; i++)
                     {
-                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
-                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
+                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
+                        {
+                            double min = lexicalVariables.ElementAt(i).m_terms[j].m_minValue;
+                            double max = lexicalVariables.ElementAt(i).m_terms[j].m_maxValue;
+                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
+                        }
                     }
                     break;
             }
@@ -792,7 +916,7 @@ namespace WindowsFormsApplication1
                 for (double x = xmin; x <= xmax; x += 0.01)
                 {
                     // добавим в список точку
-                    list.Add(x, lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms[i].CalculateValue(x));
+                    list.Add(x, lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.ElementAt(i).CalculateValue(x));
                 }
 
                 // Создадим кривую с названием "Sinc", 
@@ -808,11 +932,11 @@ namespace WindowsFormsApplication1
                 // которая умещается в интервалы по осям, установленные по умолчанию
                 zedGraph.AxisChange();
 
-                
+                // Обновляем график
+                zedGraph.Invalidate();
             }
 
-            // Обновляем график
-            zedGraph.Invalidate();
+            
         }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -899,7 +1023,7 @@ namespace WindowsFormsApplication1
             careMessage += "    10,30,23   - variables value;\n\n";
             careMessage += "Please note that the ID value should be the same as you set to linguistic variables before!";
 
-            MessageBox.Show(careMessage);
+           // MessageBox.Show(careMessage);
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -929,7 +1053,8 @@ namespace WindowsFormsApplication1
 
             // TODO: DO NOT FORGET TO UNCOMMENT THIS -1 !!!!!!!!!!!!!!!!!!!! 
 
-            fuzzification_1_Values = new Tuple<string, string, double>[lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount * inputVariables.Length /* 1 of temrs is OUT*/]; // < input variable id, output lexical variable id, fuzzification value>
+
+            fuzzification_1_Values = new Tuple<string, string, double>[fullTermsCount - lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount  /* 1 of temrs is OUT*/]; // < input variable id, output lexical variable id, fuzzification value>
 
             FuzzificationValues(fuzzification_1_Values);
 
@@ -939,11 +1064,16 @@ namespace WindowsFormsApplication1
 
         public void FuzzificationValues(Tuple<string, string, double>[] _tp)
         {
+            /*foreach (var item in inputVariables)
+            { 
+                foreach( var val in item )
+            }*/
             for (int i = 0; i < inputVariables.Length; i++ )
             {
-                for (int j = 0; j < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; j++)
+                for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
                 {
-                    _tp[(i * inputVariables.Length) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).m_ID, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).CalculateValue(inputVariables.ElementAt(i)));
+                    _tp[(i * lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).m_ID, 
+                        lexicalVariables.ElementAt(i).m_terms.ElementAt(j).CalculateValue(inputVariables.ElementAt(i)));
                 }
             }
         }
@@ -965,7 +1095,7 @@ namespace WindowsFormsApplication1
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item2.Equals(pair.Key) && fuz.Item3 > 0.0)
+                        if (fuz.Item1.Equals(pair.Key) && item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value.Equals( fuz.Item2 ) /*&& fuz.Item3 > 0.0*/)
                         {
                             values.Push(fuz.Item3);
                         }
@@ -974,13 +1104,17 @@ namespace WindowsFormsApplication1
                 agrValueKey = item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Key + "#" + item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value;
                 if (!aggregationValues.ContainsKey(agrValueKey))
                 {
+                    
+                    double val = AggregationValues(aggregation_function, values);
                     aggregationValues.Add(agrValueKey, new Stack<double>());
-                    aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
+                    aggregationValues[agrValueKey].Push(val);
                 }
                 else
                 {
-                    aggregationValues[agrValueKey].Push(AggregationValues(aggregation_function, values));
+                    double val = AggregationValues(aggregation_function, values);
+                    aggregationValues[agrValueKey].Push(val);
                 }
+                values.Clear();
             }
 
             ActivisationPhase();
@@ -1072,6 +1206,12 @@ namespace WindowsFormsApplication1
 
             // Создадим список точек
             ZedGraph.PointPairList list = new ZedGraph.PointPairList();
+            ZedGraph.PointPairList list2 = new ZedGraph.PointPairList();
+
+            double result = CalculateResultValue();
+
+            list2.Add(result, 0);
+            list2.Add(result, 1);
 
             // Заполняем список точек
             double x = 0;
@@ -1085,20 +1225,58 @@ namespace WindowsFormsApplication1
             // которая будет рисоваться голубым цветом (Color.Blue),
             // Опорные точки выделяться не будут (SymbolType.None)
             ZedGraph.LineItem myCurve;
+            ZedGraph.LineItem myCurve2;
 
             myCurve = pane.AddCurve("Result", list, Color.Red, ZedGraph.SymbolType.None);
             myCurve.Line.Fill = new ZedGraph.Fill(Color.White, Color.Blue, 45F); ;
 
+
+            myCurve2 = pane.AddCurve("Result", list2, Color.Red, ZedGraph.SymbolType.None);
+            myCurve2.MakeUnique();
+
             // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
             // В противном случае на рисунке будет показана только часть графика, 
             // которая умещается в интервалы по осям, установленные по умолчанию
-            zedGraph.AxisChange();
+            FinalGraph.AxisChange();
 
             // Обновляем график
-            zedGraph.Invalidate();
+            FinalGraph.Invalidate();
 
+            
 
+        }
 
+        double CalculateResultValue()
+        {
+            double sum1 = 0.0;
+            double sum2 = 0.0;
+            foreach (var lv in Form1.lexicalVariables)
+            {
+                for (int i = 0; i < lv.m_termsCount; i++)
+                {
+                    if (lv.m_type == VariableType.OUT)
+                    {
+                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += drawStep)
+                        {
+                            double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
+
+                            sum1 += j * _funcVal;
+                            sum2 += _funcVal;
+                        }
+                    }
+                }
+            }
+
+           /* foreach (var item in activisationValues)
+            { 
+                            double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
+
+                            sum1 += j * _funcVal;
+                            sum2 += _funcVal;
+            }*/
+            ResultLabel.Text = (sum1 / sum2 ).ToString();
+
+            return sum1 / sum2;
         }
 
         public double AggregationValues(AggregationFormulaBase _af, Stack<double> _st)
@@ -1114,6 +1292,12 @@ namespace WindowsFormsApplication1
         public double AccumulationValues( Stack<double> _st)
         {
             return accumulation_function.CalculateAccumulation(_st);
+        }
+
+        private void ResultBackButton_Click(object sender, EventArgs e)
+        {
+            ResultPanel.Visible = false;
+            ProductionRulesInputPanel.Visible = true;
         }
 
         

@@ -63,6 +63,8 @@
             this.zedGraph = new ZedGraph.ZedGraphControl();
             this.DrawGraph = new System.Windows.Forms.Button();
             this.TermCountLabel = new System.Windows.Forms.Label();
+            this.ResultBackButton = new System.Windows.Forms.Button();
+            this.ResultLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).BeginInit();
             this.AddTermsPanel.SuspendLayout();
             this.ChooseFunctionsPanel.SuspendLayout();
@@ -168,6 +170,8 @@
             // 
             // ResultPanel
             // 
+            this.ResultPanel.Controls.Add(this.ResultLabel);
+            this.ResultPanel.Controls.Add(this.ResultBackButton);
             this.ResultPanel.Controls.Add(this.FinalGraph);
             this.ResultPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ResultPanel.Location = new System.Drawing.Point(0, 0);
@@ -225,7 +229,7 @@
             this.prodRulesTB.Name = "prodRulesTB";
             this.prodRulesTB.Size = new System.Drawing.Size(492, 195);
             this.prodRulesTB.TabIndex = 4;
-            this.prodRulesTB.Text = "if lvid_0 is tmid_0 then lvout is tmout_0";
+            this.prodRulesTB.Text = "if s is p OR f is b then t is c\nif s is g then t is a\nif s is e OR f is g then t is g";
             // 
             // InputVariables
             // 
@@ -416,6 +420,26 @@
             this.TermCountLabel.TabIndex = 5;
             this.TermCountLabel.Text = "Terms :";
             // 
+            // ResultBackButton
+            // 
+            this.ResultBackButton.Location = new System.Drawing.Point(24, 413);
+            this.ResultBackButton.Name = "ResultBackButton";
+            this.ResultBackButton.Size = new System.Drawing.Size(75, 23);
+            this.ResultBackButton.TabIndex = 42;
+            this.ResultBackButton.Text = "< Back";
+            this.ResultBackButton.UseVisualStyleBackColor = true;
+            this.ResultBackButton.Click += new System.EventHandler(this.ResultBackButton_Click);
+            // 
+            // ResultLabel
+            // 
+            this.ResultLabel.AutoSize = true;
+            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ResultLabel.Location = new System.Drawing.Point(738, 100);
+            this.ResultLabel.Name = "ResultLabel";
+            this.ResultLabel.Size = new System.Drawing.Size(70, 25);
+            this.ResultLabel.TabIndex = 43;
+            this.ResultLabel.Text = "label8";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +461,7 @@
             this.ProductionRulesInputPanel.ResumeLayout(false);
             this.ProductionRulesInputPanel.PerformLayout();
             this.ResultPanel.ResumeLayout(false);
+            this.ResultPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,6 +503,8 @@
         private System.Windows.Forms.Button DrawGraph;
         private System.Windows.Forms.Panel ResultPanel;
         private ZedGraph.ZedGraphControl FinalGraph;
+        private System.Windows.Forms.Button ResultBackButton;
+        private System.Windows.Forms.Label ResultLabel;
     }
 }
 

@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
 
         public override double CalculateFunctionValue(double _val_1/*, double _a, double _b, double _c, double _d*/)
         {
-            if (_val_1 <= a)
+            if (_val_1 < a || _val_1 > d)
             {
                 return 0;
             }
@@ -33,10 +33,6 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
             else if (c <= _val_1 && _val_1 <= d)
             {
                 return (d - _val_1) / (d - c);
-            }
-            else if (d <= _val_1)
-            {
-                return 0;
             }
             else
                 return -1;

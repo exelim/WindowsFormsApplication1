@@ -22,11 +22,11 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
             {
                 return 0.0;
             }
-            else if (a <= _val_1 && _val_1 <= b)
+            else if (a < _val_1 && _val_1 <= b)
             {
                 return (_val_1 - a) / (b - a);
             }
-            else if (b <= _val_1 && _val_1 <= c)
+            else if (b < _val_1 && _val_1 <= c)
             {
                 return (c - _val_1) / (c - b);
             }
