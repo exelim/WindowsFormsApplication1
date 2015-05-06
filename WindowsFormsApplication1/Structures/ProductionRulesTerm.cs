@@ -28,5 +28,7 @@ namespace WindowsFormsApplication1.Structures
         {
             return m_membershipFinction.CalculateFunctionValue(_val);
         }
+
+        
     }
 }

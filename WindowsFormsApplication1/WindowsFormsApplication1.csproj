@@ -86,11 +86,11 @@
     <Compile Include="InputVariablesForm.Designer.cs">
       <DependentUpon>InputVariablesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MembershipFunctionChoise.cs">
+    <Compile Include="DrawAll.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MembershipFunctionChoise.Designer.cs">
-      <DependentUpon>MembershipFunctionChoise.cs</DependentUpon>
+    <Compile Include="DrawAll.Designer.cs">
+      <DependentUpon>DrawAll.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductionRulesInputForm.cs">
       <SubType>Form</SubType>
@@ -119,8 +119,8 @@
     <EmbeddedResource Include="InputVariablesForm.resx">
       <DependentUpon>InputVariablesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MembershipFunctionChoise.resx">
-      <DependentUpon>MembershipFunctionChoise.cs</DependentUpon>
+    <EmbeddedResource Include="DrawAll.resx">
+      <DependentUpon>DrawAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductionRulesInputForm.resx">
       <DependentUpon>ProductionRulesInputForm.cs</DependentUpon>

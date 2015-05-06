@@ -35,14 +35,14 @@ namespace WindowsFormsApplication1
         public static int lexicalVariablesCount;
         public static int termsCount;
         public static int fullTermsCount;
-        public static Stack< ProductionRulesTerm >[] _terms;
+        static public  Stack< ProductionRulesTerm >[] _terms;
         public static Array arr; 
         public static LexicalVariable[] lexicalVariables;
         static public ProductionRulesTerm[] _term;
 
         public static double[] inputVariables;
 
-        int number;
+        public static int number;
         bool choseFunctionFormInitialized = false;
         int lastLExicalVariableTermsCount = 0;
 
@@ -388,6 +388,8 @@ namespace WindowsFormsApplication1
 
         void FillAddTermsForm()
         {
+            _term = new ProductionRulesTerm[termsCount];
+
             for (int i = 0; i <= lastLExicalVariableTermsCount; i++)
             {
                 AddTermsPanel.Controls.RemoveByKey("label_TermsCount_" + i);
@@ -399,10 +401,13 @@ namespace WindowsFormsApplication1
                 AddTermsPanel.Controls.RemoveByKey("upDown_TermMinrange_" + i);
                 AddTermsPanel.Controls.RemoveByKey("label_TermMaxrange_" + i);
                 AddTermsPanel.Controls.RemoveByKey("upDown_TermMaxrange_" + i);
+                AddTermsPanel.Controls.RemoveByKey("AddmembershipFunctionButton_" + i);
+
             }
 
             AddTermsPanel.Controls.RemoveByKey("TermOKButton");
             AddTermsPanel.Controls.RemoveByKey("TermCancelButton");
+            AddTermsPanel.Controls.RemoveByKey("DrawAllButton");
 
             for (int i = 0; i < termsCount; i++)
             {
@@ -495,11 +500,11 @@ namespace WindowsFormsApplication1
                     }
                     else if (i == 1) // DEBUG
                     {
-                        MinRangeUpDown.Value = 4;  // DEBUG
+                        MinRangeUpDown.Value = 3;  // DEBUG
                     }
                     else if (i == 2)
                     {
-                        MinRangeUpDown.Value = 7;  // DEBUG
+                        MinRangeUpDown.Value = 4;  // DEBUG
                     }
                 }
                 else
@@ -510,7 +515,7 @@ namespace WindowsFormsApplication1
                     }
                     else if (i == 1) // DEBUG
                     {
-                        MinRangeUpDown.Value = 6;  // DEBUG
+                        MinRangeUpDown.Value = 2;  // DEBUG
                     }
                 }
                 // Debug en
@@ -534,11 +539,11 @@ namespace WindowsFormsApplication1
                 {
                     if (i == 0)
                     {
-                        MaxRangeUpDown.Value = 3;  // DEBUG
+                        MaxRangeUpDown.Value = 6;  // DEBUG
                     }
                     else if (i == 1) // DEBUG
                     {
-                        MaxRangeUpDown.Value = 6;  // DEBUG
+                        MaxRangeUpDown.Value = 8;  // DEBUG
                     }
                     else if (i == 2)
                     {
@@ -549,7 +554,7 @@ namespace WindowsFormsApplication1
                 {
                     if (i == 0)
                     {
-                        MaxRangeUpDown.Value = 5;  // DEBUG
+                        MaxRangeUpDown.Value = 8;  // DEBUG
                     }
                     else if (i == 1) // DEBUG
                     {
@@ -558,6 +563,16 @@ namespace WindowsFormsApplication1
                 }
                 // Debug en
                 AddTermsPanel.Controls.Add(MaxRangeUpDown);
+
+                // creating add membership button
+                Button AddmembershipFunctionButton = new Button();
+                AddmembershipFunctionButton.Name = "AddmembershipFunctionButton_" + i;
+                AddmembershipFunctionButton.Text = "Add membership function";
+                AddmembershipFunctionButton.Width = 150;
+                AddmembershipFunctionButton.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                AddTermsPanel.Controls.Add(AddmembershipFunctionButton);
+                AddmembershipFunctionButton.Click += AddmembershipFunctionButton_Clicked;
+
             }
 
             // creating OK button
@@ -576,16 +591,76 @@ namespace WindowsFormsApplication1
             AddTermsPanel.Controls.Add(termsCancelButton);
             termsCancelButton.Click += CancelButton_Clicked;
 
+            // Draw all
+            Button DrawAllButton = new Button();
+            DrawAllButton.Name = "DrawAllButton";
+            DrawAllButton.Text = "Draw all!";
+            DrawAllButton.Location = new Point(termsCancelButton.Location.X + 200, TermCountLabel.Location.Y + termsCount * 25 + 25);
+            AddTermsPanel.Controls.Add(DrawAllButton);
+            DrawAllButton.Click += DrawAll_Clicked;
+
             lastLExicalVariableTermsCount = termsCount;
+        }
+
+        void DrawAll_Clicked(object sender, EventArgs e)
+        {
+            DrawAll drawAll = new DrawAll();
+            drawAll.ShowDialog();
+        }
+
+        void AddmembershipFunctionButton_Clicked(object sender, EventArgs e)
+        {
+            int idx = Convert.ToInt32(((Button)sender).Name[((Button)sender).Name.Length - 1].ToString());
+
+            if (idx > _terms.ElementAt(number).Count)
+            {
+                MessageBox.Show("Error! Please add membership functions for all terms above.");
+                return;
+            }
+
+            string ID = AddTermsPanel.Controls["textbox_TermID_" + idx].Text;
+            if (ID == "")
+            {
+                MessageBox.Show("Error! Term's №" + (idx + 1) + " ID is empty!");
+                return;
+            }
+
+            string termName = AddTermsPanel.Controls["textbox_TermName_" + idx].Text;
+            if (termName == "")
+            {
+                MessageBox.Show("Error! Term's №" + (idx + 1) + " name is empty!");
+                return;
+            }
+
+            int termMinRange = Convert.ToInt32(AddTermsPanel.Controls["upDown_TermMinrange_" + idx].Text);
+            int termMaxRange = Convert.ToInt32(AddTermsPanel.Controls["upDown_TermMaxrange_" + idx].Text);
+            if (termMinRange >= termMaxRange)
+            {
+                MessageBox.Show("Error! Term's №" + (idx + 1) + " minimum ragne is equal or greater than maximum range!");
+                return;
+            }
+
+            _term[idx] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
+            if ( !_terms.ElementAt(number).Contains( _term[idx] ) )
+            {
+                AddTermForm addForm = new AddTermForm( idx );
+                addForm.ShowDialog();
+            }
+            
         }
 
         void OKButton_Clicked(object sender, EventArgs e )
         {
-            _term = new ProductionRulesTerm[termsCount];
-            bool shouldClose = false;
+            bool shouldClose = true;
             for (int i = 0; i < termsCount; i++)
             {
-                string ID = AddTermsPanel.Controls["textbox_TermID_" + i].Text;
+                if (_terms.ElementAt(number).Count < termsCount || _terms.ElementAt(number).ElementAt(i).m_membershipFinction == null)
+                {
+                    MessageBox.Show("Error! Please add memebership functions for all terms.");
+                    shouldClose = false;
+                    break;
+                }
+                /*string ID = AddTermsPanel.Controls["textbox_TermID_" + i].Text;
                 if (ID == "")
                 {
                     MessageBox.Show("Error! Term's №" + (i + 1) + " ID is empty!");
@@ -612,7 +687,7 @@ namespace WindowsFormsApplication1
 
                 shouldClose = true;
                 _term[i] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
-                _terms.ElementAt(number).Push( _term[i] );
+                _terms.ElementAt(number).Push( _term[i] );*/
             }
             if (shouldClose)
             {
@@ -633,13 +708,6 @@ namespace WindowsFormsApplication1
         {
             if (!choseFunctionFormInitialized)
             {
-                MembershipComboBox.Items.Add("Gauss Function");
-                MembershipComboBox.Items.Add("Sigmoid Function");
-                MembershipComboBox.Items.Add("Singleton Function");
-                MembershipComboBox.Items.Add("Trapezoidal Function");
-                MembershipComboBox.Items.Add("Triangle Function");
-                MembershipComboBox.SelectedIndex = 0;
-
                 AggregationComboBox.Items.Add("Limited Function");
                 AggregationComboBox.Items.Add("Algebraic Function");
                 AggregationComboBox.Items.Add("MaxMin Function");
@@ -665,49 +733,9 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void MembershipComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (MembershipComboBox.SelectedIndex)
-            {
-                case 0: // Gaus
-                    ALabel.Text = "g :";
-                    ALabel.Visible = true;
-                    ALabelInput.Visible = true;
-                    BLabel.Visible = true;
-                    BLabelInput.Visible = true;
-                    break;
-                case 1: // Sigmoid
-                    ALabel.Text = "a :";
-                    ALabel.Visible = true;
-                    ALabelInput.Visible = true;
-                    BLabel.Visible = true;
-                    BLabelInput.Visible = true;
-                    break;
-                case 2: // Singleton
-                    ALabel.Text = "a :";
-                    ALabel.Visible = true;
-                    ALabelInput.Visible = true;
-                    BLabel.Visible = false;
-                    BLabelInput.Visible = false;
-                    break;
-                case 3: // Tpapezoidal
-                    ALabel.Visible = false;
-                    ALabelInput.Visible = false;
-                    BLabel.Visible = false;
-                    BLabelInput.Visible = false;
-                    break;
-                case 4: // Triangle  
-                    ALabel.Visible = false;
-                    ALabelInput.Visible = false;
-                    BLabel.Visible = false;
-                    BLabelInput.Visible = false;
-                    break;
-            }
-        }
-
         private void ChooseFunctionsNextButton_Click(object sender, EventArgs e)
         {
-            switch (MembershipComboBox.SelectedIndex)
+            /*switch (MembershipComboBox.SelectedIndex)
             {
                 case 0: // Gaus
                     if (ALabelInput.Text == "" || BLabelInput.Text == "")
@@ -774,7 +802,7 @@ namespace WindowsFormsApplication1
                     }
                     break;
             }
-
+            */
             switch (AggregationComboBox.SelectedIndex)
             {
                 case 0:
@@ -843,7 +871,7 @@ namespace WindowsFormsApplication1
 
         private void DrawGraph_Click(object sender, EventArgs e)
         {
-            switch (MembershipComboBox.SelectedIndex)
+            /*switch (MembershipComboBox.SelectedIndex)
             {
                 case 0: // Gaus
                     for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
@@ -894,9 +922,9 @@ namespace WindowsFormsApplication1
                         lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
                     }
                     break;
-            }
+            }*/
 
-            // Получим панель для рисования
+           /* // Получим панель для рисования
             ZedGraph.GraphPane pane = zedGraph.GraphPane;
 
             // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
@@ -934,7 +962,7 @@ namespace WindowsFormsApplication1
 
                 // Обновляем график
                 zedGraph.Invalidate();
-            }
+            }*/
 
             
         }
@@ -1050,10 +1078,6 @@ namespace WindowsFormsApplication1
 
         public void Fuzzification_1()
         {
-
-            // TODO: DO NOT FORGET TO UNCOMMENT THIS -1 !!!!!!!!!!!!!!!!!!!! 
-
-
             fuzzification_1_Values = new Tuple<string, string, double>[fullTermsCount - lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount  /* 1 of temrs is OUT*/]; // < input variable id, output lexical variable id, fuzzification value>
 
             FuzzificationValues(fuzzification_1_Values);
@@ -1064,10 +1088,6 @@ namespace WindowsFormsApplication1
 
         public void FuzzificationValues(Tuple<string, string, double>[] _tp)
         {
-            /*foreach (var item in inputVariables)
-            { 
-                foreach( var val in item )
-            }*/
             for (int i = 0; i < inputVariables.Length; i++ )
             {
                 for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
@@ -1104,15 +1124,20 @@ namespace WindowsFormsApplication1
                 agrValueKey = item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Key + "#" + item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value;
                 if (!aggregationValues.ContainsKey(agrValueKey))
                 {
-                    
-                    double val = AggregationValues(aggregation_function, values);
-                    aggregationValues.Add(agrValueKey, new Stack<double>());
-                    aggregationValues[agrValueKey].Push(val);
+                    if (values.Count > 0)
+                    {
+                        double val = AggregationValues(aggregation_function, values);
+                        aggregationValues.Add(agrValueKey, new Stack<double>());
+                        aggregationValues[agrValueKey].Push(val);
+                    }
                 }
                 else
                 {
-                    double val = AggregationValues(aggregation_function, values);
-                    aggregationValues[agrValueKey].Push(val);
+                    if (values.Count > 0)
+                    {
+                        double val = AggregationValues(aggregation_function, values);
+                        aggregationValues[agrValueKey].Push(val);
+                    }
                 }
                 values.Clear();
             }
@@ -1184,8 +1209,6 @@ namespace WindowsFormsApplication1
         {
             Stack< double > pointsToDraw = new Stack< double >();
 
-            int j = 0;
-
             foreach (var actVal in activisationValues)
             {
                 foreach (var val in actVal.Value)
@@ -1193,7 +1216,6 @@ namespace WindowsFormsApplication1
                     if( val != null )
                         pointsToDraw.Push(AccumulationValues(val));
                 }
-                j++;
             }
 
             ResultPanel.Visible = true;
@@ -1208,18 +1230,31 @@ namespace WindowsFormsApplication1
             ZedGraph.PointPairList list = new ZedGraph.PointPairList();
             ZedGraph.PointPairList list2 = new ZedGraph.PointPairList();
 
-            double result = CalculateResultValue();
-
-            list2.Add(result, 0);
-            list2.Add(result, 1);
-
             // Заполняем список точек
             double x = 0;
+            double sum1 = 0.0;
+            double sum2 = 0.0;
             foreach (var item in pointsToDraw)
             {
                 list.Add(x, item);
                 x += drawStep;
+                sum1 += x * item;
+                sum2 += item;
             }
+
+            double result = 0.0;
+            if (sum2 != 0.0)
+            {
+                result = sum1 / sum2;
+                ResultLabel.Text = result.ToString();
+            }
+            else 
+            {
+                ResultLabel.Text = "0";
+            }
+
+            list2.Add(result, 0);
+            list2.Add(result, 1);
 
             // Создадим кривую с названием "Sinc", 
             // которая будет рисоваться голубым цветом (Color.Blue),

@@ -40,7 +40,6 @@ C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplic
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.AddTermForm.resources
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.InputVariablesForm.resources
-C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.MembershipFunctionChoise.resources
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ProductionRulesInputForm.resources
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
@@ -75,3 +74,4 @@ C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplic
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\zh-tw\ZedGraph.resources.dll
 C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\nikolay.vrublevskiy\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.DrawAll.resources

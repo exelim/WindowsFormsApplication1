@@ -8,156 +8,218 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.Structures;
+using WindowsFormsApplication1.Classes.MembershipFunctions;
 
 namespace WindowsFormsApplication1
 {
     public partial class AddTermForm : Form
     {
 
-        static public ProductionRulesTerm[] _term;
-        int number;
+        int idx;
 
-        public AddTermForm( int _number )
+        public AddTermForm( int _idx )
         {
             InitializeComponent();
 
-            number = _number;
+            idx = _idx;
 
-            for (int i = 0; i < Form1.termsCount; i++)
-            {
-                // creating Label Terms count
-                Label Numberlabel = new Label();
-                Numberlabel.Name = "label_TermsCount_" + i;
-                Numberlabel.Text = "Term №" + (i + 1) + ":";
-                Numberlabel.Width = 60;
-                Numberlabel.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(Numberlabel);
+            MembershipCombobox.Items.Add("Gauss Function");
+            MembershipCombobox.Items.Add("Sigmoid Function");
+            MembershipCombobox.Items.Add("Singleton Function");
+            MembershipCombobox.Items.Add("Trapezoidal Function");
+            MembershipCombobox.Items.Add("Triangle Function");
+            MembershipCombobox.SelectedIndex = 0;
+            
+            // Since default function is Gauss
+            AInput.Text = Convert.ToDouble(((Form1._term[_idx].m_maxValue - Form1._term[_idx].m_minValue) + 1) / 6.0).ToString();
+            BInput.Text = Convert.ToDouble((Form1._term[_idx].m_maxValue + Form1._term[_idx].m_minValue) / 2.0).ToString();
 
-                // creating Label Term ID
-                Label IDlabel = new Label();
-                IDlabel.Name = "label_TermID_" + i;
-                IDlabel.Text = "Id:";
-                IDlabel.Width = 20;
-                IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(IDlabel);
-
-                //creating TextBox for Terms ID
-                TextBox IDtextBox = new TextBox();
-                IDtextBox.Name = "textbox_TermID_" + i;
-                IDtextBox.Width = 50;
-                IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                IDtextBox.Text = "tmid_" + i;  // DEBUG
-                this.Controls.Add(IDtextBox);
-
-                // creating Label Term name
-                Label Namelabel = new Label();
-                Namelabel.Name = "label_TermsName_" + i;
-                Namelabel.Text = "Terms name:";
-                Namelabel.Width = 70;
-                Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(Namelabel);
-
-                // creating TextBox for Term name
-                TextBox NametextBox = new TextBox();
-                NametextBox.Name = "textbox_TermName_" + i;
-                NametextBox.Width = 100;
-                NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                NametextBox.Text = "tmname_" + i;  // DEBUG
-                this.Controls.Add(NametextBox);
-
-                // creating Label Term min range
-                Label MinRangelabel = new Label();
-                MinRangelabel.Name = "label_TermMinrange_" + i;
-                MinRangelabel.Text = "Range from:";
-                MinRangelabel.Width = 65;
-                MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(MinRangelabel);
-
-                // creating UpDown Term min range
-                NumericUpDown MinRangeUpDown = new NumericUpDown();
-                MinRangeUpDown.Name = "upDown_TermMinrange_" + i;
-                MinRangeUpDown.Width = 36; 
-                MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(MinRangeUpDown);
-
-                // creating Label Term max range
-                Label MaxRangelabel = new Label();
-                MaxRangelabel.Name = "label_TermMaxrange_" + i;
-                MaxRangelabel.Text = "Range to:";
-                MaxRangelabel.Width = 60;
-                MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                this.Controls.Add(MaxRangelabel);
-
-                // creating UpDown Term max range
-                NumericUpDown MaxRangeUpDown = new NumericUpDown();
-                MaxRangeUpDown.Name = "upDown_TermMaxrange_" + i;
-                MaxRangeUpDown.Width = 36;
-                MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                MaxRangeUpDown.Value = 1 + 10 * i; // DEBUG
-                this.Controls.Add(MaxRangeUpDown);
-            }
-
-            // creating OK button
-            Button TermsOKButton = new Button();
-            TermsOKButton.Name = "TermOKButton";
-            TermsOKButton.Text = "Accept";
-            TermsOKButton.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + Form1.termsCount * 25 + 25);
-            this.Controls.Add(TermsOKButton);
-            TermsOKButton.Click += OKButton_Clicked;
-
-            // creating Cancel button
-            Button termsCancelButton = new Button();
-            termsCancelButton.Name = "TermCancelButton";
-            termsCancelButton.Text = "Cancel";
-            termsCancelButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + Form1.termsCount * 25 + 25);
-            this.Controls.Add(termsCancelButton);
-            termsCancelButton.Click += CancelButton_Clicked;
-
-        
         }
 
-        void OKButton_Clicked(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // OK Button
         {
-            _term = new ProductionRulesTerm[Form1.termsCount];
-            bool shouldClose = false;
-            for (int i = 0; i < Form1.termsCount; i++)
+            if (Form1._term[idx].m_membershipFinction == null)
             {
-                string ID = this.Controls["textbox_TermID_" + i].Text;
-                if (ID == "")
+                double min, max;
+                switch (MembershipCombobox.SelectedIndex)
                 {
-                    MessageBox.Show("Error! Term's №" + (i + 1) + " ID is empty!");
-                    shouldClose = false;
-                    break;
+                    case 0: // Gaus
+                        if (AInput.Text == "" || BInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            break;
+                        }
+                        Form1._term[idx].m_membershipFinction = new GaussFunction(Convert.ToDouble(AInput.Text), 0, Convert.ToDouble(BInput.Text), 0);
+                        break;
+                    case 1: // Sigmoid
+                        if (AInput.Text == "" || BInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            break;
+                        }
+                        Form1._term[idx].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(AInput.Text), 0, Convert.ToDouble(BInput.Text), 0);
+                        break;
+                    case 2: // Singleton
+                        if (AInput.Text == "")
+                        {
+                            MessageBox.Show("Error! Fields are empty.");
+                            break;
+                        }
+                        Form1._term[idx].m_membershipFinction = new SingletonFunction(Convert.ToDouble(AInput.Text), 0, 0, 0);
+                        break;
+                    case 3: // Tpapezoidal
+                        min = Form1._term[idx].m_minValue;
+                        max = Form1._term[idx].m_maxValue;
+                        Form1._term[idx].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
+                        break;
+                    case 4: // Triangle  
+                        min = Form1._term[idx].m_minValue;
+                        max = Form1._term[idx].m_maxValue;
+                        Form1._term[idx].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
+                        break;
                 }
-
-                string termName = this.Controls["textbox_TermName_" + i].Text;
-                if (termName == "")
-                {
-                    MessageBox.Show("Error! Term's №" + (i + 1) + " name is empty!");
-                    shouldClose = false;
-                    break;
-                }
-
-                int termMinRange = Convert.ToInt32( this.Controls["upDown_TermMinrange_" + i].Text );
-                int termMaxRange = Convert.ToInt32(this.Controls["upDown_TermMaxrange_" + i].Text);
-                if (termMinRange >= termMaxRange)
-                {
-                    MessageBox.Show("Error! Term's №" + (i + 1) + " minimum ragne is equal or greater than maximum range!");
-                    shouldClose = false;
-                    break;
-                }
-
-                shouldClose = true;
-                _term[i] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
-                //Form1._terms[number,i] = _term[i];
             }
-            if( shouldClose )
-                Close();
+            Form1._terms.ElementAt(Form1.number).Push(Form1._term[idx]);
+            this.Close();
         }
 
-        void CancelButton_Clicked(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Draw Button
         {
-            Close();
+            double min, max;
+            switch (MembershipCombobox.SelectedIndex)
+            {
+                case 0: // Gaus
+                    if (AInput.Text == "" || BInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    Form1._term[idx].m_membershipFinction = new GaussFunction(Convert.ToDouble(AInput.Text), 0, Convert.ToDouble(BInput.Text), 0);
+                    break;
+                case 1: // Sigmoid
+                    if (AInput.Text == "" || BInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    Form1._term[idx].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(AInput.Text), 0, Convert.ToDouble(BInput.Text), 0);
+                    break;
+                case 2: // Singleton
+                    if (AInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    Form1._term[idx].m_membershipFinction = new SingletonFunction(Convert.ToDouble(AInput.Text), 0, 0, 0);
+                    break;
+                case 3: // Tpapezoidal
+                    if (AInput.Text == "" || BInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    min = Form1._term[idx].m_minValue;
+                    max = Form1._term[idx].m_maxValue;
+                    Form1._term[idx].m_membershipFinction = new TrapezoidalFunction(min, Convert.ToDouble(AInput.Text), Convert.ToDouble(BInput.Text), max);
+                    break;
+                case 4: // Triangle
+                    if (AInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    min = Form1._term[idx].m_minValue;
+                    max = Form1._term[idx].m_maxValue;
+                    Form1._term[idx].m_membershipFinction = new TriangleFunction(min, Convert.ToDouble(AInput.Text), max, 0);
+                    break;
+            }
+
+            // Получим панель для рисования
+            ZedGraph.GraphPane pane = MembershipFunctionGraph.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+
+            ZedGraph.PointPairList list = new ZedGraph.PointPairList();
+
+            double xmin = Form1._term[idx].m_minValue;
+            double xmax = Form1._term[idx].m_maxValue;
+
+            // Заполняем список точек
+            for (double x = xmin; x <= xmax; x += 0.01)
+            {
+                // добавим в список точку
+                list.Add(x, Form1._term[idx].CalculateValue(x));
+            }
+
+            // Создадим кривую с названием "Sinc", 
+            // которая будет рисоваться голубым цветом (Color.Blue),
+            // Опорные точки выделяться не будут (SymbolType.None)
+            ZedGraph.LineItem myCurve;
+
+            myCurve = pane.AddCurve(Form1._term[idx].m_name, list, Color.Red, ZedGraph.SymbolType.None);
+            myCurve.MakeUnique();
+
+            // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
+            // В противном случае на рисунке будет показана только часть графика, 
+            // которая умещается в интервалы по осям, установленные по умолчанию
+            MembershipFunctionGraph.AxisChange();
+
+            // Обновляем график
+            MembershipFunctionGraph.Invalidate();
+        }
+
+        private void MembershipCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            double min, max;
+            switch (MembershipCombobox.SelectedIndex)
+            {
+                case 0: // Gaus
+                    ALabel.Text = "g :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = true;
+                    BInput.Visible = true;
+                    AInput.Text = Convert.ToDouble(((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) + 1) / 6.0).ToString();
+                    BInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
+                    break;
+                case 1: // Sigmoid
+                    ALabel.Text = "a :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = true;
+                    BInput.Visible = true;
+                    break;
+                case 2: // Singleton
+                    ALabel.Text = "a :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = false;
+                    BInput.Visible = false;
+                    break;
+                case 3: // Tpapezoidal
+                    ALabel.Text = "b :";
+                    BLabel.Text = "c :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = true;
+                    BInput.Visible = true;
+                    min = Form1._term[idx].m_minValue;
+                    max = Form1._term[idx].m_maxValue;
+                    AInput.Text = Convert.ToDouble( min + ( max + min ) / 4 ).ToString();
+                    BInput.Text = Convert.ToDouble( max - ( max + min ) / 4 ).ToString();
+                    break;
+                case 4: // Triangle  
+                    ALabel.Text = "b :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = false;
+                    BInput.Visible = false;
+                    AInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) / 2.0).ToString();
+                    break;
+            }
         }
     }
 }
