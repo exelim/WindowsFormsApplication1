@@ -34,6 +34,9 @@ namespace WindowsFormsApplication1
             AInput.Text = Convert.ToDouble(((Form1._term[_idx].m_maxValue - Form1._term[_idx].m_minValue) + 1) / 6.0).ToString();
             BInput.Text = Convert.ToDouble((Form1._term[_idx].m_maxValue + Form1._term[_idx].m_minValue) / 2.0).ToString();
 
+            Form1._term[idx].m_membershipFinction = new GaussFunction(Convert.ToDouble(AInput.Text), 0, Convert.ToDouble(BInput.Text), 0);
+            DrawFunction();
+
         }
 
         private void button1_Click(object sender, EventArgs e) // OK Button
@@ -118,6 +121,11 @@ namespace WindowsFormsApplication1
                         MessageBox.Show("Error! Fields are empty.");
                         break;
                     }
+                    else if (Form1._term[idx].m_minValue >= Convert.ToDouble(AInput.Text) || Convert.ToDouble(AInput.Text) >= Convert.ToDouble(BInput.Text) || Convert.ToDouble(BInput.Text) >= Form1._term[idx].m_maxValue)
+                    {
+                        MessageBox.Show("Error! Wrong parameters. Correct are: a < b < c < d.");
+                        break;
+                    }
                     min = Form1._term[idx].m_minValue;
                     max = Form1._term[idx].m_maxValue;
                     Form1._term[idx].m_membershipFinction = new TrapezoidalFunction(min, Convert.ToDouble(AInput.Text), Convert.ToDouble(BInput.Text), max);
@@ -128,12 +136,22 @@ namespace WindowsFormsApplication1
                         MessageBox.Show("Error! Fields are empty.");
                         break;
                     }
+                    else if (Form1._term[idx].m_minValue >= Convert.ToDouble(AInput.Text) || Convert.ToDouble(AInput.Text) >= Form1._term[idx].m_maxValue)
+                    {
+                        MessageBox.Show("Error! Wrong parameters. Correct are: a < b < c.");
+                        break;
+                    }
                     min = Form1._term[idx].m_minValue;
                     max = Form1._term[idx].m_maxValue;
                     Form1._term[idx].m_membershipFinction = new TriangleFunction(min, Convert.ToDouble(AInput.Text), max, 0);
                     break;
             }
 
+            DrawFunction();
+        }
+
+        void DrawFunction()
+        {
             // Получим панель для рисования
             ZedGraph.GraphPane pane = MembershipFunctionGraph.GraphPane;
 

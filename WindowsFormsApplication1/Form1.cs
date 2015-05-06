@@ -297,8 +297,8 @@ namespace WindowsFormsApplication1
 
         void NextButton_Clicked(object sender, EventArgs e)
         {
-            
 
+            fullTermsCount = 0;
             int outVariablesCount = 0;
 
             for (int i = 0; i < lexicalVariablesCount; i++)
@@ -595,7 +595,7 @@ namespace WindowsFormsApplication1
             Button DrawAllButton = new Button();
             DrawAllButton.Name = "DrawAllButton";
             DrawAllButton.Text = "Draw all!";
-            DrawAllButton.Location = new Point(termsCancelButton.Location.X + 200, TermCountLabel.Location.Y + termsCount * 25 + 25);
+            DrawAllButton.Location = new Point(TermCountLabel.Location.X + 200, TermCountLabel.Location.Y + termsCount * 25 + 25);
             AddTermsPanel.Controls.Add(DrawAllButton);
             DrawAllButton.Click += DrawAll_Clicked;
 
