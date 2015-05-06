@@ -1237,9 +1237,10 @@ namespace WindowsFormsApplication1
             foreach (var item in pointsToDraw)
             {
                 list.Add(x, item);
-                x += drawStep;
                 sum1 += x * item;
                 sum2 += item;
+
+                x += drawStep;
             }
 
             double result = 0.0;
