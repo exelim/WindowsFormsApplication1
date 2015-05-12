@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
             MembershipCombobox.SelectedIndex = 0;
             
             // Since default function is Gauss
-            AInput.Text = Convert.ToDouble(((Form1._term[_idx].m_maxValue - Form1._term[_idx].m_minValue) + 1) / 6.0).ToString();
+            AInput.Text = Convert.ToDouble(((Form1._term[_idx].m_maxValue - Form1._term[_idx].m_minValue) + 1) / 4.0).ToString();
             BInput.Text = Convert.ToDouble((Form1._term[_idx].m_maxValue + Form1._term[_idx].m_minValue) / 2.0).ToString();
 
             Form1._term[idx].m_membershipFinction = new GaussFunction(Convert.ToDouble(AInput.Text), 0, Convert.ToDouble(BInput.Text), 0);
@@ -200,7 +200,7 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
-                    AInput.Text = Convert.ToDouble(((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) + 1) / 6.0).ToString();
+                    AInput.Text = Convert.ToDouble(((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) + 1) / 4.0).ToString();
                     BInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
                     break;
                 case 1: // Sigmoid

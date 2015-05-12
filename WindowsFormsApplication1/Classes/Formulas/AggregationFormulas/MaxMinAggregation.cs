@@ -10,10 +10,10 @@ namespace WindowsFormsApplication1.Classes.Formulas.AggregationFormulas
     {
         RelationType m_type;
 
-        public override double CalculateAggregation(Stack<double> st)
+        public override double CalculateAggregation(Stack<double> st, RelationType _type)
         {
             double returnValue = 0.0;
-            switch (m_type)
+            switch (_type)
             { 
                 case RelationType.OR:
                     returnValue = st.Max();

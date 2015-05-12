@@ -1092,7 +1092,7 @@ namespace WindowsFormsApplication1
             {
                 for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
                 {
-                    _tp[(i * lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).m_ID, 
+                    _tp[(i * lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id,lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_ID, //lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).m_ID, 
                         lexicalVariables.ElementAt(i).m_terms.ElementAt(j).CalculateValue(inputVariables.ElementAt(i)));
                 }
             }
@@ -1107,15 +1107,16 @@ namespace WindowsFormsApplication1
             Stack<double> values = new Stack<double>();
 
             int i = 0;
-
+            RelationType type;
             foreach (var item in prodcutionsRules)
             {
                 String agrValueKey;
+                type = item.m_type;
                 foreach (var pair in item.m_variables)
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item1.Equals(pair.Key) && item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value.Equals( fuz.Item2 ) /*&& fuz.Item3 > 0.0*/)
+                        if (fuz.Item1.Equals(pair.Key)  && fuz.Item2.Equals( pair.Value) /*item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value.Equals( fuz.Item2 ) /*&& fuz.Item3 > 0.0*/)
                         {
                             values.Push(fuz.Item3);
                         }
@@ -1126,7 +1127,7 @@ namespace WindowsFormsApplication1
                 {
                     if (values.Count > 0)
                     {
-                        double val = AggregationValues(aggregation_function, values);
+                        double val = AggregationValues(aggregation_function, values, type);
                         aggregationValues.Add(agrValueKey, new Stack<double>());
                         aggregationValues[agrValueKey].Push(val);
                     }
@@ -1135,7 +1136,7 @@ namespace WindowsFormsApplication1
                 {
                     if (values.Count > 0)
                     {
-                        double val = AggregationValues(aggregation_function, values);
+                        double val = AggregationValues(aggregation_function, values, type);
                         aggregationValues[agrValueKey].Push(val);
                     }
                 }
@@ -1315,9 +1316,9 @@ namespace WindowsFormsApplication1
             return sum1 / sum2;
         }
 
-        public double AggregationValues(AggregationFormulaBase _af, Stack<double> _st)
+        public double AggregationValues(AggregationFormulaBase _af, Stack<double> _st, RelationType _type)
         {
-            return _af.CalculateAggregation(_st);
+            return _af.CalculateAggregation(_st, _type);
         }
 
         public double ActivisationValues(ActivisationFormulaBase _af, double _c, double _val1)

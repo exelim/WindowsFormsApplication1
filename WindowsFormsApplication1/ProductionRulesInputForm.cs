@@ -159,7 +159,7 @@ namespace WindowsFormsApplication1
 
         public double AggregationValues(AggregationFormulaBase _af, Stack<double> _st)
         {
-            return _af.CalculateAggregation(_st);
+            return 1;// return _af.CalculateAggregation(_st);
         }
 
         public double ActivisationValues(ActivisationFormulaBase _af, double _c, double _val1)
