@@ -1210,12 +1210,15 @@ namespace WindowsFormsApplication1
         {
             Stack< double > pointsToDraw = new Stack< double >();
 
+            Queue<double> points = new Queue<double>();
+
             foreach (var actVal in activisationValues)
             {
                 foreach (var val in actVal.Value)
                 {
-                    if( val != null )
-                        pointsToDraw.Push(AccumulationValues(val));
+                    if (val != null)
+                        // pointsToDraw.Push(AccumulationValues(val));
+                        points.Enqueue(AccumulationValues(val));
                 }
             }
 
@@ -1235,7 +1238,8 @@ namespace WindowsFormsApplication1
             double x = 0;
             double sum1 = 0.0;
             double sum2 = 0.0;
-            foreach (var item in pointsToDraw)
+            pointsToDraw.Reverse();
+            foreach (var item in points)
             {
                 list.Add(x, item);
                 sum1 += x * item;

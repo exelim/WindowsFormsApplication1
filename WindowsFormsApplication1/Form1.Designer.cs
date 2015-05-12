@@ -233,7 +233,7 @@
             this.prodRulesTB.Name = "prodRulesTB";
             this.prodRulesTB.Size = new System.Drawing.Size(492, 195);
             this.prodRulesTB.TabIndex = 4;
-            this.prodRulesTB.Text = "if s is p OR f is b then t is c\nif s is g then t is a\nif s is e OR f is g then t " +
+            this.prodRulesTB.Text = "if s is p OR f is b then t is c\nif s is g OR f is b then t is a\nif s is e OR f is g then t " +
     "is g";
             // 
             // InputVariables

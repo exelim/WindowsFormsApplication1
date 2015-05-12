@@ -41,8 +41,8 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e) // OK Button
         {
-            if (Form1._term[idx].m_membershipFinction == null)
-            {
+            //if (Form1._term[idx].m_membershipFinction == null)
+            //{
                 double min, max;
                 switch (MembershipCombobox.SelectedIndex)
                 {
@@ -80,7 +80,7 @@ namespace WindowsFormsApplication1
                         max = Form1._term[idx].m_maxValue;
                         Form1._term[idx].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
                         break;
-                }
+               // }
             }
             Form1._terms.ElementAt(Form1.number).Push(Form1._term[idx]);
             this.Close();
