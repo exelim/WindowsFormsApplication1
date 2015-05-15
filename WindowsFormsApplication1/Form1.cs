@@ -46,6 +46,10 @@ namespace WindowsFormsApplication1
         bool choseFunctionFormInitialized = false;
         int lastLExicalVariableTermsCount = 0;
 
+        public static int currentLVMinValue;
+        public static int currentLVMaxValue;
+        public static string currentLVName;
+
         public static ProductionRule[] prodcutionsRules;
         public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < input variable id, output lexical variable id, fuzzification value>
         public static Dictionary<String, Stack<double>> aggregationValues;
@@ -288,7 +292,15 @@ namespace WindowsFormsApplication1
             {
                 //addTermsForm = new AddTermForm(Convert.ToInt32(button.Name.Substring(button.Name.Length - 1, 1)));
                 //addTermsForm.ShowDialog();
+
                 number = Convert.ToInt32(button.Name.Substring(button.Name.Length - 1, 1));
+                currentLVName = (this.Controls.Find("textbox_LVName_" + number, false).FirstOrDefault() as TextBox).Text;//
+
+                NumericUpDown cntrl = this.Controls.Find("upDown_LVMinrange_" + number, false).FirstOrDefault() as NumericUpDown;
+                currentLVMinValue = Convert.ToInt32( cntrl.Value );
+                cntrl = this.Controls.Find("upDown_LVMaxrange_" + number, false).FirstOrDefault() as NumericUpDown;
+                currentLVMaxValue = Convert.ToInt32( cntrl.Value );
+                
                 AddTermsPanel.Visible = true;
                 ChooseFunctionsPanel.Visible = false;
                 FillAddTermsForm();
@@ -660,34 +672,6 @@ namespace WindowsFormsApplication1
                     shouldClose = false;
                     break;
                 }
-                /*string ID = AddTermsPanel.Controls["textbox_TermID_" + i].Text;
-                if (ID == "")
-                {
-                    MessageBox.Show("Error! Term's №" + (i + 1) + " ID is empty!");
-                    shouldClose = false;
-                    break;
-                }
-
-                string termName = AddTermsPanel.Controls["textbox_TermName_" + i].Text;
-                if (termName == "")
-                {
-                    MessageBox.Show("Error! Term's №" + (i + 1) + " name is empty!");
-                    shouldClose = false;
-                    break;
-                }
-
-                int termMinRange = Convert.ToInt32(AddTermsPanel.Controls["upDown_TermMinrange_" + i].Text);
-                int termMaxRange = Convert.ToInt32(AddTermsPanel.Controls["upDown_TermMaxrange_" + i].Text);
-                if (termMinRange >= termMaxRange)
-                {
-                    MessageBox.Show("Error! Term's №" + (i + 1) + " minimum ragne is equal or greater than maximum range!");
-                    shouldClose = false;
-                    break;
-                }
-
-                shouldClose = true;
-                _term[i] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
-                _terms.ElementAt(number).Push( _term[i] );*/
             }
             if (shouldClose)
             {
@@ -735,74 +719,6 @@ namespace WindowsFormsApplication1
 
         private void ChooseFunctionsNextButton_Click(object sender, EventArgs e)
         {
-            /*switch (MembershipComboBox.SelectedIndex)
-            {
-                case 0: // Gaus
-                    if (ALabelInput.Text == "" || BLabelInput.Text == "")
-                    {
-                        MessageBox.Show("Error! Fields are empty.");
-                        return;
-                    }
-                    for (int i = 0; i < lexicalVariables.Length; i++)
-                    {
-                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
-                        {
-                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new GaussFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
-                        }
-                    }
-                    break;
-                case 1: // sigmoid
-                    if (ALabelInput.Text == "" || BLabelInput.Text == "")
-                    {
-                        MessageBox.Show("Error! Fields are empty.");
-                        return;
-                    }
-                    for (int i = 0; i < lexicalVariables.Length; i++)
-                    {
-                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
-                        {
-                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
-                        }
-                    }
-                    break;
-                case 2: // Singleton
-                    if (ALabelInput.Text == "" || BLabelInput.Text == "")
-                    {
-                        MessageBox.Show("Error! Fields are empty.");
-                        return;
-                    }
-                    for (int i = 0; i < lexicalVariables.Length; i++)
-                    {
-                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
-                        {
-                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SingletonFunction(Convert.ToDouble(ALabelInput.Text), 0, 0, 0);
-                        }
-                    }
-                    break;
-                case 3: // Tpapezoidal
-                    for (int i = 0; i < lexicalVariables.Length; i++)
-                    {
-                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
-                        {
-                            double min = lexicalVariables.ElementAt(i).m_terms[j].m_minValue;
-                            double max = lexicalVariables.ElementAt(i).m_terms[j].m_maxValue;
-                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new TrapezoidalFunction(min, min + (min + max) / 4, max - (min + max) / 4, max);
-                        }
-                    }
-                    break;
-                case 4: // Triangle
-                    for (int i = 0; i < lexicalVariables.Length; i++)
-                    {
-                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
-                        {
-                            double min = lexicalVariables.ElementAt(i).m_terms[j].m_minValue;
-                            double max = lexicalVariables.ElementAt(i).m_terms[j].m_maxValue;
-                            lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
-                        }
-                    }
-                    break;
-            }
-            */
             switch (AggregationComboBox.SelectedIndex)
             {
                 case 0:
@@ -858,9 +774,11 @@ namespace WindowsFormsApplication1
                     break;
             }
 
-           
             InputVariablesPanel.Visible = true;
-            FillInputVariablesForm();
+            ProductionRulesInputPanel.Visible = true;
+            ShowHelpMessage();
+            //InputVariablesPanel.Visible = true;
+            //FillInputVariablesForm();
         }
 
         private void ChooseFunctionsBackButton_Click(object sender, EventArgs e)
@@ -869,103 +787,6 @@ namespace WindowsFormsApplication1
             ChooseFunctionsPanel.Visible = false;
         }
 
-        private void DrawGraph_Click(object sender, EventArgs e)
-        {
-            /*switch (MembershipComboBox.SelectedIndex)
-            {
-                case 0: // Gaus
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
-                    {
-                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
-                        {
-                            MessageBox.Show("Error! Fields are empty.");
-                            return;
-                        }
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new GaussFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
-                    }
-                    break;
-                case 1: // sigmoid
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
-                    {
-                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
-                        {
-                            MessageBox.Show("Error! Fields are empty.");
-                            return;
-                        }
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SigmoidFunction(Convert.ToDouble(ALabelInput.Text), 0, Convert.ToDouble(BLabelInput.Text), 0);
-                    }
-                    break;
-                case 2: // Singleton 
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
-                    {
-                        if (ALabelInput.Text == "" || BLabelInput.Text == "")
-                        {
-                            MessageBox.Show("Error! Fields are empty.");
-                            return;
-                        }
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new SingletonFunction(Convert.ToDouble(ALabelInput.Text), 0, 0, 0);
-                    }
-                    break;
-                case 3: // Tpapezoidal
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
-                    {
-                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
-                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TrapezoidalFunction(min, min + (max - min) / 4, max - (max - min ) / 4, max);
-                    }
-                    break;
-                case 4: // Triangle
-                    for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_termsCount; i++)
-                    {
-                        double min = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_minValue;
-                        double max = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_maxValue;
-                        lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms[i].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
-                    }
-                    break;
-            }*/
-
-           /* // Получим панель для рисования
-            ZedGraph.GraphPane pane = zedGraph.GraphPane;
-
-            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
-            pane.CurveList.Clear();
-
-            // Создадим список точек
-            
-
-            for (int i = 0; i < lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.Length; i++)
-            {
-                ZedGraph.PointPairList list = new ZedGraph.PointPairList();
-
-                double xmin = lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.ElementAt(i).m_minValue;
-                double xmax = lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.ElementAt(i).m_maxValue;
-
-                // Заполняем список точек
-                for (double x = xmin; x <= xmax; x += 0.01)
-                {
-                    // добавим в список точку
-                    list.Add(x, lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_terms.ElementAt(i).CalculateValue(x));
-                }
-
-                // Создадим кривую с названием "Sinc", 
-                // которая будет рисоваться голубым цветом (Color.Blue),
-                // Опорные точки выделяться не будут (SymbolType.None)
-                ZedGraph.LineItem myCurve;
-
-                myCurve = pane.AddCurve(lexicalVariables.ElementAt(lexicalVariablesCount - 1).m_name, list, Color.Red, ZedGraph.SymbolType.None);
-                myCurve.MakeUnique();
-
-                // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
-                // В противном случае на рисунке будет показана только часть графика, 
-                // которая умещается в интервалы по осям, установленные по умолчанию
-                zedGraph.AxisChange();
-
-                // Обновляем график
-                zedGraph.Invalidate();
-            }*/
-
-            
-        }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////   INPUT VARTIABLE FORM     /////////////////////////////////////////////
@@ -1021,8 +842,8 @@ namespace WindowsFormsApplication1
 
         void BackButton_Clicked(object sender, EventArgs e)
         {
-            ChooseFunctionsPanel.Visible = true;
-            InputVariablesPanel.Visible = false;
+            InputVariablesPanel.Visible = true;
+            ProductionRulesInputPanel.Visible = true;
         }
 
         void OkButton_Clicked(object sender, EventArgs e)
@@ -1032,8 +853,11 @@ namespace WindowsFormsApplication1
                 inputVariables[i] = Convert.ToDouble(InputVariablesPanel.Controls["upDown_InputVariableValue_" + i].Text);
             }
 
-            ProductionRulesInputPanel.Visible = true;
-            ShowHelpMessage();
+            Fuzzification_1();
+
+            //ProductionRulesInputPanel.Visible = true;
+            //ShowHelpMessage();
+            
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1061,6 +885,8 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e) // Back BUtton
         {
             ProductionRulesInputPanel.Visible = false;
+            InputVariablesPanel.Visible = false;
+            ChooseFunctionsPanel.Visible = true;
         }
 
         private void button1_Click_1(object sender, EventArgs e) // Calculate button
@@ -1073,7 +899,20 @@ namespace WindowsFormsApplication1
                 if (lines[i] != "")
                     prodcutionsRules[i] = rp.ParseRuleString(lines[i]);
             }
-            Fuzzification_1();
+
+            ProductionRulesInputPanel.Visible = false;
+            InputVariablesPanel.Visible = true;
+            FillInputVariablesForm();
+
+            /*var lines = prodRulesTB.Text.Split('\n');
+            prodcutionsRules = new ProductionRule[lines.Length];
+            RuleParser rp = new RuleParser();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] != "")
+                    prodcutionsRules[i] = rp.ParseRuleString(lines[i]);
+            }
+            Fuzzification_1();*/
         }
 
         public void Fuzzification_1()
@@ -1222,10 +1061,16 @@ namespace WindowsFormsApplication1
                 }
             }
 
+            ProductionRulesInputPanel.Visible = true;
             ResultPanel.Visible = true;
 
             // Получим панель для рисования
             ZedGraph.GraphPane pane = FinalGraph.GraphPane;
+            pane.Title.Text = "Result value of " + lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_name;
+            pane.XAxis.Title.Text = lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_name;
+            pane.YAxis.Title.Text = "Membership Grade";
+
+            pane.Legend.IsVisible = false;
 
             // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
             pane.CurveList.Clear();
@@ -1248,19 +1093,23 @@ namespace WindowsFormsApplication1
                 x += drawStep;
             }
 
-            double result = 0.0;
-            if (sum2 != 0.0)
+            ResultDescriptionLabel.Text = "For input variables :\n\n";
+
+            for (int i = 0; i < lexicalVariables.Length; i++)
             {
-                result = sum1 / sum2;
-                ResultLabel.Text = result.ToString();
-            }
-            else 
-            {
-                ResultLabel.Text = "0";
+                LexicalVariable tmp = lexicalVariables.ElementAt(i);
+                if (tmp.m_type == VariableType.IN)
+                {
+                    ResultDescriptionLabel.Text += ( i + 1 ).ToString() + ". " + tmp.m_name + " - " + inputVariables.ElementAt(i) + "\n";
+                }
+                else
+                {
+                    ResultDescriptionLabel.Text += "\nOutput value is :\n\n";
+                    ResultDescriptionLabel.Text += tmp.m_name + " - " + (sum1 / sum2).ToString() + "\n";
+                }
             }
 
-            list2.Add(result, 0);
-            list2.Add(result, 1);
+            list2.Add((sum1 / sum2), 0);
 
             // Создадим кривую с названием "Sinc", 
             // которая будет рисоваться голубым цветом (Color.Blue),
@@ -1273,7 +1122,6 @@ namespace WindowsFormsApplication1
 
 
             myCurve2 = pane.AddCurve("Result", list2, Color.Red, ZedGraph.SymbolType.None);
-            myCurve2.MakeUnique();
 
             // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
             // В противном случае на рисунке будет показана только часть графика, 
@@ -1285,39 +1133,6 @@ namespace WindowsFormsApplication1
 
             
 
-        }
-
-        double CalculateResultValue()
-        {
-            double sum1 = 0.0;
-            double sum2 = 0.0;
-            foreach (var lv in Form1.lexicalVariables)
-            {
-                for (int i = 0; i < lv.m_termsCount; i++)
-                {
-                    if (lv.m_type == VariableType.OUT)
-                    {
-                        for (double j = lv.m_terms.ElementAt(i).m_minValue; j <= lv.m_terms.ElementAt(i).m_maxValue; j += drawStep)
-                        {
-                            double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
-
-                            sum1 += j * _funcVal;
-                            sum2 += _funcVal;
-                        }
-                    }
-                }
-            }
-
-           /* foreach (var item in activisationValues)
-            { 
-                            double _funcVal = lv.m_terms.ElementAt(i).CalculateValue(j);
-
-                            sum1 += j * _funcVal;
-                            sum2 += _funcVal;
-            }*/
-            ResultLabel.Text = (sum1 / sum2 ).ToString();
-
-            return sum1 / sum2;
         }
 
         public double AggregationValues(AggregationFormulaBase _af, Stack<double> _st, RelationType _type)
@@ -1340,8 +1155,5 @@ namespace WindowsFormsApplication1
             ResultPanel.Visible = false;
             ProductionRulesInputPanel.Visible = true;
         }
-
-        
-
     }
 }

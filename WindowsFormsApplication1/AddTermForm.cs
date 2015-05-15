@@ -154,22 +154,27 @@ namespace WindowsFormsApplication1
         {
             // Получим панель для рисования
             ZedGraph.GraphPane pane = MembershipFunctionGraph.GraphPane;
+            pane.Title.Text = "Membersip function for " + Form1._term[idx].m_name;
+            pane.XAxis.Title.Text = Form1._term[idx].m_name;
+            pane.YAxis.Title.Text = "Membership Grade";
 
             // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
             pane.CurveList.Clear();
 
-            // Создадим список точек
+            pane.Legend.IsVisible = false;
 
+            // Создадим список точек
             ZedGraph.PointPairList list = new ZedGraph.PointPairList();
 
-            double xmin = Form1._term[idx].m_minValue;
-            double xmax = Form1._term[idx].m_maxValue;
+            double xmin = Form1.currentLVMinValue;
+            double xmax = Form1.currentLVMaxValue;
 
             // Заполняем список точек
             for (double x = xmin; x <= xmax; x += 0.01)
             {
                 // добавим в список точку
-                list.Add(x, Form1._term[idx].CalculateValue(x));
+                double val = Form1._term[idx].CalculateValue(x);
+                list.Add(x, val);
             }
 
             // Создадим кривую с названием "Sinc", 
@@ -177,8 +182,7 @@ namespace WindowsFormsApplication1
             // Опорные точки выделяться не будут (SymbolType.None)
             ZedGraph.LineItem myCurve;
 
-            myCurve = pane.AddCurve(Form1._term[idx].m_name, list, Color.Red, ZedGraph.SymbolType.None);
-            myCurve.MakeUnique();
+            myCurve = pane.AddCurve(Form1._term[idx].m_name, list, Color.Black, ZedGraph.SymbolType.None);
 
             // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
             // В противном случае на рисунке будет показана только часть графика, 

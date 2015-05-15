@@ -37,6 +37,7 @@
             this.InputVariablesPanel = new System.Windows.Forms.Panel();
             this.ProductionRulesInputPanel = new System.Windows.Forms.Panel();
             this.ResultPanel = new System.Windows.Forms.Panel();
+            this.ResultDescriptionLabel = new System.Windows.Forms.Label();
             this.ResultLabel = new System.Windows.Forms.Label();
             this.ResultBackButton = new System.Windows.Forms.Button();
             this.FinalGraph = new ZedGraph.ZedGraphControl();
@@ -44,6 +45,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.prodRulesTB = new System.Windows.Forms.RichTextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.InputVariables = new System.Windows.Forms.Label();
             this.ChooseFunctionsBackButton = new System.Windows.Forms.Button();
             this.FuzzificationComboBox = new System.Windows.Forms.ComboBox();
@@ -145,6 +153,13 @@
             this.ProductionRulesInputPanel.Controls.Add(this.button1);
             this.ProductionRulesInputPanel.Controls.Add(this.label7);
             this.ProductionRulesInputPanel.Controls.Add(this.prodRulesTB);
+            this.ProductionRulesInputPanel.Controls.Add(this.label13);
+            this.ProductionRulesInputPanel.Controls.Add(this.label12);
+            this.ProductionRulesInputPanel.Controls.Add(this.label11);
+            this.ProductionRulesInputPanel.Controls.Add(this.label10);
+            this.ProductionRulesInputPanel.Controls.Add(this.label9);
+            this.ProductionRulesInputPanel.Controls.Add(this.label8);
+            this.ProductionRulesInputPanel.Controls.Add(this.label6);
             this.ProductionRulesInputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProductionRulesInputPanel.Location = new System.Drawing.Point(0, 0);
             this.ProductionRulesInputPanel.Name = "ProductionRulesInputPanel";
@@ -154,6 +169,7 @@
             // 
             // ResultPanel
             // 
+            this.ResultPanel.Controls.Add(this.ResultDescriptionLabel);
             this.ResultPanel.Controls.Add(this.ResultLabel);
             this.ResultPanel.Controls.Add(this.ResultBackButton);
             this.ResultPanel.Controls.Add(this.FinalGraph);
@@ -164,15 +180,25 @@
             this.ResultPanel.TabIndex = 8;
             this.ResultPanel.Visible = false;
             // 
+            // ResultDescriptionLabel
+            // 
+            this.ResultDescriptionLabel.AutoSize = true;
+            this.ResultDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ResultDescriptionLabel.Location = new System.Drawing.Point(657, 99);
+            this.ResultDescriptionLabel.Name = "ResultDescriptionLabel";
+            this.ResultDescriptionLabel.Size = new System.Drawing.Size(75, 25);
+            this.ResultDescriptionLabel.TabIndex = 45;
+            this.ResultDescriptionLabel.Text = "label14";
+            // 
             // ResultLabel
             // 
             this.ResultLabel.AutoSize = true;
             this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ResultLabel.Location = new System.Drawing.Point(738, 100);
+            this.ResultLabel.Location = new System.Drawing.Point(685, 41);
             this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(70, 25);
+            this.ResultLabel.Size = new System.Drawing.Size(204, 25);
             this.ResultLabel.TabIndex = 43;
-            this.ResultLabel.Text = "label8";
+            this.ResultLabel.Text = "Computation result :";
             // 
             // ResultBackButton
             // 
@@ -200,7 +226,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(187, 325);
+            this.button2.Location = new System.Drawing.Point(118, 339);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
@@ -210,31 +236,103 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(604, 325);
+            this.button1.Location = new System.Drawing.Point(342, 339);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
-            this.button1.Text = "Calculate";
+            this.button1.Text = "Next >";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(188, 66);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(14, 15);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(175, 13);
+            this.label7.Size = new System.Drawing.Size(274, 20);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Enter productions rules in for below:";
+            this.label7.Text = "Enter productions rules in form below:";
             // 
             // prodRulesTB
             // 
-            this.prodRulesTB.Location = new System.Drawing.Point(187, 89);
+            this.prodRulesTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.prodRulesTB.Location = new System.Drawing.Point(18, 57);
             this.prodRulesTB.Name = "prodRulesTB";
-            this.prodRulesTB.Size = new System.Drawing.Size(492, 195);
+            this.prodRulesTB.Size = new System.Drawing.Size(543, 259);
             this.prodRulesTB.TabIndex = 4;
-            this.prodRulesTB.Text = "if s is p OR f is b then t is c\nif s is g OR f is b then t is a\nif s is e OR f is g then t " +
-    "is g";
+            this.prodRulesTB.Text = "if s is p OR f is b then t is c\nif s is g OR f is b then t is a\nif s is e OR f is" +
+    " g then t is g";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(625, 275);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(250, 25);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "- OV - output variable value";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Location = new System.Drawing.Point(625, 245);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(205, 25);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "- Y - output variable ID";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(625, 216);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(298, 25);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "- IV1, IV2 - input variables values";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(625, 191);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(264, 25);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "- X1, X2 - input variables ID\'s";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(603, 155);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 25);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Where :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Location = new System.Drawing.Point(603, 107);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(397, 25);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "if X1 is IV1 [ANR/OR X2 is IV2] then Y is OV";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(745, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(99, 25);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Example :";
             // 
             // InputVariables
             // 
@@ -408,6 +506,14 @@
         private ZedGraph.ZedGraphControl FinalGraph;
         private System.Windows.Forms.Button ResultBackButton;
         private System.Windows.Forms.Label ResultLabel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label ResultDescriptionLabel;
     }
 }
 
