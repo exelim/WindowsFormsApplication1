@@ -337,7 +337,7 @@
             // InputVariables
             // 
             this.InputVariables.AutoSize = true;
-            this.InputVariables.Location = new System.Drawing.Point(37, 41);
+            this.InputVariables.Location = new System.Drawing.Point(101, 44);
             this.InputVariables.Name = "InputVariables";
             this.InputVariables.Size = new System.Drawing.Size(79, 13);
             this.InputVariables.TabIndex = 1;
@@ -345,7 +345,7 @@
             // 
             // ChooseFunctionsBackButton
             // 
-            this.ChooseFunctionsBackButton.Location = new System.Drawing.Point(77, 318);
+            this.ChooseFunctionsBackButton.Location = new System.Drawing.Point(112, 318);
             this.ChooseFunctionsBackButton.Name = "ChooseFunctionsBackButton";
             this.ChooseFunctionsBackButton.Size = new System.Drawing.Size(75, 23);
             this.ChooseFunctionsBackButton.TabIndex = 29;
@@ -356,7 +356,7 @@
             // FuzzificationComboBox
             // 
             this.FuzzificationComboBox.FormattingEnabled = true;
-            this.FuzzificationComboBox.Location = new System.Drawing.Point(198, 254);
+            this.FuzzificationComboBox.Location = new System.Drawing.Point(233, 254);
             this.FuzzificationComboBox.Name = "FuzzificationComboBox";
             this.FuzzificationComboBox.Size = new System.Drawing.Size(121, 21);
             this.FuzzificationComboBox.TabIndex = 28;
@@ -364,7 +364,7 @@
             // AccumulationComboBox
             // 
             this.AccumulationComboBox.FormattingEnabled = true;
-            this.AccumulationComboBox.Location = new System.Drawing.Point(198, 203);
+            this.AccumulationComboBox.Location = new System.Drawing.Point(233, 203);
             this.AccumulationComboBox.Name = "AccumulationComboBox";
             this.AccumulationComboBox.Size = new System.Drawing.Size(121, 21);
             this.AccumulationComboBox.TabIndex = 27;
@@ -372,7 +372,7 @@
             // ActivisationComboBox
             // 
             this.ActivisationComboBox.FormattingEnabled = true;
-            this.ActivisationComboBox.Location = new System.Drawing.Point(198, 146);
+            this.ActivisationComboBox.Location = new System.Drawing.Point(233, 146);
             this.ActivisationComboBox.Name = "ActivisationComboBox";
             this.ActivisationComboBox.Size = new System.Drawing.Size(121, 21);
             this.ActivisationComboBox.TabIndex = 26;
@@ -380,7 +380,7 @@
             // AggregationComboBox
             // 
             this.AggregationComboBox.FormattingEnabled = true;
-            this.AggregationComboBox.Location = new System.Drawing.Point(198, 97);
+            this.AggregationComboBox.Location = new System.Drawing.Point(233, 97);
             this.AggregationComboBox.Name = "AggregationComboBox";
             this.AggregationComboBox.Size = new System.Drawing.Size(121, 21);
             this.AggregationComboBox.TabIndex = 25;
@@ -388,7 +388,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(84, 257);
+            this.label5.Location = new System.Drawing.Point(119, 257);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 13);
             this.label5.TabIndex = 23;
@@ -397,7 +397,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(84, 203);
+            this.label4.Location = new System.Drawing.Point(119, 203);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 22;
@@ -406,7 +406,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(84, 149);
+            this.label3.Location = new System.Drawing.Point(119, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 13);
             this.label3.TabIndex = 21;
@@ -415,7 +415,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 100);
+            this.label2.Location = new System.Drawing.Point(119, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 20;
@@ -424,7 +424,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 64);
+            this.label1.Location = new System.Drawing.Point(49, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(138, 13);
             this.label1.TabIndex = 19;
@@ -432,7 +432,7 @@
             // 
             // ChooseFunctionsNextButton
             // 
-            this.ChooseFunctionsNextButton.Location = new System.Drawing.Point(244, 319);
+            this.ChooseFunctionsNextButton.Location = new System.Drawing.Point(279, 319);
             this.ChooseFunctionsNextButton.Name = "ChooseFunctionsNextButton";
             this.ChooseFunctionsNextButton.Size = new System.Drawing.Size(75, 23);
             this.ChooseFunctionsNextButton.TabIndex = 17;

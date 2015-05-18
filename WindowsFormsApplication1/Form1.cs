@@ -696,6 +696,7 @@ namespace WindowsFormsApplication1
 
         void FillChooseFunctionForm()
         {
+            this.Width = 500;
             if (!choseFunctionFormInitialized)
             {
                 AggregationComboBox.Items.Add("Limited Function");
@@ -783,6 +784,7 @@ namespace WindowsFormsApplication1
             InputVariablesPanel.Visible = true;
             ProductionRulesInputPanel.Visible = true;
             ShowHelpMessage();
+            this.Width = 1024;
             //InputVariablesPanel.Visible = true;
             //FillInputVariablesForm();
         }
@@ -791,6 +793,7 @@ namespace WindowsFormsApplication1
         {
             AddTermsPanel.Visible = false;
             ChooseFunctionsPanel.Visible = false;
+            this.Width = 1024;
         }
 
 
@@ -799,6 +802,7 @@ namespace WindowsFormsApplication1
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         void FillInputVariablesForm()
         {
+            this.Width = 500;
             inputVariables = new double[lexicalVariablesCount - 1];
 
             for (int i = 0; i < lexicalVariablesCount -1 /*Since last is the outout value*/; i++)
@@ -806,7 +810,7 @@ namespace WindowsFormsApplication1
                 // creating Label input var
                 Label InputNumberlabel = new Label();
                 InputNumberlabel.Name = "label_InputVariableNumber_" + i;
-                InputNumberlabel.Text = "Input var №" + (i + 1) + ":";
+                InputNumberlabel.Text = lexicalVariables.ElementAt(i).m_name + " :";
                 InputNumberlabel.Width = 95;
                 InputNumberlabel.Location = new Point(InputVariables.Location.X, InputVariables.Location.Y + (25 + 25 * i));
                 InputVariablesPanel.Controls.Add(InputNumberlabel);
@@ -850,6 +854,7 @@ namespace WindowsFormsApplication1
         {
             InputVariablesPanel.Visible = true;
             ProductionRulesInputPanel.Visible = true;
+            this.Width = 1024;
         }
 
         void OkButton_Clicked(object sender, EventArgs e)
@@ -860,7 +865,7 @@ namespace WindowsFormsApplication1
             }
 
             Fuzzification_1();
-
+            this.Width = 1024;
             //ProductionRulesInputPanel.Visible = true;
             //ShowHelpMessage();
             
@@ -893,6 +898,7 @@ namespace WindowsFormsApplication1
             ProductionRulesInputPanel.Visible = false;
             InputVariablesPanel.Visible = false;
             ChooseFunctionsPanel.Visible = true;
+            this.Width = 500;
         }
 
         private void button1_Click_1(object sender, EventArgs e) // Calculate button
@@ -909,16 +915,6 @@ namespace WindowsFormsApplication1
             ProductionRulesInputPanel.Visible = false;
             InputVariablesPanel.Visible = true;
             FillInputVariablesForm();
-
-            /*var lines = prodRulesTB.Text.Split('\n');
-            prodcutionsRules = new ProductionRule[lines.Length];
-            RuleParser rp = new RuleParser();
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i] != "")
-                    prodcutionsRules[i] = rp.ParseRuleString(lines[i]);
-            }
-            Fuzzification_1();*/
         }
 
         public void Fuzzification_1()
@@ -1099,7 +1095,7 @@ namespace WindowsFormsApplication1
                 x += drawStep;
             }
 
-            ResultDescriptionLabel.Text = "For input variables :\n\n";
+            ResultDescriptionLabel.Text = "For input variables :\n";
 
             for (int i = 0; i < lexicalVariables.Length; i++)
             {
@@ -1159,7 +1155,9 @@ namespace WindowsFormsApplication1
         private void ResultBackButton_Click(object sender, EventArgs e)
         {
             ResultPanel.Visible = false;
-            ProductionRulesInputPanel.Visible = true;
+            ProductionRulesInputPanel.Visible = false;
+            InputVariablesPanel.Visible = true;
+            this.Width = 500;
         }
     }
 }
