@@ -82,7 +82,16 @@ namespace WindowsFormsApplication1
                         break;
                // }
             }
-            Form1._terms.ElementAt(Form1.number).Push(Form1._term[idx]);
+                if (Form1._terms[Form1.number].ContainsKey(idx))
+                {
+                    Form1._terms[Form1.number].Remove(idx);
+
+                    Form1._terms[Form1.number][idx] = Form1._term[idx];
+                }
+                else 
+                {
+                    Form1._terms[Form1.number][idx] = Form1._term[idx];
+                }
             this.Close();
         }
 
@@ -239,8 +248,38 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = false;
                     BInput.Visible = false;
-                    AInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) / 2.0).ToString();
+                    AInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
                     break;
+            }
+        }
+
+        private void AInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void BInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
             }
         }
     }

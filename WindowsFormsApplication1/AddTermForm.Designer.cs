@@ -96,6 +96,7 @@
             this.AInput.Name = "AInput";
             this.AInput.Size = new System.Drawing.Size(49, 20);
             this.AInput.TabIndex = 47;
+            this.AInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AInput_KeyPress);
             // 
             // BInput
             // 
@@ -103,6 +104,7 @@
             this.BInput.Name = "BInput";
             this.BInput.Size = new System.Drawing.Size(49, 20);
             this.BInput.TabIndex = 48;
+            this.BInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BInput_KeyPress);
             // 
             // button1
             // 

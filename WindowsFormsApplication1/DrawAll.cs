@@ -39,7 +39,7 @@ namespace WindowsFormsApplication1
                 for (double x = xmin; x <= xmax; x += 0.01)
                 {
                     // добавим в список точку
-                    double val = Form1._terms.ElementAt(Form1.number).ElementAt(i).CalculateValue(x);
+                    double val = Form1._terms[Form1.number][i].CalculateValue(x);
                     list.Add(x, val);
                     if( val > maxPoint.Y )
                     {
@@ -53,10 +53,10 @@ namespace WindowsFormsApplication1
                 // Опорные точки выделяться не будут (SymbolType.None)
                 ZedGraph.LineItem myCurve;
 
-                myCurve = pane.AddCurve(Form1._terms.ElementAt(Form1.number).ElementAt(i).m_name, list, Color.Black, ZedGraph.SymbolType.None);
+                myCurve = pane.AddCurve(Form1._terms[Form1.number][i].m_name, list, Color.Black, ZedGraph.SymbolType.None);
 
                 // Create a text label from the Y data value
-                ZedGraph.TextObj text = new ZedGraph.TextObj(Form1._terms.ElementAt(Form1.number).ElementAt(i).m_name, maxPoint.X, maxPoint.Y + 0.1,
+                ZedGraph.TextObj text = new ZedGraph.TextObj(Form1._terms[Form1.number][i].m_name, maxPoint.X, maxPoint.Y + 0.1,
                 ZedGraph.CoordType.AxisXYScale, ZedGraph.AlignH.Left, ZedGraph.AlignV.Center);
                 text.ZOrder = ZedGraph.ZOrder.A_InFront;
                 // Hide the border and the fill

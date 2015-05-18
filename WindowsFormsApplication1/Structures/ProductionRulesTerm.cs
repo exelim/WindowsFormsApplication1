@@ -29,6 +29,14 @@ namespace WindowsFormsApplication1.Structures
             return m_membershipFinction.CalculateFunctionValue(_val);
         }
 
-        
+        public static bool operator false ( ProductionRulesTerm tr )
+        {
+            return tr.m_ID == "";
+        }
+
+        public static bool operator true(ProductionRulesTerm tr)
+        {
+            return tr.m_ID != "";
+        }
     }
 }

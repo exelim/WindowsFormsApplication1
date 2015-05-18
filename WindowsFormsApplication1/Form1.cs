@@ -35,7 +35,7 @@ namespace WindowsFormsApplication1
         public static int lexicalVariablesCount;
         public static int termsCount;
         public static int fullTermsCount;
-        static public  Stack< ProductionRulesTerm >[] _terms;
+        static public  Dictionary< int, ProductionRulesTerm >[] _terms;
         public static Array arr; 
         public static LexicalVariable[] lexicalVariables;
         static public ProductionRulesTerm[] _term;
@@ -104,20 +104,23 @@ namespace WindowsFormsApplication1
                         this.Controls.RemoveByKey("upDown_TermsCount_" + i);
                         this.Controls.RemoveByKey("button_AddTerms_" + i);
                         this.Controls.RemoveByKey("LVOKButton");
+                        this.Controls.RemoveByKey("label_LVType_" + i);
+                        this.Controls.RemoveByKey("List_LVType_" + i);
+                        this.Controls.RemoveByKey("label_LVTermsCount_" + i);
                     }
                 }
 
                 lexicalVariablesCount = Convert.ToInt32(LVCountUpDown.Value);
                 lexicalVariables = new LexicalVariable[lexicalVariablesCount];
 
-                _terms = new Stack< ProductionRulesTerm >[lexicalVariablesCount];
+                _terms = new Dictionary< int, ProductionRulesTerm >[lexicalVariablesCount];
 
                 for( int i = 0; i < lexicalVariablesCount; i ++)
                 {
-                    _terms[i] = new Stack<ProductionRulesTerm>();
+                    _terms[i] = new Dictionary<int,ProductionRulesTerm>();
                 }
 
-                    for (int i = 0; i < LVCountUpDown.Value; i++)
+                for (int i = 0; i < lexicalVariablesCount; i++)
                     {
                         // creating Label LV number
                         Label Numberlabel = new Label();
@@ -235,7 +238,10 @@ namespace WindowsFormsApplication1
                         TypeList.Width = 45;
                         TypeList.Items.Add("IN");
                         TypeList.Items.Add("OUT");
-                        TypeList.SelectedIndex = 0;
+                        if( i == lexicalVariablesCount - 1)
+                            TypeList.SelectedIndex = 1;
+                        else
+                            TypeList.SelectedIndex = 0;
                         TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                         this.Controls.Add(TypeList);
                         if (i == 2) // DEBUG
@@ -365,13 +371,13 @@ namespace WindowsFormsApplication1
                     fullTermsCount += termsCount;
                     for (int j = 0; j < termsCount; j++)
                     {
-                        if ( _terms.ElementAt(i).Count == 0 || _terms.ElementAt( i ).ElementAt( j ).m_ID == null)
+                        if ( _terms[i].Count == 0 || _terms[i][j].m_ID == null)
                         {
                             MessageBox.Show("Error! You should first add terms for all linguistic variables!");
                             return;
                         }
 
-                        terms[j] = _terms.ElementAt(i).ElementAt(j);
+                        terms[j] = _terms[i][j];
                     }
                     lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, terms, type);
                 }
@@ -653,11 +659,11 @@ namespace WindowsFormsApplication1
             }
 
             _term[idx] = new ProductionRulesTerm(ID, termName, termMinRange, termMaxRange);
-            if ( !_terms.ElementAt(number).Contains( _term[idx] ) )
-            {
+            //if ( !_terms.ElementAt(number).Contains( _term[idx] ) )
+           // {
                 AddTermForm addForm = new AddTermForm( idx );
                 addForm.ShowDialog();
-            }
+            //}
             
         }
 
@@ -666,7 +672,7 @@ namespace WindowsFormsApplication1
             bool shouldClose = true;
             for (int i = 0; i < termsCount; i++)
             {
-                if (_terms.ElementAt(number).Count < termsCount || _terms.ElementAt(number).ElementAt(i).m_membershipFinction == null)
+                if (_terms.ElementAt(number).Count < termsCount || _terms[number][i].m_membershipFinction == null)
                 {
                     MessageBox.Show("Error! Please add memebership functions for all terms.");
                     shouldClose = false;
