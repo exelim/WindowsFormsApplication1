@@ -36,6 +36,8 @@
             this.ChooseFunctionsPanel = new System.Windows.Forms.Panel();
             this.InputVariablesPanel = new System.Windows.Forms.Panel();
             this.ProductionRulesInputPanel = new System.Windows.Forms.Panel();
+            this.TotalRulesNumberLabel = new System.Windows.Forms.Label();
+            this.CurrentRuleNumberLabel = new System.Windows.Forms.Label();
             this.ResultPanel = new System.Windows.Forms.Panel();
             this.ResultDescriptionLabel = new System.Windows.Forms.Label();
             this.ResultLabel = new System.Windows.Forms.Label();
@@ -160,12 +162,34 @@
             this.ProductionRulesInputPanel.Controls.Add(this.label9);
             this.ProductionRulesInputPanel.Controls.Add(this.label8);
             this.ProductionRulesInputPanel.Controls.Add(this.label6);
+            this.ProductionRulesInputPanel.Controls.Add(this.TotalRulesNumberLabel);
+            this.ProductionRulesInputPanel.Controls.Add(this.CurrentRuleNumberLabel);
             this.ProductionRulesInputPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProductionRulesInputPanel.Location = new System.Drawing.Point(0, 0);
             this.ProductionRulesInputPanel.Name = "ProductionRulesInputPanel";
             this.ProductionRulesInputPanel.Size = new System.Drawing.Size(1024, 448);
             this.ProductionRulesInputPanel.TabIndex = 2;
             this.ProductionRulesInputPanel.Visible = false;
+            // 
+            // TotalRulesNumberLabel
+            // 
+            this.TotalRulesNumberLabel.AutoSize = true;
+            this.TotalRulesNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TotalRulesNumberLabel.Location = new System.Drawing.Point(219, 319);
+            this.TotalRulesNumberLabel.Name = "TotalRulesNumberLabel";
+            this.TotalRulesNumberLabel.Size = new System.Drawing.Size(218, 17);
+            this.TotalRulesNumberLabel.TabIndex = 17;
+            this.TotalRulesNumberLabel.Text = "Total number of prudoction rules:";
+            // 
+            // CurrentRuleNumberLabel
+            // 
+            this.CurrentRuleNumberLabel.AutoSize = true;
+            this.CurrentRuleNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CurrentRuleNumberLabel.Location = new System.Drawing.Point(37, 319);
+            this.CurrentRuleNumberLabel.Name = "CurrentRuleNumberLabel";
+            this.CurrentRuleNumberLabel.Size = new System.Drawing.Size(87, 17);
+            this.CurrentRuleNumberLabel.TabIndex = 16;
+            this.CurrentRuleNumberLabel.Text = "Current rule:";
             // 
             // ResultPanel
             // 
@@ -183,10 +207,10 @@
             // ResultDescriptionLabel
             // 
             this.ResultDescriptionLabel.AutoSize = true;
-            this.ResultDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ResultDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ResultDescriptionLabel.Location = new System.Drawing.Point(657, 99);
             this.ResultDescriptionLabel.Name = "ResultDescriptionLabel";
-            this.ResultDescriptionLabel.Size = new System.Drawing.Size(75, 25);
+            this.ResultDescriptionLabel.Size = new System.Drawing.Size(68, 22);
             this.ResultDescriptionLabel.TabIndex = 45;
             this.ResultDescriptionLabel.Text = "label14";
             // 
@@ -226,7 +250,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(118, 339);
+            this.button2.Location = new System.Drawing.Point(112, 358);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
@@ -236,7 +260,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(342, 339);
+            this.button1.Location = new System.Drawing.Point(342, 358);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -261,8 +285,10 @@
             this.prodRulesTB.Name = "prodRulesTB";
             this.prodRulesTB.Size = new System.Drawing.Size(543, 259);
             this.prodRulesTB.TabIndex = 4;
-            this.prodRulesTB.Text = "if s is p OR f is b then t is c\nif s is g OR f is b then t is a\nif s is e OR f is" +
-    " g then t is g";
+            this.prodRulesTB.Text = "IF ( s is p ) OR ( f is b ) THEN ( t is c )\nIF ( s is g ) OR ( f is b ) THEN ( t is a )\nIF ( s is e ) OR ( f is" +
+    " g ) THEN ( t is g )";
+            this.prodRulesTB.SelectionChanged += new System.EventHandler(this.prodRulesTB_SelectionChanged);
+            this.prodRulesTB.TextChanged += new System.EventHandler(this.prodRulesTB_TextChanged);
             // 
             // label13
             // 
@@ -514,6 +540,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label ResultDescriptionLabel;
+        private System.Windows.Forms.Label TotalRulesNumberLabel;
+        private System.Windows.Forms.Label CurrentRuleNumberLabel;
     }
 }
 

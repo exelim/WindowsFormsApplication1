@@ -8,6 +8,6 @@ namespace WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas
 {
     public abstract class FuzzificationFormulaBase
     {
-        public abstract double CalculateFuzzification(double _val_1, double _val_2);
+        public abstract double CalculateFuzzification(Queue<double> points, double minVal, double maxVal);
     }
 }

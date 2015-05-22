@@ -8,7 +8,7 @@ namespace WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas
 {
     class CenterSquareFuzzification : FuzzificationFormulaBase
     {
-        public override double CalculateFuzzification(double _val_1, double _val_2)
+        public override double CalculateFuzzification(Queue<double> points, double minVal, double maxVal)
         {
             return 0.0;
         }

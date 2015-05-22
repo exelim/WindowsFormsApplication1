@@ -8,9 +8,18 @@ namespace WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas
 {
     class CenterOfGravityPointSetsFuzzification : FuzzificationFormulaBase
     {
-        public override double CalculateFuzzification(double _val_1, double _val_2)
+        public override double CalculateFuzzification(Queue<double> points, double minVal, double maxVal)
         {
-            return 0.0;
+            double sum1 = 0.0, sum2 = 0.0, x = 0.0;
+            const double step = 0.1;
+            foreach (var item in points)
+            {
+                sum1 += x * item;
+                sum2 += item;
+
+                x += step;
+            }
+            return sum1 / sum2;
         }
     }
 }

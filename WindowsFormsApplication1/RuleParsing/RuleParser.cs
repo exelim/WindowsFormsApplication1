@@ -16,12 +16,12 @@ namespace WindowsFormsApplication1.RuleParsing
 
             Dictionary<string, string> variables = new Dictionary<string, string>();
 
-            for (int i = 0; i < temp.Length / 4; i++)
+            for (int i = 0; i < temp.Length / 6; i++)
             {
                 string key, value;
 
-                key = temp[(i * 4) + 1];
-                value = temp[(i * 4) + 3];
+                key = temp[(i * 6) + 2];
+                value = temp[(i * 6) + 4];
                 variables.Add(key, value);
             }
 
