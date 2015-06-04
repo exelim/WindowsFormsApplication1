@@ -972,7 +972,7 @@ namespace WindowsFormsApplication1
                     }
                     if (!hasLex)
                     {
-                        MessageBox.Show("Error! Line " + line + ":" + "there is no lexical variable with ID \"" + prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Key + "\"");
+                        MessageBox.Show("Error! Line " + line + ":" + " there is no lexical variable with ID \"" + prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Key + "\"");
                         return;
                     }
                     if (!hasTerms)
