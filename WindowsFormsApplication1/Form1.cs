@@ -939,97 +939,49 @@ namespace WindowsFormsApplication1
             }
 
 
-
+            int termIdx = 0, lvIdx = 0, eleIdx = 0, line = 0;
+            bool hasTerms = false, hasLex = false;
             for (int i = 0; i < prodcutionsRules.Length; i++)
             {
+                line++;
                 for (int j = 0; j < prodcutionsRules.ElementAt(i).m_variables.Count; j++)
                 {
-                    for (int k = 0; k > lexicalVariables.Length; k++)
+                    hasTerms = false;
+                    hasLex = false;
+                    for (int k = 0; k < lexicalVariables.Length; k++)
                     {
                         if (prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Key == lexicalVariables.ElementAt(k).m_id)
                         {
-                            bool hasTerms = false;
+                            hasLex = true;
+                            hasTerms = false;
                             for (int l = 0; l < lexicalVariables.ElementAt(k).m_termsCount; l++)
                             {
+                                termIdx = l;
                                 if (prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Value == lexicalVariables.ElementAt(k).m_terms.ElementAt(l).m_ID)
                                 {
                                     hasTerms = true;
                                     break;
                                 }
+                                else
+                                {
+                                    lvIdx = k;
+                                    eleIdx = j;
+                                }
                             }
                         }
+                    }
+                    if (!hasLex)
+                    {
+                        MessageBox.Show("Error! Line " + line + ":" + "there is no lexical variable with ID \"" + prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Key + "\"");
+                        return;
+                    }
+                    if (!hasTerms)
+                    {
+                        MessageBox.Show("Error! Line " + line + ":" + " there is no terms with ID: \"" + prodcutionsRules.ElementAt(i).m_variables.ElementAt(eleIdx).Value + "\" in lexical variable with ID: \"" + lexicalVariables.ElementAt(lvIdx).m_id + "\"");
+                        return;
                     }
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            int k = 0;
-            int lvIdx = 0, termIdx = 0;
-            foreach (var rule in prodcutionsRules)
-            {
-                k++;
-                bool hasLexicalVariable = false;
-                for (int i = 0; i < lexicalVariables.Length; i++)
-                {
-                    if (rule.m_variables.ElementAt(0).Key == lexicalVariables.ElementAt(i).m_id)
-                    {
-                        hasLexicalVariable = true;
-                        bool hasTerm = false;
-                        for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
-                        {
-                            if (rule.m_variables.ElementAt(0).Value == lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_ID)
-                            {
-                                hasTerm = true;
-                                break;
-                            }
-                            else
-                            {
-                                termIdx = j;
-                            }
-                        }
-                        if (!hasTerm)
-                        {
-                            MessageBox.Show("Error! Line " + k + ":" + "there is no terms with ID: " + lexicalVariables.ElementAt(i).m_terms.ElementAt(termIdx).m_ID + " in lexical variable with ID: " + lexicalVariables.ElementAt(i).m_id);
-                            return;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        lvIdx = i;
-                    }
-                }
-                if (!hasLexicalVariable)
-                {
-                    MessageBox.Show("Error! Line " + k + ":" + "there is no lexical variable with ID" + lexicalVariables.ElementAt(lvIdx).m_id);
-                    return;
-                }
-            }
-
 
             ProductionRulesInputPanel.Visible = false;
             InputVariablesPanel.Visible = true;
