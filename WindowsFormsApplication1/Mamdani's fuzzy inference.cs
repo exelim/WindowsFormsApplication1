@@ -321,8 +321,21 @@ namespace WindowsFormsApplication1
             {
                 //addTermsForm = new AddTermForm(Convert.ToInt32(button.Name.Substring(button.Name.Length - 1, 1)));
                 //addTermsForm.ShowDialog();
-
                 number = Convert.ToInt32(button.Name.Substring(button.Name.Length - 1, 1));
+
+                bool isOk = checkLinguisticVariable(number);
+
+                if (!isOk)
+                    return;
+
+                termsCount = Convert.ToInt32(this.Controls["upDown_TermsCount_" + button.Name.Substring(button.Name.Length - 1, 1)].Text);
+
+                if (termsCount <= 0)
+                {
+                    MessageBox.Show("Terms count should be greater than 0.");
+                    return;
+                }
+
                 currentLVName = (this.Controls.Find("textbox_LVName_" + number, false).FirstOrDefault() as TextBox).Text;//
 
                 NumericUpDown cntrl = this.Controls.Find("upDown_LVMinrange_" + number, false).FirstOrDefault() as NumericUpDown;
@@ -344,25 +357,15 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < lexicalVariablesCount; i++)
             {
+                bool isOk = checkLinguisticVariable(i);
+                if (!isOk)
+                    return;
+
                 string ID = this.Controls["textbox_LVID_" + i].Text;
-                if (ID == "")
-                {
-                    MessageBox.Show("Error! Linguistic's variable №" + (i + 1) + " ID is empty!");
-                    return;
-                }
                 string LVName = this.Controls["textbox_LVName_" + i].Text;
-                if (LVName == "")
-                {
-                    MessageBox.Show("Error! Linguistic's variable №" + (i + 1) + " name is empty!");
-                    return;
-                }
                 int LVMinValue = Convert.ToInt32(this.Controls["upDown_LVMinrange_" + i].Text);
                 int LVMaxValue = Convert.ToInt32(this.Controls["upDown_LVMaxrange_" + i].Text);
-                if (LVMinValue >= LVMaxValue)
-                {
-                    MessageBox.Show("Error! Linguistic's variable №" + (i + 1) + " minimal value is equal greater than maximal!");
-                    return;
-                }
+
                 int termsCount = Convert.ToInt32(this.Controls["upDown_TermsCount_" + i].Text);
                 VariableType type = VariableType.IN;
                 switch (this.Controls["List_LVType_" + i].Text)
@@ -421,6 +424,31 @@ namespace WindowsFormsApplication1
             //choiseFunctionForm.ShowDialog();
             //AddTermsPanel.Visible = true;
 
+        }
+
+        bool checkLinguisticVariable(int idx)
+        {
+            string ID = this.Controls["textbox_LVID_" + idx].Text;
+            if (ID == "")
+            {
+                MessageBox.Show("Error! Linguistic's variable №" + (idx + 1) + " ID is empty!");
+                return false;
+            }
+            string LVName = this.Controls["textbox_LVName_" + idx].Text;
+            if (LVName == "")
+            {
+                MessageBox.Show("Error! Linguistic's variable №" + (idx + 1) + " name is empty!");
+                return false;
+            }
+            int LVMinValue = Convert.ToInt32(this.Controls["upDown_LVMinrange_" + idx].Text);
+            int LVMaxValue = Convert.ToInt32(this.Controls["upDown_LVMaxrange_" + idx].Text);
+            if (LVMinValue >= LVMaxValue)
+            {
+                MessageBox.Show("Error! Linguistic's variable №" + (idx + 1) + " minimal value is equal greater than maximal!");
+                return false;
+
+            }
+            return true;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -648,19 +676,19 @@ namespace WindowsFormsApplication1
             AddTermsPanel.Controls.Add(TermsOKButton);
             TermsOKButton.Click += OKButton_Clicked;
 
-           /* // creating Cancel button
+            // creating Cancel button
             Button termsCancelButton = new Button();
             termsCancelButton.Name = "TermCancelButton";
-            termsCancelButton.Text = "Cancel";
+            termsCancelButton.Text = "Back";
             termsCancelButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + termsCount * 25 + 25);
             AddTermsPanel.Controls.Add(termsCancelButton);
-            termsCancelButton.Click += CancelButton_Clicked;*/
+            termsCancelButton.Click += CancelButton_Clicked;
 
             // Draw all
             Button DrawAllButton = new Button();
             DrawAllButton.Name = "DrawAllButton";
             DrawAllButton.Text = "Draw all!";
-            DrawAllButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + termsCount * 25 + 25);
+            DrawAllButton.Location = new Point(TermCountLabel.Location.X + 200, TermCountLabel.Location.Y + termsCount * 25 + 25);
             AddTermsPanel.Controls.Add(DrawAllButton);
             DrawAllButton.Click += DrawAll_Clicked;
 
