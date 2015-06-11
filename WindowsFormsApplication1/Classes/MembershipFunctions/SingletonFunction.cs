@@ -17,7 +17,7 @@ namespace WindowsFormsApplication1.Classes.MembershipFunctions
         }
         public override double CalculateFunctionValue(double _val_1/*, double _a, double _c, double _b, double _d = 0*/)
         {
-            if (_val_1 == a)
+            if (Math.Round(_val_1,2 ) == a)
                 return 1;
             else
                 return 0;
