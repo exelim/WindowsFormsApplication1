@@ -49,6 +49,7 @@ namespace WindowsFormsApplication1
         public static int currentLVMinValue;
         public static int currentLVMaxValue;
         public static string currentLVName;
+        public static int currentLVIdx;
 
         public static ProductionRule[] prodcutionsRules;
         public static Tuple<string, string, double>[] fuzzification_1_Values;   //  < input variable id, output lexical variable id, fuzzification value>
@@ -143,7 +144,7 @@ namespace WindowsFormsApplication1
                     IDtextBox.Name = "textbox_LVID_" + i;
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    IDtextBox.Text = "lvid_" + i; // DEBUG
+                   /* IDtextBox.Text = "lvid_" + i; // DEBUG
 
                     // Debug start
                     if (i == 0)
@@ -159,7 +160,7 @@ namespace WindowsFormsApplication1
                         IDtextBox.Text = "t"; // DEBUG
                     }
                     // Debug end
-
+                    */
                     this.Controls.Add(IDtextBox);
 
                     // creating Label LV name
@@ -175,7 +176,7 @@ namespace WindowsFormsApplication1
                     NametextBox.Name = "textbox_LVName_" + i;
                     NametextBox.Width = 100;
                     NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
-                    NametextBox.Text = "lvname_" + i; // DEBUG
+                   // NametextBox.Text = "lvname_" + i; // DEBUG
                     this.Controls.Add(NametextBox);
 
                     // creating Label LV min range
@@ -206,7 +207,7 @@ namespace WindowsFormsApplication1
                     MaxRangeUpDown.Name = "upDown_LVMaxrange_" + i;
                     MaxRangeUpDown.Width = 36;
                     MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
+                   /* MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
                     // Debug start
                     if (i == 0)
                     {
@@ -221,7 +222,7 @@ namespace WindowsFormsApplication1
                         MaxRangeUpDown.Value = 30;  // DEBUG
                     }
                     // Debug en
-
+                    */
                     this.Controls.Add(MaxRangeUpDown);
 
                     // creating Label LV type
@@ -244,11 +245,10 @@ namespace WindowsFormsApplication1
                         TypeList.SelectedIndex = 0;
                     TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(TypeList);
-                    if (i == 2) // DEBUG
+                  /*  if (i == 2) // DEBUG
                     {
                         TypeList.SelectedIndex = 1; // DEBUG
-                    }
-
+                    }*/
                     // creating Label Terms count
                     Label TermsCountlabel = new Label();
                     TermsCountlabel.Name = "label_LVTermsCount_" + i;
@@ -429,171 +429,190 @@ namespace WindowsFormsApplication1
 
             TermCountLabel.Text = "Terms of lexical variable " + currentLVName + " :";
 
-            for (int i = 0; i < termsCount; i++)
+            int idx = -1;
+
+          /*  for (int i = 0; i < lexicalVariables.Length; i++)
             {
-                // creating Label Terms count
-                Label Numberlabel = new Label();
-                Numberlabel.Name = "label_TermsCount_" + i;
-                Numberlabel.Text = "Term №" + (i + 1) + ":";
-                Numberlabel.Width = 60;
-                Numberlabel.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + (25 + 25 * i));
-                AddTermsPanel.Controls.Add(Numberlabel);
+                if (lexicalVariables.ElementAt(i) != null && lexicalVariables.ElementAt(i).m_name == currentLVName)
+                    idx = i;
+            }*/
 
-                // creating Label Term ID
-                Label IDlabel = new Label();
-                IDlabel.Name = "label_TermID_" + i;
-                IDlabel.Text = "Id:";
-                IDlabel.Width = 20;
-                IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                AddTermsPanel.Controls.Add(IDlabel);
-
-                //creating TextBox for Terms ID
-                TextBox IDtextBox = new TextBox();
-                IDtextBox.Name = "textbox_TermID_" + i;
-                IDtextBox.Width = 50;
-                IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                // Debug start
-                if (termsCount == 3)
+            //if ( idx != -1 && lexicalVariables.ElementAt(idx).m_termsCount == termsCount)
+           // {
+                for (int i = 0; i < termsCount; i++)
                 {
-                    if (i == 0)
-                    {
-                        IDtextBox.Text = "p";  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        IDtextBox.Text = "g";  // DEBUG
-                    }
-                    else if (i == 2)
-                    {
-                        IDtextBox.Text = "e";  // DEBUG
-                    }
+                    // creating Label Terms count
+                    Label Numberlabel = new Label();
+                    Numberlabel.Name = "label_TermsCount_" + i;
+                    Numberlabel.Text = "Term №" + (i + 1) + ":";
+                    Numberlabel.Width = 60;
+                    Numberlabel.Location = new Point(TermCountLabel.Location.X, TermCountLabel.Location.Y + (25 + 25 * i));
+                    AddTermsPanel.Controls.Add(Numberlabel);
+
+                    // creating Label Term ID
+                    Label IDlabel = new Label();
+                    IDlabel.Name = "label_TermID_" + i;
+                    IDlabel.Text = "Id:";
+                    IDlabel.Width = 20;
+                    IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
+                    AddTermsPanel.Controls.Add(IDlabel);
+
+                    //creating TextBox for Terms ID
+                    TextBox IDtextBox = new TextBox();
+                    IDtextBox.Name = "textbox_TermID_" + i;
+                    IDtextBox.Width = 50;
+                    IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
+                    if (idx != -1)
+                        IDtextBox.Text = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_ID;
+                    /* // Debug start
+                     if (termsCount == 3)
+                     {
+                         if (i == 0)
+                         {
+                             IDtextBox.Text = "p";  // DEBUG
+                         }
+                         else if (i == 1) // DEBUG
+                         {
+                             IDtextBox.Text = "g";  // DEBUG
+                         }
+                         else if (i == 2)
+                         {
+                             IDtextBox.Text = "e";  // DEBUG
+                         }
+                     }
+                     else
+                     {
+                         if (i == 0)
+                         {
+                             IDtextBox.Text = "b";  // DEBUG
+                         }
+                         else if (i == 1) // DEBUG
+                         {
+                             IDtextBox.Text = "g";  // DEBUG
+                         }
+                     }
+                     // Debug en*/
+                    AddTermsPanel.Controls.Add(IDtextBox);
+
+                    // creating Label Term name
+                    Label Namelabel = new Label();
+                    Namelabel.Name = "label_TermsName_" + i;
+                    Namelabel.Text = "Terms name:";
+                    Namelabel.Width = 70;
+                    Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                    AddTermsPanel.Controls.Add(Namelabel);
+
+                    // creating TextBox for Term name
+                    TextBox NametextBox = new TextBox();
+                    NametextBox.Name = "textbox_TermName_" + i;
+                    NametextBox.Width = 100;
+                    NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
+                    // NametextBox.Text = "tmname_" + i;  // DEBUG
+                    if (idx != -1)
+                        NametextBox.Text = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_name;
+                    AddTermsPanel.Controls.Add(NametextBox);
+
+                    // creating Label Term min range
+                    Label MinRangelabel = new Label();
+                    MinRangelabel.Name = "label_TermMinrange_" + i;
+                    MinRangelabel.Text = "Range from:";
+                    MinRangelabel.Width = 65;
+                    MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                    AddTermsPanel.Controls.Add(MinRangelabel);
+
+                    // creating UpDown Term min range
+                    NumericUpDown MinRangeUpDown = new NumericUpDown();
+                    MinRangeUpDown.Name = "upDown_TermMinrange_" + i;
+                    MinRangeUpDown.Width = 36;
+                    MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                    if (idx != -1)
+                        MinRangeUpDown.Value = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_minValue;
+                    /* // Debug start
+                     if (termsCount == 3)
+                     {
+                         if (i == 0)
+                         {
+                             MinRangeUpDown.Value = 0;  // DEBUG
+                         }
+                         else if (i == 1) // DEBUG
+                         {
+                             MinRangeUpDown.Value = 3;  // DEBUG
+                         }
+                         else if (i == 2)
+                         {
+                             MinRangeUpDown.Value = 4;  // DEBUG
+                         }
+                     }
+                     else
+                     {
+                         if (i == 0)
+                         {
+                             MinRangeUpDown.Value = 0;  // DEBUG
+                         }
+                         else if (i == 1) // DEBUG
+                         {
+                             MinRangeUpDown.Value = 2;  // DEBUG
+                         }
+                     }
+                     // Debug en*/
+                    AddTermsPanel.Controls.Add(MinRangeUpDown);
+
+                    // creating Label Term max range
+                    Label MaxRangelabel = new Label();
+                    MaxRangelabel.Name = "label_TermMaxrange_" + i;
+                    MaxRangelabel.Text = "Range to:";
+                    MaxRangelabel.Width = 60;
+                    MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                    AddTermsPanel.Controls.Add(MaxRangelabel);
+
+                    // creating UpDown Term max range
+                    NumericUpDown MaxRangeUpDown = new NumericUpDown();
+                    MaxRangeUpDown.Name = "upDown_TermMaxrange_" + i;
+                    MaxRangeUpDown.Width = 36;
+                    MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                    if (idx != -1)
+                        MaxRangeUpDown.Value = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_maxValue;
+                    /* // Debug start
+                     if (termsCount == 3)
+                     {
+                         if (i == 0)
+                         {
+                             MaxRangeUpDown.Value = 6;  // DEBUG
+                         }
+                         else if (i == 1) // DEBUG
+                         {
+                             MaxRangeUpDown.Value = 8;  // DEBUG
+                         }
+                         else if (i == 2)
+                         {
+                             MaxRangeUpDown.Value = 10;  // DEBUG
+                         }
+                     }
+                     else
+                     {
+                         if (i == 0)
+                         {
+                             MaxRangeUpDown.Value = 8;  // DEBUG
+                         }
+                         else if (i == 1) // DEBUG
+                         {
+                             MaxRangeUpDown.Value = 10;  // DEBUG
+                         }
+                     }
+                     // Debug en*/
+                    AddTermsPanel.Controls.Add(MaxRangeUpDown);
+
+                    // creating add membership button
+                    Button AddmembershipFunctionButton = new Button();
+                    AddmembershipFunctionButton.Name = "AddmembershipFunctionButton_" + i;
+                    AddmembershipFunctionButton.Text = "Add membership function";
+                    AddmembershipFunctionButton.Width = 150;
+                    AddmembershipFunctionButton.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
+                    AddTermsPanel.Controls.Add(AddmembershipFunctionButton);
+                    AddmembershipFunctionButton.Click += AddmembershipFunctionButton_Clicked;
+
                 }
-                else
-                {
-                    if (i == 0)
-                    {
-                        IDtextBox.Text = "b";  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        IDtextBox.Text = "g";  // DEBUG
-                    }
-                }
-                // Debug en
-                AddTermsPanel.Controls.Add(IDtextBox);
-
-                // creating Label Term name
-                Label Namelabel = new Label();
-                Namelabel.Name = "label_TermsName_" + i;
-                Namelabel.Text = "Terms name:";
-                Namelabel.Width = 70;
-                Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                AddTermsPanel.Controls.Add(Namelabel);
-
-                // creating TextBox for Term name
-                TextBox NametextBox = new TextBox();
-                NametextBox.Name = "textbox_TermName_" + i;
-                NametextBox.Width = 100;
-                NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
-                NametextBox.Text = "tmname_" + i;  // DEBUG
-                AddTermsPanel.Controls.Add(NametextBox);
-
-                // creating Label Term min range
-                Label MinRangelabel = new Label();
-                MinRangelabel.Name = "label_TermMinrange_" + i;
-                MinRangelabel.Text = "Range from:";
-                MinRangelabel.Width = 65;
-                MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                AddTermsPanel.Controls.Add(MinRangelabel);
-
-                // creating UpDown Term min range
-                NumericUpDown MinRangeUpDown = new NumericUpDown();
-                MinRangeUpDown.Name = "upDown_TermMinrange_" + i;
-                MinRangeUpDown.Width = 36;
-                MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                // Debug start
-                if (termsCount == 3)
-                {
-                    if (i == 0)
-                    {
-                        MinRangeUpDown.Value = 0;  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        MinRangeUpDown.Value = 3;  // DEBUG
-                    }
-                    else if (i == 2)
-                    {
-                        MinRangeUpDown.Value = 4;  // DEBUG
-                    }
-                }
-                else
-                {
-                    if (i == 0)
-                    {
-                        MinRangeUpDown.Value = 0;  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        MinRangeUpDown.Value = 2;  // DEBUG
-                    }
-                }
-                // Debug en
-                AddTermsPanel.Controls.Add(MinRangeUpDown);
-
-                // creating Label Term max range
-                Label MaxRangelabel = new Label();
-                MaxRangelabel.Name = "label_TermMaxrange_" + i;
-                MaxRangelabel.Text = "Range to:";
-                MaxRangelabel.Width = 60;
-                MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                AddTermsPanel.Controls.Add(MaxRangelabel);
-
-                // creating UpDown Term max range
-                NumericUpDown MaxRangeUpDown = new NumericUpDown();
-                MaxRangeUpDown.Name = "upDown_TermMaxrange_" + i;
-                MaxRangeUpDown.Width = 36;
-                MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                // Debug start
-                if (termsCount == 3)
-                {
-                    if (i == 0)
-                    {
-                        MaxRangeUpDown.Value = 6;  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        MaxRangeUpDown.Value = 8;  // DEBUG
-                    }
-                    else if (i == 2)
-                    {
-                        MaxRangeUpDown.Value = 10;  // DEBUG
-                    }
-                }
-                else
-                {
-                    if (i == 0)
-                    {
-                        MaxRangeUpDown.Value = 8;  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        MaxRangeUpDown.Value = 10;  // DEBUG
-                    }
-                }
-                // Debug en
-                AddTermsPanel.Controls.Add(MaxRangeUpDown);
-
-                // creating add membership button
-                Button AddmembershipFunctionButton = new Button();
-                AddmembershipFunctionButton.Name = "AddmembershipFunctionButton_" + i;
-                AddmembershipFunctionButton.Text = "Add membership function";
-                AddmembershipFunctionButton.Width = 150;
-                AddmembershipFunctionButton.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
-                AddTermsPanel.Controls.Add(AddmembershipFunctionButton);
-                AddmembershipFunctionButton.Click += AddmembershipFunctionButton_Clicked;
-
-            }
+           // }
 
             // creating OK button
             Button TermsOKButton = new Button();

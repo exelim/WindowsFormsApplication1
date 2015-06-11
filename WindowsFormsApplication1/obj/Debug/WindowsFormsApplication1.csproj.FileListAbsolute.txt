@@ -53,7 +53,6 @@ D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsAppli
 D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.AddTermForm.resources
 D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.InputVariablesForm.resources
-D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.MembershipFunctionChoise.resources
 D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ProductionRulesInputForm.resources
 D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
@@ -89,3 +88,18 @@ C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\bi
 C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\zh-tw\ZedGraph.resources.dll
 C:\Users\Лена\Documents\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.DrawAll.resources
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ZedGraph.xml
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\de\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\es\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\fr\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\hu\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\it\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ja\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\pt\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ru\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\sk\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\sv\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\tr\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\zh-cn\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\zh-tw\ZedGraph.resources.dll
+D:\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.DrawAll.resources

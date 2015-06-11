@@ -23,11 +23,15 @@ namespace WindowsFormsApplication1
 
             idx = _idx;
 
+
+
             MembershipCombobox.Items.Add("Gauss Function");
             MembershipCombobox.Items.Add("Sigmoid Function");
             MembershipCombobox.Items.Add("Singleton Function");
             MembershipCombobox.Items.Add("Trapezoidal Function");
             MembershipCombobox.Items.Add("Triangle Function");
+            MembershipCombobox.Items.Add("\"S\" Function");
+            MembershipCombobox.Items.Add("\"Z\" Function");
             MembershipCombobox.SelectedIndex = 0;
             
             // Since default function is Gauss
@@ -79,6 +83,16 @@ namespace WindowsFormsApplication1
                         min = Form1._term[idx].m_minValue;
                         max = Form1._term[idx].m_maxValue;
                         Form1._term[idx].m_membershipFinction = new TriangleFunction(min, (min + max) / 2, max, 0);
+                        break;
+                    case 5: // S  
+                        min = Form1._term[idx].m_minValue;
+                        max = Form1._term[idx].m_maxValue;
+                        Form1._term[idx].m_membershipFinction = new SFunction(Convert.ToDouble(AInput.Text), Convert.ToDouble(BInput.Text), 0, 0);
+                        break;
+                    case 6: // Z  
+                        min = Form1._term[idx].m_minValue;
+                        max = Form1._term[idx].m_maxValue;
+                        Form1._term[idx].m_membershipFinction = new ZFunction(Convert.ToDouble(AInput.Text), Convert.ToDouble(BInput.Text), 0, 0);
                         break;
                // }
             }
@@ -153,6 +167,26 @@ namespace WindowsFormsApplication1
                     min = Form1._term[idx].m_minValue;
                     max = Form1._term[idx].m_maxValue;
                     Form1._term[idx].m_membershipFinction = new TriangleFunction(min, Convert.ToDouble(AInput.Text), max, 0);
+                    break;
+                case 5: // S
+                    if (AInput.Text == "" || BInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    min = Form1._term[idx].m_minValue;
+                    max = Form1._term[idx].m_maxValue;
+                    Form1._term[idx].m_membershipFinction = new SFunction(Convert.ToDouble(AInput.Text), Convert.ToDouble(BInput.Text), 0, 0);
+                    break;
+                case 6: // Z  
+                    if (AInput.Text == "" || BInput.Text == "")
+                    {
+                        MessageBox.Show("Error! Fields are empty.");
+                        break;
+                    }
+                    min = Form1._term[idx].m_minValue;
+                    max = Form1._term[idx].m_maxValue;
+                    Form1._term[idx].m_membershipFinction = new ZFunction(Convert.ToDouble(AInput.Text), Convert.ToDouble(BInput.Text), 0, 0);
                     break;
             }
 
@@ -250,13 +284,28 @@ namespace WindowsFormsApplication1
                     BInput.Visible = false;
                     AInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
                     break;
+                case 5: // S
+                    ALabel.Text = "a :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = true;
+                    BInput.Visible = true;
+                    break;
+                case 6: // Z
+                    ALabel.Text = "a :";
+                    ALabel.Visible = true;
+                    AInput.Visible = true;
+                    BLabel.Visible = true;
+                    BInput.Visible = true;
+                    break;
+
             }
         }
 
         private void AInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            (e.KeyChar != ','))
+            (e.KeyChar != ',') && ((e.KeyChar == '-') && ((sender as TextBox).SelectionStart != 0) && (sender as TextBox).Text.IndexOf('-') != 0)) 
             {
                 e.Handled = true;
             }
@@ -271,7 +320,7 @@ namespace WindowsFormsApplication1
         private void BInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            (e.KeyChar != ','))
+            (e.KeyChar != ',') && ((e.KeyChar == '-') && ((sender as TextBox).SelectionStart != 0) && (sender as TextBox).Text.IndexOf('-') != 0)) 
             {
                 e.Handled = true;
             }

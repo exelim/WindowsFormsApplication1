@@ -75,10 +75,12 @@
     <Compile Include="Classes\LexicalVariable.cs" />
     <Compile Include="Classes\MembershipFunctions\GaussFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\MembershipFunctionBase.cs" />
+    <Compile Include="Classes\MembershipFunctions\SFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\SigmoidFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\SingletonFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\TrapezoidalFunction.cs" />
     <Compile Include="Classes\MembershipFunctions\TriangleFunction.cs" />
+    <Compile Include="Classes\MembershipFunctions\ZFunction.cs" />
     <Compile Include="Classes\ProductionRule.cs" />
     <Compile Include="InputVariablesForm.cs">
       <SubType>Form</SubType>
