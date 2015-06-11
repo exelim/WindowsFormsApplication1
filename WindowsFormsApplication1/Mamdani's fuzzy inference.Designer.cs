@@ -80,13 +80,13 @@
             this.LVCountLabel.AutoSize = true;
             this.LVCountLabel.Location = new System.Drawing.Point(12, 23);
             this.LVCountLabel.Name = "LVCountLabel";
-            this.LVCountLabel.Size = new System.Drawing.Size(126, 13);
+            this.LVCountLabel.Size = new System.Drawing.Size(188, 13);
             this.LVCountLabel.TabIndex = 0;
-            this.LVCountLabel.Text = "Linguistic variables count";
+            this.LVCountLabel.Text = "Enter the number of linguistic variables";
             // 
             // LVCountUpDown
             // 
-            this.LVCountUpDown.Location = new System.Drawing.Point(144, 21);
+            this.LVCountUpDown.Location = new System.Drawing.Point(206, 21);
             this.LVCountUpDown.Name = "LVCountUpDown";
             this.LVCountUpDown.Size = new System.Drawing.Size(36, 20);
             this.LVCountUpDown.TabIndex = 2;
@@ -98,7 +98,7 @@
             // 
             // LVCountConfirmButton
             // 
-            this.LVCountConfirmButton.Location = new System.Drawing.Point(187, 21);
+            this.LVCountConfirmButton.Location = new System.Drawing.Point(249, 21);
             this.LVCountConfirmButton.Name = "LVCountConfirmButton";
             this.LVCountConfirmButton.Size = new System.Drawing.Size(75, 19);
             this.LVCountConfirmButton.TabIndex = 3;
@@ -485,7 +485,7 @@
             this.Controls.Add(this.LVCountUpDown);
             this.Controls.Add(this.LVCountLabel);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Mamdani\'s fuzzy inference";
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).EndInit();
             this.AddTermsPanel.ResumeLayout(false);
             this.AddTermsPanel.PerformLayout();

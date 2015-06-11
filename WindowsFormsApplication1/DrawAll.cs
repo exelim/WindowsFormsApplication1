@@ -18,8 +18,8 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             // Получим панель для рисования
             ZedGraph.GraphPane pane = AllTermsGraph.GraphPane;
-            pane.Title.Text = "Membership functions for " + Form1.currentLVName;
-            pane.XAxis.Title.Text = Form1.currentLVName;
+            pane.Title.Text = "Membership functions for \"" + Form1.currentLVName + "\"";
+            pane.XAxis.Title.Text = "\"" + Form1.currentLVName + "\"";
             pane.YAxis.Title.Text = "Membership Grade";
 
             pane.Legend.IsVisible = false;

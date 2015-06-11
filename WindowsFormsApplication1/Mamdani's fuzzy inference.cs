@@ -134,16 +134,31 @@ namespace WindowsFormsApplication1
                     // creating Label LV ID
                     Label IDlabel = new Label();
                     IDlabel.Name = "label_LVID_" + i;
-                    IDlabel.Text = "Id:";
+                    IDlabel.Text = "ID:";
                     IDlabel.Width = 20;
                     IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(IDlabel);
+
+                    var toolTip1 = new System.Windows.Forms.ToolTip();
+
+                    toolTip1.AutoPopDelay = 5000;
+                    toolTip1.InitialDelay = 500;
+                    toolTip1.ReshowDelay = 500;
+                    toolTip1.ShowAlways = true;
+                    toolTip1.IsBalloon = true;
+                    toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+                    toolTip1.ToolTipTitle = "ID:";
 
                     //creating TextBox for LV id
                     TextBox IDtextBox = new TextBox();
                     IDtextBox.Name = "textbox_LVID_" + i;
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                    IDtextBox.MouseHover += ChangeTip;
+
+                    toolTip1.SetToolTip(IDtextBox, IDtextBox.Text);
+                    //Form1.Children.Add(host);  //a container for windowsForm textBox 
+
                    /* IDtextBox.Text = "lvid_" + i; // DEBUG
 
                     // Debug start
@@ -166,8 +181,8 @@ namespace WindowsFormsApplication1
                     // creating Label LV name
                     Label Namelabel = new Label();
                     Namelabel.Name = "label_LVName_" + i;
-                    Namelabel.Text = "Linguistic var name:";
-                    Namelabel.Width = 110;
+                    Namelabel.Text = "Name:";
+                    Namelabel.Width = 35;
                     Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(Namelabel);
 
@@ -175,16 +190,38 @@ namespace WindowsFormsApplication1
                     TextBox NametextBox = new TextBox();
                     NametextBox.Name = "textbox_LVName_" + i;
                     NametextBox.Width = 100;
-                    NametextBox.Location = new Point(Namelabel.Location.X + Namelabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                    NametextBox.Location = new Point(Namelabel.Location.X + 50, LVCountLabel.Location.Y + (25 + 25 * i));
+                    NametextBox.MouseHover += ChangeTip;
                    // NametextBox.Text = "lvname_" + i; // DEBUG
                     this.Controls.Add(NametextBox);
+
+                    // creating Label LV type
+                    Label Typelabel = new Label();
+                    Typelabel.Name = "label_LVType_" + i;
+                    Typelabel.Text = "Type:";
+                    Typelabel.Width = 40;
+                    Typelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(Typelabel);
+
+                    // creating UpDown LV type
+                    ComboBox TypeList = new ComboBox();
+                    TypeList.Name = "List_LVType_" + i;
+                    TypeList.Width = 45;
+                    TypeList.Items.Add("IN");
+                    TypeList.Items.Add("OUT");
+                    if (i == lexicalVariablesCount - 1)
+                        TypeList.SelectedIndex = 1;
+                    else
+                        TypeList.SelectedIndex = 0;
+                    TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(TypeList);
 
                     // creating Label LV min range
                     Label MinRangelabel = new Label();
                     MinRangelabel.Name = "label_LVMinrange_" + i;
                     MinRangelabel.Text = "Range from:";
                     MinRangelabel.Width = 65;
-                    MinRangelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    MinRangelabel.Location = new Point(TypeList.Location.X + TypeList.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(MinRangelabel);
 
                     // creating UpDown LV min range
@@ -197,8 +234,8 @@ namespace WindowsFormsApplication1
                     // creating Label LV max range
                     Label MaxRangelabel = new Label();
                     MaxRangelabel.Name = "label_LVMaxrange_" + i;
-                    MaxRangelabel.Text = "Range to:";
-                    MaxRangelabel.Width = 60;
+                    MaxRangelabel.Text = "to:";
+                    MaxRangelabel.Width = 20;
                     MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(MaxRangelabel);
 
@@ -225,26 +262,6 @@ namespace WindowsFormsApplication1
                     */
                     this.Controls.Add(MaxRangeUpDown);
 
-                    // creating Label LV type
-                    Label Typelabel = new Label();
-                    Typelabel.Name = "label_LVType_" + i;
-                    Typelabel.Text = "Type:";
-                    Typelabel.Width = 40;
-                    Typelabel.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(Typelabel);
-
-                    // creating UpDown LV type
-                    ComboBox TypeList = new ComboBox();
-                    TypeList.Name = "List_LVType_" + i;
-                    TypeList.Width = 45;
-                    TypeList.Items.Add("IN");
-                    TypeList.Items.Add("OUT");
-                    if (i == lexicalVariablesCount - 1)
-                        TypeList.SelectedIndex = 1;
-                    else
-                        TypeList.SelectedIndex = 0;
-                    TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                    this.Controls.Add(TypeList);
                   /*  if (i == 2) // DEBUG
                     {
                         TypeList.SelectedIndex = 1; // DEBUG
@@ -252,9 +269,9 @@ namespace WindowsFormsApplication1
                     // creating Label Terms count
                     Label TermsCountlabel = new Label();
                     TermsCountlabel.Name = "label_LVTermsCount_" + i;
-                    TermsCountlabel.Text = "Terms count:";
-                    TermsCountlabel.Width = 70;
-                    TermsCountlabel.Location = new Point(TypeList.Location.X + TypeList.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    TermsCountlabel.Text = "Number of terms:";
+                    TermsCountlabel.Width = 90;
+                    TermsCountlabel.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(TermsCountlabel);
 
                     // creating UpDown terms Count
@@ -269,7 +286,7 @@ namespace WindowsFormsApplication1
                     Button AddTerms = new Button();
                     AddTerms.Name = "button_AddTerms_" + i;
                     AddTerms.Width = 90;
-                    AddTerms.Text = "Add terms";
+                    AddTerms.Text = "Edit terms";
                     AddTerms.Location = new Point(TermsCountUpDown.Location.X + TermsCountUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     AddTerms.Click += AddTermsButton_Clicked;
                     this.Controls.Add(AddTerms);
@@ -283,6 +300,12 @@ namespace WindowsFormsApplication1
                 LVNextButton.Click += NextButton_Clicked;
                 this.Controls.Add(LVNextButton);
             }
+        }
+
+        void ChangeTip(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.Show(((TextBox)sender).Text, (TextBox)sender, 0, 23, 1000);
         }
 
         void AddTermsButton_Clicked(object sender, EventArgs e)
@@ -452,7 +475,7 @@ namespace WindowsFormsApplication1
                     // creating Label Term ID
                     Label IDlabel = new Label();
                     IDlabel.Name = "label_TermID_" + i;
-                    IDlabel.Text = "Id:";
+                    IDlabel.Text = "ID:";
                     IDlabel.Width = 20;
                     IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
                     AddTermsPanel.Controls.Add(IDlabel);
@@ -492,13 +515,14 @@ namespace WindowsFormsApplication1
                          }
                      }
                      // Debug en*/
+                    IDtextBox.MouseHover += ChangeTip;
                     AddTermsPanel.Controls.Add(IDtextBox);
 
                     // creating Label Term name
                     Label Namelabel = new Label();
                     Namelabel.Name = "label_TermsName_" + i;
-                    Namelabel.Text = "Terms name:";
-                    Namelabel.Width = 70;
+                    Namelabel.Text = "Name:";
+                    Namelabel.Width = 35;
                     Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                     AddTermsPanel.Controls.Add(Namelabel);
 
@@ -510,6 +534,8 @@ namespace WindowsFormsApplication1
                     // NametextBox.Text = "tmname_" + i;  // DEBUG
                     if (idx != -1)
                         NametextBox.Text = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_name;
+
+                    IDtextBox.MouseHover += ChangeTip;
                     AddTermsPanel.Controls.Add(NametextBox);
 
                     // creating Label Term min range
@@ -560,8 +586,8 @@ namespace WindowsFormsApplication1
                     // creating Label Term max range
                     Label MaxRangelabel = new Label();
                     MaxRangelabel.Name = "label_TermMaxrange_" + i;
-                    MaxRangelabel.Text = "Range to:";
-                    MaxRangelabel.Width = 60;
+                    MaxRangelabel.Text = "to:";
+                    MaxRangelabel.Width = 20;
                     MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                     AddTermsPanel.Controls.Add(MaxRangelabel);
 
@@ -605,7 +631,7 @@ namespace WindowsFormsApplication1
                     // creating add membership button
                     Button AddmembershipFunctionButton = new Button();
                     AddmembershipFunctionButton.Name = "AddmembershipFunctionButton_" + i;
-                    AddmembershipFunctionButton.Text = "Add membership function";
+                    AddmembershipFunctionButton.Text = "Edit membership function";
                     AddmembershipFunctionButton.Width = 150;
                     AddmembershipFunctionButton.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                     AddTermsPanel.Controls.Add(AddmembershipFunctionButton);
@@ -622,19 +648,19 @@ namespace WindowsFormsApplication1
             AddTermsPanel.Controls.Add(TermsOKButton);
             TermsOKButton.Click += OKButton_Clicked;
 
-            // creating Cancel button
+           /* // creating Cancel button
             Button termsCancelButton = new Button();
             termsCancelButton.Name = "TermCancelButton";
             termsCancelButton.Text = "Cancel";
             termsCancelButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + termsCount * 25 + 25);
             AddTermsPanel.Controls.Add(termsCancelButton);
-            termsCancelButton.Click += CancelButton_Clicked;
+            termsCancelButton.Click += CancelButton_Clicked;*/
 
             // Draw all
             Button DrawAllButton = new Button();
             DrawAllButton.Name = "DrawAllButton";
             DrawAllButton.Text = "Draw all!";
-            DrawAllButton.Location = new Point(TermCountLabel.Location.X + 200, TermCountLabel.Location.Y + termsCount * 25 + 25);
+            DrawAllButton.Location = new Point(TermCountLabel.Location.X + 100, TermCountLabel.Location.Y + termsCount * 25 + 25);
             AddTermsPanel.Controls.Add(DrawAllButton);
             DrawAllButton.Click += DrawAll_Clicked;
 

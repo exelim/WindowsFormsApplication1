@@ -197,8 +197,8 @@ namespace WindowsFormsApplication1
         {
             // Получим панель для рисования
             ZedGraph.GraphPane pane = MembershipFunctionGraph.GraphPane;
-            pane.Title.Text = "Membersip function for " + Form1._term[idx].m_name;
-            pane.XAxis.Title.Text = Form1._term[idx].m_name;
+            pane.Title.Text = "Membersip function for \"" + Form1._term[idx].m_name + "\"";
+            pane.XAxis.Title.Text = "\"" + Form1._term[idx].m_name + "\"";
             pane.YAxis.Title.Text = "Membership Grade";
 
             // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы

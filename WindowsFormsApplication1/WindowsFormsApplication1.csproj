@@ -104,19 +104,19 @@
     <Compile Include="Structures\ControlVariable.cs" />
     <Compile Include="Structures\Node.cs" />
     <Compile Include="Structures\ProductionRulesTerm.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Mamdani%27s fuzzy inference.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Mamdani%27s fuzzy inference.Designer.cs">
+      <DependentUpon>Mamdani%27s fuzzy inference.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddTermForm.resx">
       <DependentUpon>AddTermForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Mamdani%27s fuzzy inference.resx">
+      <DependentUpon>Mamdani%27s fuzzy inference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputVariablesForm.resx">
       <DependentUpon>InputVariablesForm.cs</DependentUpon>
