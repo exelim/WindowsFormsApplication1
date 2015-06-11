@@ -39,6 +39,8 @@ namespace WindowsFormsApplication1
         public static Array arr;
         public static LexicalVariable[] lexicalVariables;
         static public ProductionRulesTerm[] _term;
+        int outVariablesCount = 0;
+        int[] previousTermsCount;
 
         public static double[] inputVariables;
 
@@ -120,6 +122,8 @@ namespace WindowsFormsApplication1
                 {
                     _terms[i] = new Dictionary<int, ProductionRulesTerm>();
                 }
+
+                previousTermsCount = new int[lexicalVariablesCount];
 
                 for (int i = 0; i < lexicalVariablesCount; i++)
                 {
@@ -328,6 +332,49 @@ namespace WindowsFormsApplication1
                 if (!isOk)
                     return;
 
+                string ID = this.Controls["textbox_LVID_" + number].Text;
+                string LVName = this.Controls["textbox_LVName_" + number].Text;
+                int LVMinValue = Convert.ToInt32(this.Controls["upDown_LVMinrange_" + number].Text);
+                int LVMaxValue = Convert.ToInt32(this.Controls["upDown_LVMaxrange_" + number].Text);
+                VariableType type = VariableType.IN;
+                switch (this.Controls["List_LVType_" + number].Text)
+                {
+                    case "IN":
+                        type = VariableType.IN;
+                        break;
+                    case "OUT":
+                        type = VariableType.OUT;
+                        break;
+                }
+
+                if (outVariablesCount > 1)
+                {
+                    MessageBox.Show("Error! Single OUT variable should be present in the lexical variables list and it should be the last one. There are: " + outVariablesCount + " now.");
+                    return;
+                }
+
+                // Fake
+                ProductionRulesTerm[] terms = new ProductionRulesTerm[termsCount];
+
+                if (lexicalVariables[number] == null)
+                {
+                    if (type == VariableType.OUT)
+                    {
+                        outVariablesCount++;
+                    }
+                    lexicalVariables[number] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, terms, type);
+                }
+                else
+                {
+                    previousTermsCount[number] = lexicalVariables[number].m_termsCount;
+                    lexicalVariables[number].m_id = ID;
+                    lexicalVariables[number].m_name = LVName;
+                    lexicalVariables[number].m_minValue = LVMinValue;
+                    lexicalVariables[number].m_maxValue = LVMaxValue;
+                    lexicalVariables[number].m_termsCount = termsCount;
+                    lexicalVariables[number].m_type = type;
+                }
+
                 termsCount = Convert.ToInt32(this.Controls["upDown_TermsCount_" + button.Name.Substring(button.Name.Length - 1, 1)].Text);
 
                 if (termsCount <= 0)
@@ -353,7 +400,7 @@ namespace WindowsFormsApplication1
         {
 
             fullTermsCount = 0;
-            int outVariablesCount = 0;
+            
 
             for (int i = 0; i < lexicalVariablesCount; i++)
             {
@@ -361,7 +408,7 @@ namespace WindowsFormsApplication1
                 if (!isOk)
                     return;
 
-                string ID = this.Controls["textbox_LVID_" + i].Text;
+               /* string ID = this.Controls["textbox_LVID_" + i].Text;
                 string LVName = this.Controls["textbox_LVName_" + i].Text;
                 int LVMinValue = Convert.ToInt32(this.Controls["upDown_LVMinrange_" + i].Text);
                 int LVMaxValue = Convert.ToInt32(this.Controls["upDown_LVMaxrange_" + i].Text);
@@ -383,7 +430,7 @@ namespace WindowsFormsApplication1
                 {
                     MessageBox.Show("Error! Single OUT variable should be present in the lexical variables list and it should be the last one. There are: " + outVariablesCount + " now.");
                     return;
-                }
+                }*/
 
 
                 ProductionRulesTerm[] terms = new ProductionRulesTerm[termsCount];
@@ -405,7 +452,9 @@ namespace WindowsFormsApplication1
 
                         terms[j] = _terms[i][j];
                     }
-                    lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, terms, type);
+                    lexicalVariables[i].m_termsCount = termsCount;
+                    lexicalVariables[i].m_terms = terms;
+                   // lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, terms, type);
                 }
             }
 
@@ -423,7 +472,6 @@ namespace WindowsFormsApplication1
             // MembershipFunctionChoise  choiseFunctionForm = new MembershipFunctionChoise();
             //choiseFunctionForm.ShowDialog();
             //AddTermsPanel.Visible = true;
-
         }
 
         bool checkLinguisticVariable(int idx)
@@ -482,16 +530,24 @@ namespace WindowsFormsApplication1
 
             int idx = -1;
 
-          /*  for (int i = 0; i < lexicalVariables.Length; i++)
+            for (int i = 0; i < lexicalVariables.Length; i++)
             {
-                if (lexicalVariables.ElementAt(i) != null && lexicalVariables.ElementAt(i).m_name == currentLVName)
+                if (lexicalVariables.ElementAt(i) != null && lexicalVariables.ElementAt(i).m_name == currentLVName && previousTermsCount[i] == lexicalVariables.ElementAt(i).m_termsCount)
                     idx = i;
-            }*/
+            }
+            if (idx == -1)
+            {
+                _terms[number] = new Dictionary<int, ProductionRulesTerm>();
+            }
 
             //if ( idx != -1 && lexicalVariables.ElementAt(idx).m_termsCount == termsCount)
            // {
                 for (int i = 0; i < termsCount; i++)
                 {
+                    if( idx == -1 /*|| lexicalVariables.ElementAt(idx).m_terms.Length > i + 1*/ || lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).ToString() == "")
+                    {
+                        idx = -1;
+                    }
                     // creating Label Terms count
                     Label Numberlabel = new Label();
                     Numberlabel.Name = "label_TermsCount_" + i;
@@ -755,9 +811,19 @@ namespace WindowsFormsApplication1
         void OKButton_Clicked(object sender, EventArgs e)
         {
             bool shouldClose = true;
+            ProductionRulesTerm[] terms = new ProductionRulesTerm[termsCount];
+            if (_terms[number].Count == termsCount)
+            {
+                for (int i = 0; i < termsCount; i++)
+                {
+                    terms[i] = _terms[number][i];
+                }
+            }
+
+            lexicalVariables.ElementAt(number).m_terms = terms;
             for (int i = 0; i < termsCount; i++)
             {
-                if (_terms.ElementAt(number).Count < termsCount || _terms[number][i].m_membershipFinction == null)
+                if (lexicalVariables.ElementAt(number).m_terms.Length < termsCount || lexicalVariables.ElementAt(number).m_terms[i].m_membershipFinction == null)
                 {
                     MessageBox.Show("Error! Please add memebership functions for all terms.");
                     shouldClose = false;
