@@ -33,10 +33,35 @@
             this.LVCountUpDown = new System.Windows.Forms.NumericUpDown();
             this.LVCountConfirmButton = new System.Windows.Forms.Button();
             this.AddTermsPanel = new System.Windows.Forms.Panel();
+            this.menuStrip5 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.ChooseFunctionsPanel = new System.Windows.Forms.Panel();
+            this.menuStrip4 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.InputVariablesPanel = new System.Windows.Forms.Panel();
+            this.menuStrip3 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.ProductionRulesInputPanel = new System.Windows.Forms.Panel();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.ResultPanel = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResultDescriptionLabel = new System.Windows.Forms.Label();
             this.ResultLabel = new System.Windows.Forms.Label();
             this.ResultBackButton = new System.Windows.Forms.Button();
@@ -67,18 +92,31 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ChooseFunctionsNextButton = new System.Windows.Forms.Button();
             this.TermCountLabel = new System.Windows.Forms.Label();
+            this.menuStrip6 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).BeginInit();
             this.AddTermsPanel.SuspendLayout();
+            this.menuStrip5.SuspendLayout();
             this.ChooseFunctionsPanel.SuspendLayout();
+            this.menuStrip4.SuspendLayout();
             this.InputVariablesPanel.SuspendLayout();
+            this.menuStrip3.SuspendLayout();
             this.ProductionRulesInputPanel.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.ResultPanel.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.menuStrip6.SuspendLayout();
             this.SuspendLayout();
             // 
             // LVCountLabel
             // 
             this.LVCountLabel.AutoSize = true;
-            this.LVCountLabel.Location = new System.Drawing.Point(12, 23);
+            this.LVCountLabel.Location = new System.Drawing.Point(12, 34);
             this.LVCountLabel.Name = "LVCountLabel";
             this.LVCountLabel.Size = new System.Drawing.Size(188, 13);
             this.LVCountLabel.TabIndex = 0;
@@ -86,7 +124,7 @@
             // 
             // LVCountUpDown
             // 
-            this.LVCountUpDown.Location = new System.Drawing.Point(206, 21);
+            this.LVCountUpDown.Location = new System.Drawing.Point(206, 32);
             this.LVCountUpDown.Name = "LVCountUpDown";
             this.LVCountUpDown.Size = new System.Drawing.Size(36, 20);
             this.LVCountUpDown.TabIndex = 2;
@@ -98,7 +136,7 @@
             // 
             // LVCountConfirmButton
             // 
-            this.LVCountConfirmButton.Location = new System.Drawing.Point(249, 21);
+            this.LVCountConfirmButton.Location = new System.Drawing.Point(249, 32);
             this.LVCountConfirmButton.Name = "LVCountConfirmButton";
             this.LVCountConfirmButton.Size = new System.Drawing.Size(75, 19);
             this.LVCountConfirmButton.TabIndex = 3;
@@ -108,6 +146,7 @@
             // 
             // AddTermsPanel
             // 
+            this.AddTermsPanel.Controls.Add(this.menuStrip5);
             this.AddTermsPanel.Controls.Add(this.ChooseFunctionsPanel);
             this.AddTermsPanel.Controls.Add(this.TermCountLabel);
             this.AddTermsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -117,8 +156,48 @@
             this.AddTermsPanel.TabIndex = 4;
             this.AddTermsPanel.Visible = false;
             // 
+            // menuStrip5
+            // 
+            this.menuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem13,
+            this.toolStripMenuItem16});
+            this.menuStrip5.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip5.Name = "menuStrip5";
+            this.menuStrip5.Size = new System.Drawing.Size(1024, 24);
+            this.menuStrip5.TabIndex = 47;
+            this.menuStrip5.Text = "menuStrip5";
+            // 
+            // toolStripMenuItem13
+            // 
+            this.toolStripMenuItem13.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem14,
+            this.toolStripMenuItem15});
+            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(50, 20);
+            this.toolStripMenuItem13.Text = "Menu";
+            // 
+            // toolStripMenuItem14
+            // 
+            this.toolStripMenuItem14.Name = "toolStripMenuItem14";
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem14.Text = "Save";
+            this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
+            // 
+            // toolStripMenuItem15
+            // 
+            this.toolStripMenuItem15.Name = "toolStripMenuItem15";
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem15.Text = "Load";;
+            // 
+            // toolStripMenuItem16
+            // 
+            this.toolStripMenuItem16.Name = "toolStripMenuItem16";
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(52, 20);
+            this.toolStripMenuItem16.Text = "About";
+            // 
             // ChooseFunctionsPanel
             // 
+            this.ChooseFunctionsPanel.Controls.Add(this.menuStrip4);
             this.ChooseFunctionsPanel.Controls.Add(this.InputVariablesPanel);
             this.ChooseFunctionsPanel.Controls.Add(this.ChooseFunctionsBackButton);
             this.ChooseFunctionsPanel.Controls.Add(this.FuzzificationComboBox);
@@ -137,8 +216,47 @@
             this.ChooseFunctionsPanel.Size = new System.Drawing.Size(1024, 448);
             this.ChooseFunctionsPanel.TabIndex = 6;
             // 
+            // menuStrip4
+            // 
+            this.menuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem9,
+            this.toolStripMenuItem12});
+            this.menuStrip4.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip4.Name = "menuStrip4";
+            this.menuStrip4.Size = new System.Drawing.Size(1024, 24);
+            this.menuStrip4.TabIndex = 47;
+            this.menuStrip4.Text = "menuStrip4";
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem10,
+            this.toolStripMenuItem11});
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(50, 20);
+            this.toolStripMenuItem9.Text = "Menu";
+            // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem10.Text = "Save";
+            // 
+            // toolStripMenuItem11
+            // 
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem11.Text = "Load";
+            // 
+            // toolStripMenuItem12
+            // 
+            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(52, 20);
+            this.toolStripMenuItem12.Text = "About";
+            // 
             // InputVariablesPanel
             // 
+            this.InputVariablesPanel.Controls.Add(this.menuStrip3);
             this.InputVariablesPanel.Controls.Add(this.ProductionRulesInputPanel);
             this.InputVariablesPanel.Controls.Add(this.InputVariables);
             this.InputVariablesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -148,8 +266,47 @@
             this.InputVariablesPanel.TabIndex = 31;
             this.InputVariablesPanel.Visible = false;
             // 
+            // menuStrip3
+            // 
+            this.menuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem8});
+            this.menuStrip3.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip3.Name = "menuStrip3";
+            this.menuStrip3.Size = new System.Drawing.Size(1024, 24);
+            this.menuStrip3.TabIndex = 47;
+            this.menuStrip3.Text = "menuStrip3";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7});
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(50, 20);
+            this.toolStripMenuItem5.Text = "Menu";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Text = "Save";
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Text = "Load";
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(52, 20);
+            this.toolStripMenuItem8.Text = "About";
+            // 
             // ProductionRulesInputPanel
             // 
+            this.ProductionRulesInputPanel.Controls.Add(this.menuStrip2);
             this.ProductionRulesInputPanel.Controls.Add(this.ResultPanel);
             this.ProductionRulesInputPanel.Controls.Add(this.button2);
             this.ProductionRulesInputPanel.Controls.Add(this.button1);
@@ -171,8 +328,47 @@
             this.ProductionRulesInputPanel.TabIndex = 2;
             this.ProductionRulesInputPanel.Visible = false;
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem4});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(1024, 24);
+            this.menuStrip2.TabIndex = 47;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 20);
+            this.toolStripMenuItem1.Text = "Menu";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem2.Text = "Save";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem3.Text = "Load";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(52, 20);
+            this.toolStripMenuItem4.Text = "About";
+            // 
             // ResultPanel
             // 
+            this.ResultPanel.Controls.Add(this.menuStrip1);
             this.ResultPanel.Controls.Add(this.ResultDescriptionLabel);
             this.ResultPanel.Controls.Add(this.ResultLabel);
             this.ResultPanel.Controls.Add(this.ResultBackButton);
@@ -183,6 +379,44 @@
             this.ResultPanel.Size = new System.Drawing.Size(1024, 448);
             this.ResultPanel.TabIndex = 8;
             this.ResultPanel.Visible = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1024, 24);
+            this.menuStrip1.TabIndex = 46;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // ResultDescriptionLabel
             // 
@@ -216,7 +450,7 @@
             // 
             // FinalGraph
             // 
-            this.FinalGraph.Location = new System.Drawing.Point(24, 21);
+            this.FinalGraph.Location = new System.Drawing.Point(24, 38);
             this.FinalGraph.Name = "FinalGraph";
             this.FinalGraph.ScrollGrace = 0D;
             this.FinalGraph.ScrollMaxX = 0D;
@@ -252,7 +486,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(14, 15);
+            this.label7.Location = new System.Drawing.Point(14, 28);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(274, 20);
             this.label7.TabIndex = 5;
@@ -475,28 +709,86 @@
             this.TermCountLabel.TabIndex = 5;
             this.TermCountLabel.Text = "Terms :";
             // 
+            // menuStrip6
+            // 
+            this.menuStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem17,
+            this.toolStripMenuItem20});
+            this.menuStrip6.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip6.Name = "menuStrip6";
+            this.menuStrip6.Size = new System.Drawing.Size(1024, 24);
+            this.menuStrip6.TabIndex = 47;
+            this.menuStrip6.Text = "menuStrip6";
+            // 
+            // toolStripMenuItem17
+            // 
+            this.toolStripMenuItem17.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem18,
+            this.toolStripMenuItem19});
+            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
+            this.toolStripMenuItem17.Size = new System.Drawing.Size(50, 20);
+            this.toolStripMenuItem17.Text = "Menu";
+            // 
+            // toolStripMenuItem18
+            // 
+            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
+            this.toolStripMenuItem18.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem18.Text = "Save";
+            this.toolStripMenuItem18.Click += new System.EventHandler(this.toolStripMenuItem18_Click);
+            // 
+            // toolStripMenuItem19
+            // 
+            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
+            this.toolStripMenuItem19.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem19.Text = "Load";
+            this.toolStripMenuItem19.Click += new System.EventHandler(this.toolStripMenuItem19_Click);
+            // 
+            // toolStripMenuItem20
+            // 
+            this.toolStripMenuItem20.Name = "toolStripMenuItem20";
+            this.toolStripMenuItem20.Size = new System.Drawing.Size(52, 20);
+            this.toolStripMenuItem20.Text = "About";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 448);
+            this.Controls.Add(this.menuStrip6);
             this.Controls.Add(this.AddTermsPanel);
             this.Controls.Add(this.LVCountConfirmButton);
             this.Controls.Add(this.LVCountUpDown);
             this.Controls.Add(this.LVCountLabel);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Mamdani\'s fuzzy inference";
             ((System.ComponentModel.ISupportInitialize)(this.LVCountUpDown)).EndInit();
             this.AddTermsPanel.ResumeLayout(false);
             this.AddTermsPanel.PerformLayout();
+            this.menuStrip5.ResumeLayout(false);
+            this.menuStrip5.PerformLayout();
             this.ChooseFunctionsPanel.ResumeLayout(false);
             this.ChooseFunctionsPanel.PerformLayout();
+            this.menuStrip4.ResumeLayout(false);
+            this.menuStrip4.PerformLayout();
             this.InputVariablesPanel.ResumeLayout(false);
             this.InputVariablesPanel.PerformLayout();
+            this.menuStrip3.ResumeLayout(false);
+            this.menuStrip3.PerformLayout();
             this.ProductionRulesInputPanel.ResumeLayout(false);
             this.ProductionRulesInputPanel.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResultPanel.ResumeLayout(false);
             this.ResultPanel.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.menuStrip6.ResumeLayout(false);
+            this.menuStrip6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -542,6 +834,38 @@
         private System.Windows.Forms.Label ResultDescriptionLabel;
         private System.Windows.Forms.Label TotalRulesNumberLabel;
         private System.Windows.Forms.Label CurrentRuleNumberLabel;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
+        private System.Windows.Forms.MenuStrip menuStrip4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
+        private System.Windows.Forms.MenuStrip menuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.MenuStrip menuStrip6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem18;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem19;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem20;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

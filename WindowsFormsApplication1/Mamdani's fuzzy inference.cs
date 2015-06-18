@@ -19,6 +19,7 @@ using WindowsFormsApplication1.Classes.MembershipFunctions;
 using WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas;
 
 using WindowsFormsApplication1.RuleParsing;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -69,7 +70,9 @@ namespace WindowsFormsApplication1
         public static AccumulatiomFormulaBase accumulation_function;
         public static FuzzificationFormulaBase fuzzification_function;
 
+        //load from file
 
+        bool inputVariablesLoadFromFile = false;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,43 +142,12 @@ namespace WindowsFormsApplication1
                     IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
                     this.Controls.Add(IDlabel);
 
-                    var toolTip1 = new System.Windows.Forms.ToolTip();
-
-                    toolTip1.AutoPopDelay = 5000;
-                    toolTip1.InitialDelay = 500;
-                    toolTip1.ReshowDelay = 500;
-                    toolTip1.ShowAlways = true;
-                    toolTip1.IsBalloon = true;
-                    toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-                    toolTip1.ToolTipTitle = "ID:";
-
                     //creating TextBox for LV id
                     TextBox IDtextBox = new TextBox();
                     IDtextBox.Name = "textbox_LVID_" + i;
                     IDtextBox.Width = 50;
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
                     IDtextBox.MouseHover += ChangeTip;
-
-                    toolTip1.SetToolTip(IDtextBox, IDtextBox.Text);
-                    //Form1.Children.Add(host);  //a container for windowsForm textBox 
-
-                   /* IDtextBox.Text = "lvid_" + i; // DEBUG
-
-                    // Debug start
-                    if (i == 0)
-                    {
-                        IDtextBox.Text = "s"; // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        IDtextBox.Text = "f"; // DEBUG
-                    }
-                    else if (i == 2)
-                    {
-                        IDtextBox.Text = "t"; // DEBUG
-                    }
-                    // Debug end
-                    */
                     this.Controls.Add(IDtextBox);
 
                     // creating Label LV name
@@ -244,28 +216,8 @@ namespace WindowsFormsApplication1
                     MaxRangeUpDown.Name = "upDown_LVMaxrange_" + i;
                     MaxRangeUpDown.Width = 36;
                     MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
-                   /* MaxRangeUpDown.Value = 1 + (10 * i);  // DEBUG
-                    // Debug start
-                    if (i == 0)
-                    {
-                        MaxRangeUpDown.Value = 10;  // DEBUG
-                    }
-                    else if (i == 1) // DEBUG
-                    {
-                        MaxRangeUpDown.Value = 10;  // DEBUG
-                    }
-                    else if (i == 2)
-                    {
-                        MaxRangeUpDown.Value = 30;  // DEBUG
-                    }
-                    // Debug en
-                    */
                     this.Controls.Add(MaxRangeUpDown);
 
-                  /*  if (i == 2) // DEBUG
-                    {
-                        TypeList.SelectedIndex = 1; // DEBUG
-                    }*/
                     // creating Label Terms count
                     Label TermsCountlabel = new Label();
                     TermsCountlabel.Name = "label_LVTermsCount_" + i;
@@ -290,6 +242,14 @@ namespace WindowsFormsApplication1
                     AddTerms.Location = new Point(TermsCountUpDown.Location.X + TermsCountUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
                     AddTerms.Click += AddTermsButton_Clicked;
                     this.Controls.Add(AddTerms);
+
+                    // creating Label Terms count
+                    Label isOk = new Label();
+                    isOk.Name = "isOk_" + i;
+                    isOk.Text = "Not good =(";
+                    isOk.Width = 90;
+                    isOk.Location = new Point(AddTerms.Location.X + AddTerms.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i) + 4);
+                    this.Controls.Add(isOk);
                 }
 
                 // creating OK button
@@ -515,34 +475,7 @@ namespace WindowsFormsApplication1
                     IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, TermCountLabel.Location.Y + (25 + 25 * i));
                     if (idx != -1)
                         IDtextBox.Text = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_ID;
-                    /* // Debug start
-                     if (termsCount == 3)
-                     {
-                         if (i == 0)
-                         {
-                             IDtextBox.Text = "p";  // DEBUG
-                         }
-                         else if (i == 1) // DEBUG
-                         {
-                             IDtextBox.Text = "g";  // DEBUG
-                         }
-                         else if (i == 2)
-                         {
-                             IDtextBox.Text = "e";  // DEBUG
-                         }
-                     }
-                     else
-                     {
-                         if (i == 0)
-                         {
-                             IDtextBox.Text = "b";  // DEBUG
-                         }
-                         else if (i == 1) // DEBUG
-                         {
-                             IDtextBox.Text = "g";  // DEBUG
-                         }
-                     }
-                     // Debug en*/
+
                     IDtextBox.MouseHover += ChangeTip;
                     AddTermsPanel.Controls.Add(IDtextBox);
 
@@ -581,34 +514,7 @@ namespace WindowsFormsApplication1
                     MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                     if (idx != -1)
                         MinRangeUpDown.Value = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_minValue;
-                    /* // Debug start
-                     if (termsCount == 3)
-                     {
-                         if (i == 0)
-                         {
-                             MinRangeUpDown.Value = 0;  // DEBUG
-                         }
-                         else if (i == 1) // DEBUG
-                         {
-                             MinRangeUpDown.Value = 3;  // DEBUG
-                         }
-                         else if (i == 2)
-                         {
-                             MinRangeUpDown.Value = 4;  // DEBUG
-                         }
-                     }
-                     else
-                     {
-                         if (i == 0)
-                         {
-                             MinRangeUpDown.Value = 0;  // DEBUG
-                         }
-                         else if (i == 1) // DEBUG
-                         {
-                             MinRangeUpDown.Value = 2;  // DEBUG
-                         }
-                     }
-                     // Debug en*/
+
                     AddTermsPanel.Controls.Add(MinRangeUpDown);
 
                     // creating Label Term max range
@@ -626,34 +532,7 @@ namespace WindowsFormsApplication1
                     MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, TermCountLabel.Location.Y + (25 + 25 * i));
                     if (idx != -1)
                         MaxRangeUpDown.Value = lexicalVariables.ElementAt(idx).m_terms.ElementAt(i).m_maxValue;
-                    /* // Debug start
-                     if (termsCount == 3)
-                     {
-                         if (i == 0)
-                         {
-                             MaxRangeUpDown.Value = 6;  // DEBUG
-                         }
-                         else if (i == 1) // DEBUG
-                         {
-                             MaxRangeUpDown.Value = 8;  // DEBUG
-                         }
-                         else if (i == 2)
-                         {
-                             MaxRangeUpDown.Value = 10;  // DEBUG
-                         }
-                     }
-                     else
-                     {
-                         if (i == 0)
-                         {
-                             MaxRangeUpDown.Value = 8;  // DEBUG
-                         }
-                         else if (i == 1) // DEBUG
-                         {
-                             MaxRangeUpDown.Value = 10;  // DEBUG
-                         }
-                     }
-                     // Debug en*/
+                   
                     AddTermsPanel.Controls.Add(MaxRangeUpDown);
 
                     // creating add membership button
@@ -768,6 +647,8 @@ namespace WindowsFormsApplication1
             {
                 AddTermsPanel.Visible = false;
             }
+
+            this.Controls["isOk_" + number].Text = "All is good =)";
         }
 
         void CancelButton_Clicked(object sender, EventArgs e)
@@ -784,20 +665,20 @@ namespace WindowsFormsApplication1
             this.Width = 500;
             if (!choseFunctionFormInitialized)
             {
-                AggregationComboBox.Items.Add("Limited Function");
                 AggregationComboBox.Items.Add("Algebraic Function");
+                AggregationComboBox.Items.Add("Limited Function");
                 AggregationComboBox.Items.Add("MaxMin Function");
-                AggregationComboBox.SelectedIndex = 0;
+                AggregationComboBox.SelectedIndex = 1;
 
+                ActivisationComboBox.Items.Add("Avarage Function");
                 ActivisationComboBox.Items.Add("Min Function");
                 ActivisationComboBox.Items.Add("Prod Function");
-                ActivisationComboBox.Items.Add("Avarage Function");
-                ActivisationComboBox.SelectedIndex = 0;
+                ActivisationComboBox.SelectedIndex = 1;
 
-                AccumulationComboBox.Items.Add("Limited Function");
                 AccumulationComboBox.Items.Add("Algebraic Function");
+                AccumulationComboBox.Items.Add("Limited Function");
                 AccumulationComboBox.Items.Add("MaxMin Function");
-                AccumulationComboBox.SelectedIndex = 0;
+                AccumulationComboBox.SelectedIndex = 1;
 
                 FuzzificationComboBox.Items.Add("Center of gravity Function");
                 FuzzificationComboBox.Items.Add("Center of gravity point sets Function");
@@ -888,6 +769,8 @@ namespace WindowsFormsApplication1
         void FillInputVariablesForm()
         {
             this.Width = 500;
+            if (inputVariablesLoadFromFile)
+                return;
             inputVariables = new double[lexicalVariablesCount - 1];
 
             for (int i = 0; i < lexicalVariablesCount - 1 /*Since last is the outout value*/; i++)
@@ -1325,6 +1208,487 @@ namespace WindowsFormsApplication1
             int index = prodRulesTB.SelectionStart;
             int line = prodRulesTB.GetLineFromCharIndex(index);
             CurrentRuleNumberLabel.Text = "Current rule: " + (line + 1).ToString();
+        }
+
+        private void toolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem18_Click(sender, e);
+        }
+
+        private void toolStripMenuItem18_Click(object sender, EventArgs e)
+        {
+            if (lexicalVariables == null)
+            {
+                MessageBox.Show("You can save only when you'll be at the next stage of the algorithm");
+                return;
+            }
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                StreamWriter write_text;  //Класс для записи в файл
+                FileInfo file = new FileInfo(saveFileDialog1.FileName);
+                write_text = new StreamWriter( file.FullName ); //Дописываем инфу в файл, если файла не существует он создастся
+                //  lexical variables count
+                write_text.WriteLine(lexicalVariables.Length.ToString());
+                // lexical variables data
+                if (lexicalVariables.Length == 0)
+                {
+                    write_text.Close(); // Закрываем файл
+                    return;
+                }
+
+                for (int i = 0; i < lexicalVariables.Length; i++)
+                {
+                    write_text.WriteLine(lexicalVariables.ElementAt(i).m_id.ToString());
+                    write_text.WriteLine(lexicalVariables.ElementAt(i).m_name.ToString());
+                    write_text.WriteLine(lexicalVariables.ElementAt(i).m_type.ToString());
+                    write_text.WriteLine(lexicalVariables.ElementAt(i).m_minValue.ToString());
+                    write_text.WriteLine(lexicalVariables.ElementAt(i).m_maxValue.ToString());
+                    write_text.WriteLine(lexicalVariables.ElementAt(i).m_termsCount.ToString());
+                }
+
+                for (int i = 0; i < lexicalVariables.Length; i++)
+                {
+                    // terms data of i's lexical variable
+                    for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
+                    {
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_ID.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_name.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_minValue.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_maxValue.ToString());
+
+                        //membership function data
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_membershipFinction.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_membershipFinction.a.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_membershipFinction.b.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_membershipFinction.c.ToString());
+                        write_text.WriteLine(lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_membershipFinction.d.ToString());
+                    }
+                }
+
+                write_text.WriteLine(aggregation_function.ToString());
+                write_text.WriteLine(activization_function.ToString());
+                write_text.WriteLine(accumulation_function.ToString());
+                write_text.WriteLine(fuzzification_function.ToString());
+
+                //production rules
+                if (prodcutionsRules == null)
+                {
+                    write_text.Close(); // Закрываем файл
+                    return;
+                }
+
+                write_text.WriteLine(prodcutionsRules.Length.ToString());
+
+                for (int i = 0; i < prodcutionsRules.Length; i++)
+                {
+                    write_text.WriteLine(prodcutionsRules.ElementAt(i).m_asString);
+                    //write_text.WriteLine(prodcutionsRules.ElementAt(i).m_type.ToString());
+                    //for( int j = 0; j < prodcutionsRules.ElementAt(i).m_variables.Count; j++ )
+                    //{
+                    //    write_text.WriteLine(prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Key.ToString());
+                    //    write_text.WriteLine(prodcutionsRules.ElementAt(i).m_variables.ElementAt(j).Value.ToString());
+                    //}
+                }
+
+                if (inputVariables == null)
+                {
+                    write_text.Close(); // Закрываем файл
+                    return;
+                }
+
+                write_text.WriteLine(inputVariables.Length);
+
+                for (int i = 0; i < inputVariables.Length; i++)
+                {
+                    write_text.WriteLine(inputVariables.ElementAt(i).ToString());
+                }
+                
+                write_text.Close(); // Закрываем файл
+            }
+        }
+
+        private void toolStripMenuItem19_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                FileInfo file = new FileInfo(openFileDialog1.FileName);
+                StreamReader streamReader = new StreamReader(file.FullName); //Открываем файл для чтения
+
+                lexicalVariables = new LexicalVariable[Convert.ToInt32(streamReader.ReadLine())];
+                lexicalVariablesCount = lexicalVariables.Length;
+                LVCountLabel.Text = lexicalVariables.Length.ToString();
+                for (int i = 0; i <= lexicalVariablesCount; i++)
+                {
+                    this.Controls.RemoveByKey("label_LVNumber_" + i);
+                    this.Controls.RemoveByKey("label_LVID_" + i);
+                    this.Controls.RemoveByKey("textbox_LVID_" + i);
+                    this.Controls.RemoveByKey("label_LVName_" + i);
+                    this.Controls.RemoveByKey("textbox_LVName_" + i);
+                    this.Controls.RemoveByKey("label_LVMinrange_" + i);
+                    this.Controls.RemoveByKey("upDown_LVMinrange_" + i);
+                    this.Controls.RemoveByKey("label_LVMaxrange_" + i);
+                    this.Controls.RemoveByKey("upDown_LVMaxrange_" + i);
+                    this.Controls.RemoveByKey("upDown_TermsCount_" + i);
+                    this.Controls.RemoveByKey("button_AddTerms_" + i);
+                    this.Controls.RemoveByKey("LVOKButton");
+                    this.Controls.RemoveByKey("label_LVType_" + i);
+                    this.Controls.RemoveByKey("List_LVType_" + i);
+                    this.Controls.RemoveByKey("label_LVTermsCount_" + i);
+                }
+
+                for (int i = 0; i < lexicalVariables.Length; i++)
+                {
+                    string ID = streamReader.ReadLine();
+                    string LVName = streamReader.ReadLine();
+                    VariableType type = VariableType.IN;
+                    switch (streamReader.ReadLine())
+                    { 
+                        case "IN":
+                            type = VariableType.IN;
+                            break;
+                        case "OUT":
+                            type = VariableType.OUT;
+                            break;
+                    }
+
+                    int LVMinValue = Convert.ToInt32(streamReader.ReadLine());
+                    int LVMaxValue = Convert.ToInt32(streamReader.ReadLine());
+                    int termsCount = Convert.ToInt32(streamReader.ReadLine());
+                    ProductionRulesTerm[] terms = new ProductionRulesTerm[ termsCount ];
+                    lexicalVariables[i] = new LexicalVariable(ID, LVName, LVMinValue, LVMaxValue, termsCount, terms, type);
+
+                    // creating Label LV number
+                    Label Numberlabel = new Label();
+                    Numberlabel.Name = "label_LVNumber_" + i;
+                    Numberlabel.Text = "Linguistic var №" + (i + 1) + ":";
+                    Numberlabel.Width = 95;
+                    Numberlabel.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(Numberlabel);
+
+                    // creating Label LV ID
+                    Label IDlabel = new Label();
+                    IDlabel.Name = "label_LVID_" + i;
+                    IDlabel.Text = "ID:";
+                    IDlabel.Width = 20;
+                    IDlabel.Location = new Point(Numberlabel.Location.X + Numberlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(IDlabel);
+
+                    //creating TextBox for LV id
+                    TextBox IDtextBox = new TextBox();
+                    IDtextBox.Name = "textbox_LVID_" + i;
+                    IDtextBox.Width = 50;
+                    IDtextBox.Location = new Point(IDlabel.Location.X + IDlabel.Width, LVCountLabel.Location.Y + (25 + 25 * i));
+                    IDtextBox.MouseHover += ChangeTip;
+                    IDtextBox.Text = ID;
+                    this.Controls.Add(IDtextBox);
+
+                    // creating Label LV name
+                    Label Namelabel = new Label();
+                    Namelabel.Name = "label_LVName_" + i;
+                    Namelabel.Text = "Name:";
+                    Namelabel.Width = 35;
+                    Namelabel.Location = new Point(IDtextBox.Location.X + IDtextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(Namelabel);
+
+                    // creating TextBox for LV name
+                    TextBox NametextBox = new TextBox();
+                    NametextBox.Name = "textbox_LVName_" + i;
+                    NametextBox.Width = 100;
+                    NametextBox.Location = new Point(Namelabel.Location.X + 50, LVCountLabel.Location.Y + (25 + 25 * i));
+                    NametextBox.MouseHover += ChangeTip;
+                    NametextBox.Text = LVName;
+                    this.Controls.Add(NametextBox);
+
+                    // creating Label LV type
+                    Label Typelabel = new Label();
+                    Typelabel.Name = "label_LVType_" + i;
+                    Typelabel.Text = "Type:";
+                    Typelabel.Width = 40;
+                    Typelabel.Location = new Point(NametextBox.Location.X + NametextBox.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(Typelabel);
+
+                    // creating UpDown LV type
+                    ComboBox TypeList = new ComboBox();
+                    TypeList.Name = "List_LVType_" + i;
+                    TypeList.Width = 45;
+                    TypeList.Items.Add("IN");
+                    TypeList.Items.Add("OUT");
+                    if (i == lexicalVariablesCount - 1)
+                        TypeList.SelectedIndex = 1;
+                    else
+                        TypeList.SelectedIndex = 0;
+                    TypeList.Location = new Point(Typelabel.Location.X + Typelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(TypeList);
+
+                    // creating Label LV min range
+                    Label MinRangelabel = new Label();
+                    MinRangelabel.Name = "label_LVMinrange_" + i;
+                    MinRangelabel.Text = "Range from:";
+                    MinRangelabel.Width = 65;
+                    MinRangelabel.Location = new Point(TypeList.Location.X + TypeList.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(MinRangelabel);
+
+                    // creating UpDown LV min range
+                    NumericUpDown MinRangeUpDown = new NumericUpDown();
+                    MinRangeUpDown.Name = "upDown_LVMinrange_" + i;
+                    MinRangeUpDown.Width = 36;
+                    MinRangeUpDown.Location = new Point(MinRangelabel.Location.X + MinRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    MinRangeUpDown.Value = LVMinValue;
+                    this.Controls.Add(MinRangeUpDown);
+
+                    // creating Label LV max range
+                    Label MaxRangelabel = new Label();
+                    MaxRangelabel.Name = "label_LVMaxrange_" + i;
+                    MaxRangelabel.Text = "to:";
+                    MaxRangelabel.Width = 20;
+                    MaxRangelabel.Location = new Point(MinRangeUpDown.Location.X + MinRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(MaxRangelabel);
+
+                    // creating UpDown LV max range
+                    NumericUpDown MaxRangeUpDown = new NumericUpDown();
+                    MaxRangeUpDown.Name = "upDown_LVMaxrange_" + i;
+                    MaxRangeUpDown.Width = 36;
+                    MaxRangeUpDown.Location = new Point(MaxRangelabel.Location.X + MaxRangelabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    MaxRangeUpDown.Value = LVMaxValue;
+                    this.Controls.Add(MaxRangeUpDown);
+
+                    // creating Label Terms count
+                    Label TermsCountlabel = new Label();
+                    TermsCountlabel.Name = "label_LVTermsCount_" + i;
+                    TermsCountlabel.Text = "Number of terms:";
+                    TermsCountlabel.Width = 90;
+                    TermsCountlabel.Location = new Point(MaxRangeUpDown.Location.X + MaxRangeUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    this.Controls.Add(TermsCountlabel);
+
+                    // creating UpDown terms Count
+                    NumericUpDown TermsCountUpDown = new NumericUpDown();
+                    TermsCountUpDown.Name = "upDown_TermsCount_" + i;
+                    TermsCountUpDown.Width = 36;
+                    TermsCountUpDown.Location = new Point(TermsCountlabel.Location.X + TermsCountlabel.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    TermsCountUpDown.Value = termsCount;
+                    this.Controls.Add(TermsCountUpDown);
+
+                    // creating button add terms
+                    Button AddTerms = new Button();
+                    AddTerms.Name = "button_AddTerms_" + i;
+                    AddTerms.Width = 90;
+                    AddTerms.Text = "Edit terms";
+                    AddTerms.Location = new Point(TermsCountUpDown.Location.X + TermsCountUpDown.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i));
+                    AddTerms.Click += AddTermsButton_Clicked;
+                    this.Controls.Add(AddTerms);
+
+                    // creating Label Terms count
+                    Label isOk = new Label();
+                    isOk.Name = "isOk_" + i;
+                    isOk.Text = "All is good =)";
+                    isOk.Width = 90;
+                    isOk.Location = new Point(AddTerms.Location.X + AddTerms.Width + 5, LVCountLabel.Location.Y + (25 + 25 * i) + 4);
+                    this.Controls.Add(isOk);
+                }
+                
+                // creating OK button
+                Button LVNextButton = new Button();
+                LVNextButton.Name = "LVOKButton";
+                LVNextButton.Text = "Next >";
+                LVNextButton.Location = new Point(LVCountLabel.Location.X, LVCountLabel.Location.Y + lexicalVariablesCount * 25 + 25);
+                LVNextButton.Click += NextButton_Clicked;
+                this.Controls.Add(LVNextButton);
+
+                for (int i = 0; i < lexicalVariables.Length; i++)
+                {
+                    for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
+                    {
+                        lexicalVariables.ElementAt(i).m_terms[j].m_ID = streamReader.ReadLine();
+                        lexicalVariables.ElementAt(i).m_terms[j].m_name = streamReader.ReadLine();
+                        lexicalVariables.ElementAt(i).m_terms[j].m_minValue = Convert.ToInt32(streamReader.ReadLine());
+                        lexicalVariables.ElementAt(i).m_terms[j].m_maxValue = Convert.ToInt32(streamReader.ReadLine());
+
+                        //memebership function
+                        string functionName = streamReader.ReadLine();
+                        double a = Convert.ToDouble( streamReader.ReadLine() );
+                        double b = Convert.ToDouble( streamReader.ReadLine() );
+                        double c = Convert.ToDouble( streamReader.ReadLine() );
+                        double d = Convert.ToDouble( streamReader.ReadLine() );
+
+                        switch( functionName )
+                        {
+                            case "WindowsFormsApplication1.Classes.MembershipFunctions.GaussFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new GaussFunction(a, b, c, d);
+                                break;
+                                case "WindowsFormsApplication1.Classes.MembershipFunctions.SigmoidFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SigmoidFunction(a, b, c, d);
+                                break;
+                                case "WindowsFormsApplication1.Classes.MembershipFunctions.SFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SFunction(a, b, c, d);
+                                break;
+                                case "WindowsFormsApplication1.Classes.MembershipFunctions.SingletonFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new SingletonFunction(a, b, c, d);
+                                break;
+                                case "WindowsFormsApplication1.Classes.MembershipFunctions.TrapezoidalFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new TrapezoidalFunction(a, b, c, d);
+                                break;
+                                case "WindowsFormsApplication1.Classes.MembershipFunctions.TriangleFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new TriangleFunction(a, b, c, d);
+                                break;
+                                case "WindowsFormsApplication1.Classes.MembershipFunctions.ZFunction":
+                                lexicalVariables.ElementAt(i).m_terms[j].m_membershipFinction = new ZFunction(a, b, c, d );
+                                break;
+                        }
+                    }
+                }
+
+                string aggregationFunctionName = streamReader.ReadLine();
+
+                switch (aggregationFunctionName)
+                {
+                    case "WindowsFormsApplication1.Classes.Formulas.AggregationFormulas.LimitedAggregation":
+                        aggregation_function = new LimitedAggregation();
+                        AggregationComboBox.SelectedIndex = 1;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.AggregationFormulas.AlgebraicAggregation":
+                        aggregation_function = new AlgebraicAggregation();
+                        AggregationComboBox.SelectedIndex = 0;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.AggregationFormulas.MaxMinAggregation":
+                        aggregation_function = new MaxMinAggregation();
+                        AggregationComboBox.SelectedIndex = 2;
+                        break;
+                }
+
+                string activizationFunctionName = streamReader.ReadLine();
+
+                switch (activizationFunctionName)
+                {
+                    case "WindowsFormsApplication1.Classes.Formulas.ActivisationFormulas.AvarageActivisation":
+                        activization_function = new AvarageActivisation();
+                        ActivisationComboBox.SelectedIndex = 0;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.ActivisationFormulas.ProdActivisation":
+                        activization_function = new ProdActivisation();
+                        ActivisationComboBox.SelectedIndex = 2;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.ActivisationFormulas.MinActivisation":
+                        activization_function = new MinActivisation();
+                        ActivisationComboBox.SelectedIndex = 1;
+                        break;
+                }
+
+                string accumulationFunctionName = streamReader.ReadLine();
+
+                switch (accumulationFunctionName)
+                {
+                    case "WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas.LimitedAccumulation":
+                        accumulation_function = new LimitedAccumulation();
+                        AccumulationComboBox.SelectedIndex = 1;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas.AlgebraicAccumulation":
+                        accumulation_function = new AlgebraicAccumulation();
+                        AccumulationComboBox.SelectedIndex = 0;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.AccumulationFormulas.MaxMinAccumulation":
+                        accumulation_function = new MaxMinAccumulation();
+                        AccumulationComboBox.SelectedIndex = 2;
+                        break;
+                }
+
+                string fuzzificationFunctionName = streamReader.ReadLine();
+
+                switch (fuzzificationFunctionName)
+                {
+                    case "WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas.CenterOfGravityFuzzification":
+                        fuzzification_function = new CenterOfGravityFuzzification();
+                        FuzzificationComboBox.SelectedIndex = 0;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas.CenterOfGravityPointSetsFuzzification":
+                        fuzzification_function = new CenterOfGravityPointSetsFuzzification();
+                        FuzzificationComboBox.SelectedIndex = 1;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas.CenterSquareFuzzification":
+                        fuzzification_function = new CenterSquareFuzzification();
+                        FuzzificationComboBox.SelectedIndex = 2;
+                        break;
+                    case "WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas.LeftModelValuesFuzzification":
+                        fuzzification_function = new LeftModelValuesFuzzification();
+                        FuzzificationComboBox.SelectedIndex = 3;
+                        break;
+                }
+
+                choseFunctionFormInitialized = true;
+
+                int prodRulesCount = Convert.ToInt32(streamReader.ReadLine());
+                if (prodRulesCount == 0)
+                {
+                    streamReader.Close();
+                    return;
+                }
+
+                prodcutionsRules = new ProductionRule[prodRulesCount];
+
+                RuleParser rp = new RuleParser();
+                for (int i = 0; i < prodRulesCount; i++)
+                {
+                    string tmp = streamReader.ReadLine();
+                    prodRulesTB.Text += tmp + "\n";
+                    prodcutionsRules[i] = rp.ParseRuleString(tmp);
+                }
+
+                int inputVarCount = Convert.ToInt32(streamReader.ReadLine());
+                if (inputVarCount == 0)
+                {
+                    streamReader.Close();
+                    return;
+                }
+
+                inputVariablesLoadFromFile = true;
+                inputVariables = new double[ inputVarCount ];
+                for (int i = 0; i < inputVarCount; i++)
+                {
+                    inputVariables[i] = Convert.ToInt32( streamReader.ReadLine() );
+
+                    // creating Label input var
+                    Label InputNumberlabel = new Label();
+                    InputNumberlabel.Name = "label_InputVariableNumber_" + i;
+                    InputNumberlabel.Text = lexicalVariables.ElementAt(i).m_name + " :";
+                    InputNumberlabel.Width = 95;
+                    InputNumberlabel.Location = new Point(InputVariables.Location.X, InputVariables.Location.Y + (25 + 25 * i));
+                    InputVariablesPanel.Controls.Add(InputNumberlabel);
+
+                    // creating Label input var
+                    Label InputVariablelabel = new Label();
+                    InputVariablelabel.Name = "label_InputVariableValue_" + i;
+                    InputVariablelabel.Text = "Value:";
+                    InputVariablelabel.Width = 65;
+                    InputVariablelabel.Location = new Point(InputNumberlabel.Location.X + InputNumberlabel.Width + 5, InputVariables.Location.Y + (25 + 25 * i));
+                    InputVariablesPanel.Controls.Add(InputVariablelabel);
+
+                    // creating UpDown input var
+                    NumericUpDown InputVariableUpDown = new NumericUpDown();
+                    InputVariableUpDown.Name = "upDown_InputVariableValue_" + i;
+                    InputVariableUpDown.Width = 36;
+                    InputVariableUpDown.Location = new Point(InputVariablelabel.Location.X + InputVariablelabel.Width + 5, InputVariables.Location.Y + (25 + 25 * i));
+                    InputVariableUpDown.Value = Convert.ToInt32( inputVariables[i] );
+                    InputVariablesPanel.Controls.Add(InputVariableUpDown);
+                }
+
+                // creating OK button
+                Button IVNextButton = new Button();
+                IVNextButton.Name = "InpurVariablesOKButton";
+                IVNextButton.Text = "Next >";
+                IVNextButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.X + 100, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.Y + (25 * lexicalVariablesCount) + 25);
+                IVNextButton.Click += OkButton_Clicked;
+                InputVariablesPanel.Controls.Add(IVNextButton);
+
+                // creating Back button
+                Button IVBackButton = new Button();
+                IVBackButton.Name = "InpurVariablesBackButton";
+                IVBackButton.Text = "< Back";
+                IVBackButton.Location = new Point(InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.X, InputVariablesPanel.Controls["label_InputVariableNumber_" + (lexicalVariablesCount - 2)].Location.Y + (25 * lexicalVariablesCount) + 25);
+                IVBackButton.Click += BackButton_Clicked;
+                InputVariablesPanel.Controls.Add(IVBackButton);
+
+                int awqeqwe = 123;
+            }
         }
     }
 }

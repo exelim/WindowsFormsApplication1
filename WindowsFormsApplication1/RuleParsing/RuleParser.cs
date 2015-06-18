@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1.RuleParsing
                     type = RelationType.OR;
                     break;
             }
-            ProductionRule pr = new ProductionRule(temp.Length / 4, type, variables);
+            ProductionRule pr = new ProductionRule(temp.Length / 6, type, variables, _ruleString);
 
             return pr;
         }
