@@ -106,6 +106,8 @@ namespace WindowsFormsApplication1
                 {
                     Form1._terms[Form1.number][idx] = Form1._term[idx];
                 }
+
+                
             this.Close();
         }
 

@@ -179,15 +179,14 @@
             // toolStripMenuItem14
             // 
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem14.Text = "Save";
             this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
             // 
             // toolStripMenuItem15
             // 
             this.toolStripMenuItem15.Name = "toolStripMenuItem15";
-            this.toolStripMenuItem15.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem15.Text = "Load";;
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(98, 22);
             // 
             // toolStripMenuItem16
             // 
@@ -245,7 +244,7 @@
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem11.Text = "Load";
             // 
             // toolStripMenuItem12
@@ -289,13 +288,13 @@
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem6.Text = "Save";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem7.Text = "Load";
             // 
             // toolStripMenuItem8
@@ -434,9 +433,9 @@
             this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ResultLabel.Location = new System.Drawing.Point(685, 41);
             this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(204, 25);
+            this.ResultLabel.Size = new System.Drawing.Size(172, 25);
             this.ResultLabel.TabIndex = 43;
-            this.ResultLabel.Text = "Computation result :";
+            this.ResultLabel.Text = "Inference result :";
             // 
             // ResultBackButton
             // 
@@ -499,8 +498,7 @@
             this.prodRulesTB.Name = "prodRulesTB";
             this.prodRulesTB.Size = new System.Drawing.Size(543, 259);
             this.prodRulesTB.TabIndex = 4;
-            this.prodRulesTB.Text = "IF ( s is p ) OR ( f is b ) THEN ( t is c )\nIF ( s is g ) OR ( f is b ) THEN ( t " +
-    "is a )\nIF ( s is e ) OR ( f is g ) THEN ( t is g )";
+            this.prodRulesTB.Text = "";
             this.prodRulesTB.SelectionChanged += new System.EventHandler(this.prodRulesTB_SelectionChanged);
             this.prodRulesTB.TextChanged += new System.EventHandler(this.prodRulesTB_TextChanged);
             // 
