@@ -241,6 +241,11 @@ namespace WindowsFormsApplication1
         private void MembershipCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             double min, max;
+
+            // Stretches the image to fit the pictureBox.
+           Bitmap MyImage ;
+           pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage ;
+           
             switch (MembershipCombobox.SelectedIndex)
             {
                 case 0: // Gaus
@@ -251,6 +256,8 @@ namespace WindowsFormsApplication1
                     BInput.Visible = true;
                     AInput.Text = Convert.ToDouble(((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) + 1) / 4.0).ToString();
                     BInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Gauss.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 1: // Sigmoid
                     ALabel.Text = "a :";
@@ -258,6 +265,8 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Sigmoid.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 2: // Singleton
                     ALabel.Text = "a :";
@@ -265,6 +274,8 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = false;
                     BInput.Visible = false;
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Singleton.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 3: // Tpapezoidal
                     ALabel.Text = "b :";
@@ -277,6 +288,8 @@ namespace WindowsFormsApplication1
                     max = Form1._term[idx].m_maxValue;
                     AInput.Text = Convert.ToDouble( min + ( max + min ) / 4 ).ToString();
                     BInput.Text = Convert.ToDouble( max - ( max + min ) / 4 ).ToString();
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Trapezoidal.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 4: // Triangle  
                     ALabel.Text = "b :";
@@ -285,6 +298,8 @@ namespace WindowsFormsApplication1
                     BLabel.Visible = false;
                     BInput.Visible = false;
                     AInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Triangle.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 5: // S
                     ALabel.Text = "a :";
@@ -292,6 +307,8 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\S.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 6: // Z
                     ALabel.Text = "a :";
@@ -299,6 +316,8 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
+                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Z.png");
+                    pictureBox1.Image = (Image) MyImage ;
                     break;
 
             }

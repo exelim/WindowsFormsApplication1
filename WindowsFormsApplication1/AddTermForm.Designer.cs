@@ -38,11 +38,13 @@
             this.BInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // MembershipFunctionGraph
             // 
-            this.MembershipFunctionGraph.Location = new System.Drawing.Point(160, 35);
+            this.MembershipFunctionGraph.Location = new System.Drawing.Point(269, 35);
             this.MembershipFunctionGraph.Name = "MembershipFunctionGraph";
             this.MembershipFunctionGraph.ScrollGrace = 0D;
             this.MembershipFunctionGraph.ScrollMaxX = 0D;
@@ -57,7 +59,7 @@
             // ALabel
             // 
             this.ALabel.AutoSize = true;
-            this.ALabel.Location = new System.Drawing.Point(24, 99);
+            this.ALabel.Location = new System.Drawing.Point(24, 256);
             this.ALabel.Name = "ALabel";
             this.ALabel.Size = new System.Drawing.Size(19, 13);
             this.ALabel.TabIndex = 43;
@@ -66,7 +68,7 @@
             // BLabel
             // 
             this.BLabel.AutoSize = true;
-            this.BLabel.Location = new System.Drawing.Point(92, 99);
+            this.BLabel.Location = new System.Drawing.Point(92, 256);
             this.BLabel.Name = "BLabel";
             this.BLabel.Size = new System.Drawing.Size(19, 13);
             this.BLabel.TabIndex = 44;
@@ -92,7 +94,7 @@
             // 
             // AInput
             // 
-            this.AInput.Location = new System.Drawing.Point(12, 132);
+            this.AInput.Location = new System.Drawing.Point(12, 272);
             this.AInput.Name = "AInput";
             this.AInput.Size = new System.Drawing.Size(49, 20);
             this.AInput.TabIndex = 47;
@@ -100,7 +102,7 @@
             // 
             // BInput
             // 
-            this.BInput.Location = new System.Drawing.Point(84, 132);
+            this.BInput.Location = new System.Drawing.Point(84, 272);
             this.BInput.Name = "BInput";
             this.BInput.Size = new System.Drawing.Size(49, 20);
             this.BInput.TabIndex = 48;
@@ -108,7 +110,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(27, 304);
+            this.button1.Location = new System.Drawing.Point(27, 356);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 49;
@@ -118,7 +120,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 179);
+            this.button2.Location = new System.Drawing.Point(12, 319);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(121, 23);
             this.button2.TabIndex = 50;
@@ -126,11 +128,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(11, 84);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(224, 169);
+            this.pictureBox1.TabIndex = 51;
+            this.pictureBox1.TabStop = false;
+            // 
             // AddTermForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 356);
+            this.ClientSize = new System.Drawing.Size(810, 420);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BInput);
@@ -142,6 +153,7 @@
             this.Controls.Add(this.MembershipFunctionGraph);
             this.Name = "AddTermForm";
             this.Text = "AddTermForm";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,6 +170,7 @@
         private System.Windows.Forms.TextBox BInput;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
     }
 }
