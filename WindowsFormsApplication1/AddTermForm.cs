@@ -256,7 +256,7 @@ namespace WindowsFormsApplication1
                     BInput.Visible = true;
                     AInput.Text = Convert.ToDouble(((Form1._term[idx].m_maxValue - Form1._term[idx].m_minValue) + 1) / 4.0).ToString();
                     BInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Gauss.png");
+                    MyImage = new Bitmap(@"Gauss.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 1: // Sigmoid
@@ -265,7 +265,7 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Sigmoid.png");
+                    MyImage = new Bitmap(@"Sigmoid.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 2: // Singleton
@@ -274,7 +274,7 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = false;
                     BInput.Visible = false;
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Singleton.png");
+                    MyImage = new Bitmap(@"Singleton.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 3: // Tpapezoidal
@@ -288,7 +288,7 @@ namespace WindowsFormsApplication1
                     max = Form1._term[idx].m_maxValue;
                     AInput.Text = Convert.ToDouble( min + ( max + min ) / 4 ).ToString();
                     BInput.Text = Convert.ToDouble( max - ( max + min ) / 4 ).ToString();
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Trapezoidal.png");
+                    MyImage = new Bitmap(@"Trapezoidal.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 4: // Triangle  
@@ -298,7 +298,7 @@ namespace WindowsFormsApplication1
                     BLabel.Visible = false;
                     BInput.Visible = false;
                     AInput.Text = Convert.ToDouble((Form1._term[idx].m_maxValue + Form1._term[idx].m_minValue) / 2.0).ToString();
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Triangle.png");
+                    MyImage = new Bitmap(@"Triangle.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 5: // S
@@ -307,7 +307,7 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\S.png");
+                    MyImage = new Bitmap(@"S.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
                 case 6: // Z
@@ -316,7 +316,7 @@ namespace WindowsFormsApplication1
                     AInput.Visible = true;
                     BLabel.Visible = true;
                     BInput.Visible = true;
-                    MyImage = new Bitmap(@"D:\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Z.png");
+                    MyImage = new Bitmap(@"Z.png");
                     pictureBox1.Image = (Image) MyImage ;
                     break;
 

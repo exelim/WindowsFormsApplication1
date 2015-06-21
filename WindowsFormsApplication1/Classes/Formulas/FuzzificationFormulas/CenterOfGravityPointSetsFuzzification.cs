@@ -11,13 +11,12 @@ namespace WindowsFormsApplication1.Classes.Formulas.FuzzificationFormulas
         public override double CalculateFuzzification(Queue<double> points, double minVal, double maxVal)
         {
             double sum1 = 0.0, sum2 = 0.0, x = 0.0;
-            const double step = 0.1;
             foreach (var item in points)
             {
                 sum1 += x * item;
                 sum2 += item;
 
-                x += step;
+                x += ( maxVal - minVal ) / points.Count;
             }
             return sum1 / sum2;
         }

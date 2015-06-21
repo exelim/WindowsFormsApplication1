@@ -486,7 +486,7 @@ namespace WindowsFormsApplication1
             AddTermsPanel.Controls.RemoveByKey("TermCancelButton");
             AddTermsPanel.Controls.RemoveByKey("DrawAllButton");
 
-            TermCountLabel.Text = "Terms of lexical variable \"" + currentLVName + "\" :";
+            TermCountLabel.Text = "Terms of linguistic variable \"" + currentLVName + "\" :";
 
             int idx = -1;
 
@@ -1032,7 +1032,7 @@ namespace WindowsFormsApplication1
             {
                 for (int j = 0; j < lexicalVariables.ElementAt(i).m_termsCount; j++)
                 {
-                    _tp[(i * inputVariables.Length) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_ID, //lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_terms.ElementAt(j).m_ID, 
+                    _tp[(i * inputVariables.Length) + j] = Tuple.Create(lexicalVariables.ElementAt(i).m_id, lexicalVariables.ElementAt(i).m_terms.ElementAt(j).m_ID,
                         lexicalVariables.ElementAt(i).m_terms.ElementAt(j).CalculateValue(inputVariables.ElementAt(i)));
                 }
             }
@@ -1055,7 +1055,7 @@ namespace WindowsFormsApplication1
                 {
                     foreach (var fuz in fuzzification_1_Values)
                     {
-                        if (fuz.Item1.Equals(pair.Key) && fuz.Item2.Equals(pair.Value) /*item.m_variables.ElementAt(item.m_variables.Values.Count - 1).Value.Equals( fuz.Item2 ) /*&& fuz.Item3 > 0.0*/)
+                        if (fuz.Item1.Equals(pair.Key) && fuz.Item2.Equals(pair.Value) )
                         {
                             values.Push(fuz.Item3);
                         }
@@ -1092,8 +1092,8 @@ namespace WindowsFormsApplication1
             {
                 foreach (var val in item.Value)
                 {
-                    if (val > 0)
-                    {
+                   //if (val > 0)
+                   //{
                         foreach (var lv in Form1.lexicalVariables)
                         {
                             string[] temp = item.Key.Split('#');
@@ -1137,7 +1137,7 @@ namespace WindowsFormsApplication1
                                 }
                             }
                         }
-                    }
+                    //}
                 }
             }
 
@@ -1185,18 +1185,19 @@ namespace WindowsFormsApplication1
             double sum2 = 0.0;
             pointsToDraw.Reverse();
             double max_value = 0.0;
+            double step = 100.0 / points.Count;
             foreach (var item in points)
             {
-                if (x < 100)
-                {
+                //if (x < 100)
+               // {
                     list.Add(x, item);
                     sum1 += x * item;
                     sum2 += item;
                     if (item > max_value)
                         max_value = item;
 
-                    x += drawStep;
-                }
+                    x += step;
+                //}
             }
 
             double deFuzz_result = fuzzification_function.CalculateFuzzification(points, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_minValue, lexicalVariables.ElementAt(lexicalVariables.Length - 1).m_maxValue);
@@ -1226,7 +1227,7 @@ namespace WindowsFormsApplication1
                 else
                 {
                     ResultDescriptionLabel.Text += "\nOutput value is :\n\n";
-                    ResultDescriptionLabel.Text += tmp.m_name + "( " + tmp.m_id + " )" + " = " + Math.Round(deFuzz_result, 3).ToString() + "\n";
+                    ResultDescriptionLabel.Text += tmp.m_name + "( " + tmp.m_id + " )" + " = " + Math.Round(deFuzz_result, 3).ToString() + "\n\n";
                     ResultDescriptionLabel.Text += "F" + "( " + Math.Round(deFuzz_result, 3).ToString() + " )" + " = " + Math.Round(maxFuncRes, 3).ToString() + "\n";
                 }
             }
@@ -1235,9 +1236,6 @@ namespace WindowsFormsApplication1
             list2.Add(deFuzz_result, 0);
             list2.Add(deFuzz_result, max_value);
 
-            // Ñîçäàäèì êðèâóþ ñ íàçâàíèåì "Sinc", 
-            // êîòîðàÿ áóäåò ðèñîâàòüñÿ ãîëóáûì öâåòîì (Color.Blue),
-            // Îïîðíûå òî÷êè âûäåëÿòüñÿ íå áóäóò (SymbolType.None)
             ZedGraph.LineItem myCurve;
             ZedGraph.LineItem myCurve2;
 
@@ -1246,15 +1244,8 @@ namespace WindowsFormsApplication1
             myCurve = pane.AddCurve("Result", list, Color.Blue, ZedGraph.SymbolType.None);
             myCurve.Line.Fill = new ZedGraph.Fill(Color.White, Color.Blue, 45F); ;
 
-
-
-
-            // Âûçûâàåì ìåòîä AxisChange (), ÷òîáû îáíîâèòü äàííûå îá îñÿõ. 
-            // Â ïðîòèâíîì ñëó÷àå íà ðèñóíêå áóäåò ïîêàçàíà òîëüêî ÷àñòü ãðàôèêà, 
-            // êîòîðàÿ óìåùàåòñÿ â èíòåðâàëû ïî îñÿì, óñòàíîâëåííûå ïî óìîë÷àíèþ
             FinalGraph.AxisChange();
 
-            // Îáíîâëÿåì ãðàôèê
             FinalGraph.Invalidate();
         }
 
@@ -1284,7 +1275,7 @@ namespace WindowsFormsApplication1
         private void prodRulesTB_TextChanged(object sender, EventArgs e)
         {
             var lines = prodRulesTB.Text.Split('\n');
-            TotalRulesNumberLabel.Text = "Total number of prudoction rules: " + (lines.Length).ToString();
+            TotalRulesNumberLabel.Text = "Total number of production rules: " + (lines.Length).ToString();
         }
 
         private void prodRulesTB_SelectionChanged(object sender, EventArgs e)
@@ -1655,7 +1646,7 @@ namespace WindowsFormsApplication1
                 {
                     case "WindowsFormsApplication1.Classes.Formulas.AggregationFormulas.LimitedAggregation":
                         aggregation_function = new LimitedAggregation();
-                               AggregationComboBox.SelectedIndex = 1;
+                               
                         break;
                     case "WindowsFormsApplication1.Classes.Formulas.AggregationFormulas.AlgebraicAggregation":
                         aggregation_function = new AlgebraicAggregation();

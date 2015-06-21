@@ -153,7 +153,7 @@ namespace WindowsFormsApplication1
         {
             AccumulatiomFormulaBase accBase = new MaxMinAccumulation();
 
-            double res = AccumulationValues(accBase, activisationValues);
+           // double res = AccumulationValues(accBase, activisationValues);
 
         }
 
@@ -167,9 +167,9 @@ namespace WindowsFormsApplication1
             return _af.CalculateActivisation(_c, _val1);
         }
 
-        public double AccumulationValues(AccumulatiomFormulaBase _af, Stack<double> _st)
+       /*public double AccumulationValues(AccumulatiomFormulaBase _af, Stack<double> _st)
         {
             return _af.CalculateAccumulation(_st);
-        }
+        }*/
     }
 }
